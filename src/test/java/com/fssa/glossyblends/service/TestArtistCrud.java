@@ -30,7 +30,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 			Artist artist = new Artist();
 			artist.setUsername("jallela");
 			artist.setPassword("TestPassword123");
-			artist.setEmail("jaleela12345@gmail.com");
+			artist.setEmail("jaleela1@gmail.com");
 			artist.setPhonenNumber("1234567890");
 			artist.setYearsOfExperience(5);
 			artist.setAvailable(true);
@@ -143,7 +143,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 	    ArtistService artistService = new ArtistService(artistDAO);
 	    
-	    int artistIdToDelete =31; 
+	    int artistIdToDelete =23; 
 	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
