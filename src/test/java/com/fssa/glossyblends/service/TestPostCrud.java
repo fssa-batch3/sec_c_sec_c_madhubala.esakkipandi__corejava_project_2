@@ -49,7 +49,7 @@ public class TestPostCrud {
 	    PostDAO postDao = new PostDAO(connection);
 	    PostServiceLayer serviceLayer = new PostServiceLayer(postDao);
 	    
-	    int postIdToDelete = 22;
+	    int postIdToDelete = 23;
 	    int artistId=9;
 
 	    boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);

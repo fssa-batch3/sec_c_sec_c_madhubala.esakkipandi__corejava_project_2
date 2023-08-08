@@ -28,9 +28,9 @@ public class TestArtistCrud {
 			ArtistService artistService = new ArtistService(artistDAO);
 
 			Artist artist = new Artist();
-			artist.setUsername("joo");
+			artist.setUsername("jallela");
 			artist.setPassword("TestPassword123");
-			artist.setEmail("jaleela12345@gmail.com");
+			artist.setEmail("jaleela123457@gmail.com");
 			artist.setPhone_number("1234567890");
 			artist.setYearsOfExperience(5);
 			artist.setAvailable(true);
@@ -143,7 +143,7 @@ public class TestArtistCrud {
 
 	    ArtistService artistService = new ArtistService(artistDAO);
 	    
-	    int artistIdToDelete =25; 
+	    int artistIdToDelete =29; 
 	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
