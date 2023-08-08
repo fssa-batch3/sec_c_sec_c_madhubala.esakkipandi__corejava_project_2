@@ -3,10 +3,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import com.fssa.glossyblends.CustomException.PostValueInvalidException;
-import com.fssa.glossyblends.model.Artist.Artist;
-import com.fssa.glossyblends.model.Artist.ErrorMessages;
-import com.fssa.glossyblends.model.Artist.Post;
-import com.fssa.glossyblends.model.Artist.Services;
+import com.fssa.glossyblends.model.Artist;
+import com.fssa.glossyblends.model.ErrorMessages;
+import com.fssa.glossyblends.model.Post;
+import com.fssa.glossyblends.model.Services;
 
 public class PostValidations {
 

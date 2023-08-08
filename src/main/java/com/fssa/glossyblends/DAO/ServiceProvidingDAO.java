@@ -1,8 +1,8 @@
 package com.fssa.glossyblends.DAO;
 
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
-import com.fssa.glossyblends.model.Artist.ServiceCategory;
-import com.fssa.glossyblends.model.Artist.Services;
+import com.fssa.glossyblends.model.ServiceCategory;
+import com.fssa.glossyblends.model.Services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

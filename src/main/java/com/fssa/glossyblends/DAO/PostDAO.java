@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fssa.glossyblends.model.Artist.Post;
+import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.util.ConnectionUtil;
 
 public class PostDAO {

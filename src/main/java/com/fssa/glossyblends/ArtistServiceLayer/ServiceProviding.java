@@ -2,8 +2,8 @@ package com.fssa.glossyblends.ArtistServiceLayer;
 
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
 import com.fssa.glossyblends.DAO.ServiceProvidingDAO;
-import com.fssa.glossyblends.model.Artist.Services;
 import com.fssa.glossyblends.Validator.ServiceValidations; // Import the ServiceValidations class
+import com.fssa.glossyblends.model.Services;
 
 import java.util.List;
 

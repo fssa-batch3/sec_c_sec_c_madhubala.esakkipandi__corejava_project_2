@@ -3,8 +3,8 @@ package com.fssa.glossyblends.ArtistServiceLayer;
 import com.fssa.glossyblends.CustomException.PostValueInvalidException;
 import com.fssa.glossyblends.DAO.ArtistDAO;
 import com.fssa.glossyblends.DAO.PostDAO;
-import com.fssa.glossyblends.model.Artist.Post;
 import com.fssa.glossyblends.Validator.PostValidations;
+import com.fssa.glossyblends.model.Post;
 
 import java.sql.Connection;
 import java.util.List;

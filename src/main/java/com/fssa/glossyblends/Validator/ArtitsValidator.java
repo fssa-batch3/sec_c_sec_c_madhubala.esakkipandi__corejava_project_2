@@ -5,13 +5,12 @@ import java.util.regex.Pattern;
 
 import com.fssa.glossyblends.CustomException.PostValueInvalidException;
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
-//import com.fssa.glossyblends.Validator.ServiceValidations;
-import com.fssa.glossyblends.model.Artist.Artist;
-import com.fssa.glossyblends.model.Artist.Artist.gender;
-import com.fssa.glossyblends.model.Artist.ErrorMessages;
-import com.fssa.glossyblends.model.Artist.Post;
-import com.fssa.glossyblends.model.Artist.Services;
-import com.fssa.glossyblends.model.Artist.schedule;
+import com.fssa.glossyblends.model.Artist;
+import com.fssa.glossyblends.model.ErrorMessages;
+import com.fssa.glossyblends.model.Post;
+import com.fssa.glossyblends.model.Services;
+import com.fssa.glossyblends.model.schedule;
+import com.fssa.glossyblends.model.Artist.gender;
 
 public class ArtitsValidator {
 	public static boolean validateArtist(Artist artist)

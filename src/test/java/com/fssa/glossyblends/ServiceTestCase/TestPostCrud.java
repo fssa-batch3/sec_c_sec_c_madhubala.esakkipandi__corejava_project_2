@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.glossyblends.ArtistServiceLayer.PostServiceLayer;
 import com.fssa.glossyblends.CustomException.PostValueInvalidException;
 import com.fssa.glossyblends.DAO.PostDAO;
-import com.fssa.glossyblends.model.Artist.Post;
+import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.util.ConnectionUtil;
 
 public class TestPostCrud {

@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-import com.fssa.glossyblends.model.Artist.ErrorMessages;
-import com.fssa.glossyblends.model.Artist.schedule;
+import com.fssa.glossyblends.model.ErrorMessages;
+import com.fssa.glossyblends.model.schedule;
 
 public class ScheduleValidations {
 

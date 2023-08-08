@@ -1,17 +1,20 @@
 package com.fssa.glossyblends.ServiceTestCase;
 
-import com.fssa.glossyblends.DAO.*;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Connection;
 import java.util.List;
 
-import com.fssa.glossyblends.model.Artist.*;
-import com.fssa.glossyblends.util.ConnectionUtil;
-import com.fssa.glossyblends.ArtistServiceLayer.*;
+import org.junit.jupiter.api.Test;
+
+import com.fssa.glossyblends.ArtistServiceLayer.ServiceProviding;
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
+import com.fssa.glossyblends.DAO.ServiceProvidingDAO;
+import com.fssa.glossyblends.model.ServiceCategory;
+import com.fssa.glossyblends.model.Services;
+import com.fssa.glossyblends.util.ConnectionUtil;
 
 public class TestServiceCrudOperations {
 

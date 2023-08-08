@@ -1,4 +1,4 @@
-package com.fssa.glossyblends.ServiceTestCase;
+package com.fssa.glossyblends.service;
 
 import java.sql.Connection;
 import java.time.LocalDate;

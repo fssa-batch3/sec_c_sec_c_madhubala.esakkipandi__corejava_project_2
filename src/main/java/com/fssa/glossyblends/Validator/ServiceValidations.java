@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
-import com.fssa.glossyblends.model.Artist.ErrorMessages;
-import com.fssa.glossyblends.model.Artist.ServiceCategory;
-import com.fssa.glossyblends.model.Artist.Services;
+import com.fssa.glossyblends.model.ErrorMessages;
+import com.fssa.glossyblends.model.ServiceCategory;
+import com.fssa.glossyblends.model.Services;
 
 
 public class ServiceValidations {

@@ -7,8 +7,8 @@ import java.util.List;
 import com.fssa.glossyblends.DAO.ScheduleDAO;
 import com.fssa.glossyblends.Validator.PostValidations;
 import com.fssa.glossyblends.Validator.ScheduleValidations;
-import com.fssa.glossyblends.model.Artist.Post;
-import com.fssa.glossyblends.model.Artist.schedule;
+import com.fssa.glossyblends.model.Post;
+import com.fssa.glossyblends.model.schedule;
 
 public class ScheduleServiceLayer {
 

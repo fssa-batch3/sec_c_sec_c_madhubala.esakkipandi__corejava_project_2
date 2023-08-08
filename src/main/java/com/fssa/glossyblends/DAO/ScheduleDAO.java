@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.sql.ResultSet;
 
 import com.fssa.glossyblends.Validator.ScheduleValidations;
-import com.fssa.glossyblends.model.Artist.schedule;
+import com.fssa.glossyblends.model.schedule;
 
 public class ScheduleDAO {
 

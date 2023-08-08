@@ -1,23 +1,20 @@
 package com.fssa.glossyblends.ServiceTestCase;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import com.fssa.glossyblends.DAO.ArtistDAO;
-import com.fssa.glossyblends.model.Artist.Artist;
-import com.fssa.glossyblends.model.Artist.Artist.gender;
-import com.fssa.glossyblends.util.ConnectionUtil;
-import com.fssa.glossyblends.model.Artist.Post;
-import com.fssa.glossyblends.ArtistServiceLayer.ArtistService;
 
+import com.fssa.glossyblends.ArtistServiceLayer.ArtistService;
 import com.fssa.glossyblends.CustomException.PostValueInvalidException;
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
-
-import java.sql.Connection;
-
-import java.sql.SQLException;
-
-import java.util.List;
+import com.fssa.glossyblends.DAO.ArtistDAO;
+import com.fssa.glossyblends.model.Artist;
+import com.fssa.glossyblends.model.Artist.gender;
+import com.fssa.glossyblends.model.Post;
+import com.fssa.glossyblends.util.ConnectionUtil;
 
 
 

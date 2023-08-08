@@ -2,7 +2,7 @@ package com.fssa.glossyblends.Validator;
 
 import java.util.regex.Pattern;
 
-import com.fssa.glossyblends.model.Artist.ErrorMessages;
+import com.fssa.glossyblends.model.ErrorMessages;
 
 import java.util.regex.Matcher;
 

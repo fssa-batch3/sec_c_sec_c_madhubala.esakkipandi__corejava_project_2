@@ -1,27 +1,25 @@
 package com.fssa.glossyblends.Validator;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+//import static org.junit.Assert.*;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 //import static org.junit.jupiter.api.Assertions.*;
 
 import com.fssa.glossyblends.CustomException.PostValueInvalidException;
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
-import com.fssa.glossyblends.model.Artist.Artist;
-import com.fssa.glossyblends.model.Artist.Artist.gender;
-import com.fssa.glossyblends.model.Artist.ErrorMessages;
-import com.fssa.glossyblends.model.Artist.Post;
-import com.fssa.glossyblends.model.Artist.schedule;
-
-import com.fssa.glossyblends.model.Artist.ServiceCategory;
-import com.fssa.glossyblends.model.Artist.Services;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-//import static org.junit.Assert.*;
+import com.fssa.glossyblends.model.Artist;
+import com.fssa.glossyblends.model.Artist.gender;
+import com.fssa.glossyblends.model.ErrorMessages;
+import com.fssa.glossyblends.model.Post;
+import com.fssa.glossyblends.model.ServiceCategory;
+import com.fssa.glossyblends.model.Services;
+import com.fssa.glossyblends.model.schedule;
 
 public class TestArtitsValidator {
 

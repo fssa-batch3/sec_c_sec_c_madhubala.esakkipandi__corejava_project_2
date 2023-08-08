@@ -8,6 +8,9 @@
 	<name>glossyblends</name>
 	<description>project about booking makeup artist</description>
 
+
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
@@ -19,7 +22,7 @@
 		<sonar.organization>fssa-batch3</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
-
+ 
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv -->
