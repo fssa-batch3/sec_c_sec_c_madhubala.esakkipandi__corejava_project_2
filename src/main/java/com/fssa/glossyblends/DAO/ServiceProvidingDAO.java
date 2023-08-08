@@ -81,13 +81,17 @@ public class ServiceProvidingDAO {
                 stmt.setDouble(3, service.getCost());
                 stmt.setString(4, service.getSampleImage());
                 stmt.setInt(5, artistId);
+              
                 stmt.setInt(6, serviceId);
 
                 int rows = stmt.executeUpdate();
+                System.out.println(rows);
                 return rows > 0;
+               
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            
             return false;
         }
     }
@@ -108,6 +112,7 @@ public class ServiceProvidingDAO {
             return false;
         }
     }
+    
 
     public Services getServiceById(int id, int artistId) {
         Services service = null;

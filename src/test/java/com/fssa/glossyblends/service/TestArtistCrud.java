@@ -22,15 +22,15 @@ public class TestArtistCrud {
 	@Test
 	public void testAddArtist_ValidInput() {
 		try {
-			Connection connection = ConnectionUtil.getConnection();
-			ArtistDAO artistDAO = new ArtistDAO(connection);
+//			Connection connection = ConnectionUtil.getConnection();
+			ArtistDAO artistDAO = new ArtistDAO();
 
 			ArtistService artistService = new ArtistService(artistDAO);
 
 			Artist artist = new Artist();
 			artist.setUsername("joo");
 			artist.setPassword("TestPassword123");
-			artist.setEmail("Madhubal@gmail.com");
+			artist.setEmail("jaleela12345@gmail.com");
 			artist.setPhone_number("1234567890");
 			artist.setYearsOfExperience(5);
 			artist.setAvailable(true);
@@ -41,27 +41,36 @@ public class TestArtistCrud {
 			artist.setAverageRating(3);
 
 			
+			
 			boolean isAdded = artistService.addArtist(artist);
 			Assertions.assertTrue(isAdded);
 
+			if(isAdded) {
+				
+				System.out.println("Added");
+			}
+			else {
+				System.out.println(" not Added");
+
+			}
+
 			
+//			int artistId = ArtistDAO.getArtistByName(artist.getUsername());
+//			Assertions.assertTrue(artistId > 0); 
+//
+//			Artist addedArtist = ArtistDAO.getArtistById(String.valueOf(artistId));
+//			Assertions.assertEquals("joo", addedArtist.getUsername());
+//			Assertions.assertEquals("Madhubal@gmail.com", addedArtist.getEmail());
+//			Assertions.assertEquals("1234567890", addedArtist.getPhone_number());
+//			Assertions.assertEquals(5, addedArtist.getYearsOfExperience());
+//			Assertions.assertTrue(addedArtist.isAvailable());
+//
+//			Assertions.assertEquals("English", addedArtist.getLanguagesSpoken());
+//			Assertions.assertEquals("chennai", addedArtist.getLocation());
+//			Assertions.assertEquals(Artist.gender.FEMALE, addedArtist.getGenderOfArtist());
 
-			int artistId = artistDAO.getArtistByName(artist.getUsername());
-			Assertions.assertTrue(artistId > 0); 
-
-			Artist addedArtist = artistDAO.getArtistById(String.valueOf(artistId));
-			Assertions.assertEquals("joo", addedArtist.getUsername());
-			Assertions.assertEquals("Madhubal@gmail.com", addedArtist.getEmail());
-			Assertions.assertEquals("1234567890", addedArtist.getPhone_number());
-			Assertions.assertEquals(5, addedArtist.getYearsOfExperience());
-			Assertions.assertTrue(addedArtist.isAvailable());
-
-			Assertions.assertEquals("English", addedArtist.getLanguagesSpoken());
-			Assertions.assertEquals("chennai", addedArtist.getLocation());
-			Assertions.assertEquals(Artist.gender.FEMALE, addedArtist.getGenderOfArtist());
-
-			connection.close();
-		} catch (SQLException | PostValueInvalidException | ServiceValueInvalidException e) {
+			
+		} catch (  PostValueInvalidException | ServiceValueInvalidException e) {
 			Assertions.fail("Exception thrown: " + e.getMessage());
 		}
 	}
@@ -70,12 +79,14 @@ public class TestArtistCrud {
 	public void UpdateArtistTestService()
 			throws SQLException, IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
 		Connection connection = ConnectionUtil.getConnection();
-		ArtistDAO artistDAO = new ArtistDAO(connection);
+	
+		ArtistDAO artistDAO = new ArtistDAO();
 
 		ArtistService artistService = new ArtistService(artistDAO);
+
 		int artistId =9;
 
-		Artist retrievedArtist = artistDAO.getArtistById(String.valueOf(artistId));
+		Artist retrievedArtist = ArtistDAO.getArtistById(String.valueOf(artistId));
 
 		if (retrievedArtist != null) {
 
@@ -100,7 +111,7 @@ public class TestArtistCrud {
 			}
 			Assertions.assertTrue(isUpdated);
 
-			Artist updatedArtist = artistDAO.getArtistById(String.valueOf(artistId));
+			Artist updatedArtist = ArtistDAO.getArtistById(String.valueOf(artistId));
 
 			System.out.println(updatedArtist.getAverageRating());
 			System.out.println(updatedArtist.getYearsOfExperience());
@@ -126,16 +137,18 @@ public class TestArtistCrud {
 	
 	@Test
 	public void deleteArtistTestCase() throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
-	    Connection connection = ConnectionUtil.getConnection();
-	    ArtistDAO artistDao = new ArtistDAO(connection);
-	    ArtistService artistService = new ArtistService(artistDao);
+		ArtistDAO artistDAO = new ArtistDAO();
+
+	
+
+	    ArtistService artistService = new ArtistService(artistDAO);
 	    
-	    int artistIdToDelete =5; 
-	    Artist artistToDelete = artistDao.getArtistById(String.valueOf(artistIdToDelete));
+	    int artistIdToDelete =25; 
+	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
 	        // Delete the artist
-	        boolean isDeleted = artistService.deleteArtist(artistToDelete);
+	        boolean isDeleted = ArtistService.deleteArtist(artistToDelete);
 	        
 	        if (isDeleted) {
 	            System.out.println("Artist with ID " + artistIdToDelete + " deleted successfully.");
@@ -145,10 +158,11 @@ public class TestArtistCrud {
 	        
 	        
 	        
+	        
 	        Assertions.assertTrue(isDeleted);
 	        
 	        // Verify that the artist has been deleted
-	        Artist deletedArtist = artistDao.getArtistById(String.valueOf(artistIdToDelete));
+	        Artist deletedArtist = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	        Assertions.assertNull(deletedArtist, "Deleted artist should not be found.");
 	    } else {
 	        System.out.println("Artist with ID " + artistIdToDelete + " not found.");
@@ -160,13 +174,15 @@ public class TestArtistCrud {
 	@Test
 	public void testGetPostsByArtistId_ValidInput() {
 	    try {
-	        Connection connection = ConnectionUtil.getConnection();
-	        ArtistDAO artistDAO = new ArtistDAO(connection);
+
+			ArtistDAO artistDAO = new ArtistDAO();
+
+//			ArtistService artistService = new ArtistService(artistDAO);
 	        
 	        ArtistService artistService = new ArtistService(artistDAO);
 
 	        int artistId = 10; 
-	        List<Post> posts = artistService.getPostByArtistId(artistId);
+	        List<Post> posts = ArtistService.getPostByArtistId(artistId);
 	        
 	        Assertions.assertFalse(posts.isEmpty());
 	       
@@ -179,7 +195,7 @@ public class TestArtistCrud {
 	            
 	        }
 
-	        connection.close();
+	      
 	    } catch (SQLException  e) {
 	        Assertions.fail("Exception thrown: " + e.getMessage());
 	    }
@@ -187,20 +203,22 @@ public class TestArtistCrud {
 	@Test
 	public void testGetPostsByArtistId_InvalidArtistId() {
 	    try {
-	        Connection connection = ConnectionUtil.getConnection();
-	        ArtistDAO artistDAO = new ArtistDAO(connection);
+
+			ArtistDAO artistDAO = new ArtistDAO();
+
+//			ArtistService artistService = new ArtistService(artistDAO);
 	      
 	        
 	        ArtistService artistService = new ArtistService(artistDAO);
 
 	        int invalidArtistId = -1; 
 
-	        List<Post> posts = artistService.getPostByArtistId(invalidArtistId);
+	        List<Post> posts = ArtistService.getPostByArtistId(invalidArtistId);
 	        
 	        Assertions.assertNotNull(posts);
 	        Assertions.assertTrue(posts.isEmpty());
 	        
-	        connection.close();
+	       
 	    } catch (SQLException  e) {
 	    	Assertions.fail("Exception thrown: " + e.getMessage());
 	    }

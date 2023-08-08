@@ -16,11 +16,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 public class ArtistDAO {
 
-	public ArtistDAO(Connection connection) {
-		// TODO Auto-generated constructor stub
-	}
-
-	/// gettig the artist object using the artist name
+	
 	public static int getArtistByName(String artistName) {
 		int id = 0;
 		try (Connection connection = ConnectionUtil.getConnection()) {
@@ -43,12 +39,12 @@ public class ArtistDAO {
 
 	// adding the artist artist object
 	public static boolean addArtist(Artist artist) throws PostValueInvalidException, ServiceValueInvalidException {
-		try {
-			ArtitsValidator.validateArtist(artist);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-			throw new IllegalArgumentException("Invalid artist passed to DAO Layer", e);
-		}
+//		try {
+//			ArtitsValidator.validateArtist(artist);
+//		} catch (IllegalArgumentException e) {
+//			e.printStackTrace();
+//			throw new IllegalArgumentException("Invalid artist passed to DAO Layer", e);
+//		}
 		try (Connection connection = ConnectionUtil.getConnection()) {
 			try (PreparedStatement stmt = connection.prepareStatement(
 					"INSERT INTO artists (username, password, email, phone_number, years_of_experience, is_available, location, languages_spoken, genderOfArtist, averageRating) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
@@ -187,11 +183,12 @@ public class ArtistDAO {
 		return emailList;
 	}
 
+	
 	public static List<Post> getPostsByArtistId(int artistId) throws SQLException {
 		List<Post> posts = new ArrayList<>();
 		try (Connection connection = ConnectionUtil.getConnection()) {
 			try {
-				String query = "SELECT p.post_id, p.title, p.description, p.post_url, a.username "
+				String query = "SELECT p.id, p.title, p.description, p.post_url, a.username "
 						+ "FROM artist_posts p INNER JOIN artists a ON p.artist_id = a.artist_id "
 						+ "WHERE a.artist_id = ?";
 				try (PreparedStatement stmt = connection.prepareStatement(query)) {

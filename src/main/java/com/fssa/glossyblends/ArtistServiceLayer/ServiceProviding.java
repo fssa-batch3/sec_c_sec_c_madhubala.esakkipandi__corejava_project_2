@@ -46,7 +46,7 @@ public class ServiceProviding {
 
  public Services getServiceById(int id,int artistId)throws ServiceValueInvalidException{
     	
-    	
+    	System.out.println("sdf");
 		return serviceProvidingDAO.getServiceById(id, artistId);
     	
     	

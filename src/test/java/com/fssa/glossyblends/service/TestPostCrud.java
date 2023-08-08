@@ -3,6 +3,7 @@ package com.fssa.glossyblends.service;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +18,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 public class TestPostCrud {
 
 	@Test
-	public void AddPostTestCase() throws PostValueInvalidException {
+	public void AddPostTestCase() throws PostValueInvalidException, SQLException {
 
 		try {
 			Connection connection = ConnectionUtil.getConnection();
@@ -32,7 +33,7 @@ public class TestPostCrud {
 
 			boolean added = serviceLayer.addPost(post);
 			Assertions.assertTrue(added);
-
+			   connection.close();
 		} catch (PostValueInvalidException e) {
 
 			fail(e.getMessage());
@@ -42,25 +43,25 @@ public class TestPostCrud {
 	}
 
 	@Test
-	public void testDeletePostByID() {
+	public void testDeletePostByID() throws SQLException {
 	    Connection connection = ConnectionUtil.getConnection();
 
 	    PostDAO postDao = new PostDAO(connection);
 	    PostServiceLayer serviceLayer = new PostServiceLayer(postDao);
 	    
-	    int postIdToDelete = 15;
-	    int artistId=7;
+	    int postIdToDelete = 22;
+	    int artistId=9;
 
 	    boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);
 
 	    Assertions.assertTrue( deleted);
-
+	    connection.close();
 	}
 
 	
 
 	@Test
-	public void GetPostsByArtistIdTest() {
+	public void GetPostsByArtistIdTest() throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
 		PostDAO postDao = new PostDAO(connection);
 		PostServiceLayer serviceLayer = new PostServiceLayer(postDao);
@@ -69,7 +70,7 @@ public class TestPostCrud {
 		List<Post> posts = serviceLayer.getPostsByArtistId(artistId);
 
 		Assertions.assertEquals(1, posts.size());
-
+		   connection.close();
 	}
 
 }

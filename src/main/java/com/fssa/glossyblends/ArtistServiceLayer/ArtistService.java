@@ -10,32 +10,37 @@ import com.fssa.glossyblends.model.Post;
 import java.sql.SQLException;
 import java.util.List;
 
+
 public class ArtistService {
 	private static ArtistDAO artistDAO;
 
 	public ArtistService(ArtistDAO artistDAO) {
-		this.artistDAO = artistDAO;
+		ArtistService.artistDAO = artistDAO;
 	}
 
 	private static boolean isEmailPresent(List<String> emailList, String email) {
 
-		System.out.println("lkjhgfd");
+		System.out.println("Already present");
 
 		return emailList.contains(email);
 
 	}
+	
 
 	public static boolean addArtist(Artist artist)
 			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
 		if (ArtitsValidator.validateArtist(artist)) {
-			List<String> emailList = artistDAO.getAllEmails();
+			List<String> emailList = ArtistDAO.getAllEmails();
 
 			if (!isEmailPresent(emailList, artist.getEmail())) {
-				artistDAO.addArtist(artist);
+				ArtistDAO.addArtist(artist);
 				System.out.println("Madhu alaaded");
 				return true;
 
 			}
+			
+
+			
 		}
 
 		return false;
@@ -49,9 +54,9 @@ public class ArtistService {
 			return false;
 		}
 
-		List<String> emailList = artistDAO.getAllEmails();
+		List<String> emailList = ArtistDAO.getAllEmails();
 
-		artistDAO.updateArtist(artist);
+		ArtistDAO.updateArtist(artist);
 		return true;
 	}
 
@@ -59,12 +64,12 @@ public class ArtistService {
 			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
 		// Validate the artist object using the ArtistValidator
 
-		return artistDAO.deleteArtist(artist);
+		return ArtistDAO.deleteArtist(artist);
 	}
 
 	public static List<Post> getPostByArtistId(int artistId) throws SQLException {
 
-		return artistDAO.getPostsByArtistId(artistId);
+		return ArtistDAO.getPostsByArtistId(artistId);
 
 	}
 

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.sql.Connection;
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.ArtistServiceLayer.ServiceProviding;
@@ -42,6 +43,9 @@ public class TestServiceCrudOperations {
         }
     }
 
+    
+    
+    
     @Test
     public void testGetServicesByArtistId() {
         try {
@@ -73,14 +77,16 @@ public class TestServiceCrudOperations {
 
             System.out.println("before" + serviceToUpdate.getCost());
 
-            Services updatedService = serviceProviding.getServiceById(2, 2);
+            Services updatedService = serviceProviding.getServiceById(3, 12);
+            
+            
             updatedService.setCost(10000);
             boolean updated2 = serviceProviding.updateService(updatedService);
 
-            assertTrue(updated2);
+            Assertions.assertTrue(updated2);
 
             if (updated2) {
-                System.out.println("after" + updatedService.getCost());
+                System.out.println("after" + updatedService.getCost()+"updated");
             }
 
             assertEquals(10000, updatedService.getCost(), "Service cost not updated.");
@@ -96,7 +102,7 @@ public class TestServiceCrudOperations {
         ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
         ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
 
-        boolean deleted = serviceProviding.deleteServiceById(4, 13);
+        boolean deleted = serviceProviding.deleteServiceById(9, 12);
 
         if (deleted) {
             System.out.println("Deleted");
@@ -105,6 +111,7 @@ public class TestServiceCrudOperations {
         }
     }
 
+    
     
     
     @Test
