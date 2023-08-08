@@ -1,6 +1,5 @@
 package com.fssa.glossyblends.DAO;
 
-import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
 import com.fssa.glossyblends.model.ServiceCategory;
 import com.fssa.glossyblends.model.Services;
 
@@ -19,7 +18,7 @@ public class ServiceProvidingDAO {
         this.connection = connection;
     }
 
-    public boolean addService(Services service) throws ServiceValueInvalidException {
+    public boolean addService(Services service)  {
         try {
             int artistId = service.getArtistId();
             String insertQuery = "INSERT INTO artist_services (artist_id, category, name, cost, sample_image) VALUES (?, ?, ?, ?, ?)";
@@ -40,7 +39,7 @@ public class ServiceProvidingDAO {
         }
     }
 
-    public List<Services> getServicesByArtistId(int artistId) throws ServiceValueInvalidException {
+    public List<Services> getServicesByArtistId(int artistId) {
         List<Services> servicesList = new ArrayList<>();
 
         try {
@@ -69,7 +68,7 @@ public class ServiceProvidingDAO {
         return servicesList;
     }
 
-    public boolean updateService(Services service) throws ServiceValueInvalidException {
+    public boolean updateService(Services service)  {
         try {
             int artistId = service.getArtistId();
             int serviceId = service.getId();

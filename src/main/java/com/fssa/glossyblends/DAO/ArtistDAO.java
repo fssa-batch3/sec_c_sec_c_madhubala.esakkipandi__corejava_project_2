@@ -167,7 +167,7 @@ public class ArtistDAO {
 	}
 
 	public static List<String> getAllEmails() {
-		List<String> emailList = new ArrayList<String>();
+		List<String> emailList = new ArrayList<>();
 		try (Connection connection = ConnectionUtil.getConnection()) {
 			try (PreparedStatement stmt = connection.prepareStatement("SELECT email FROM artists");
 					ResultSet resultSet = stmt.executeQuery()) {

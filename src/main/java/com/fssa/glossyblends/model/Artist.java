@@ -4,7 +4,7 @@ import java.util.List;
 //import java.util.ArrayList;
 
 public class Artist {
-	private int artist_id;
+	private int artistId;
 	
 	
 	private String username;
@@ -72,11 +72,11 @@ public class Artist {
 
 	// Artist id
 	public int getArtistId() {
-		return artist_id;
+		return artistId;
 	}
 
 	public void setArtistId(int string) {
-		this.artist_id = string;
+		this.artistId = string;
 	}
 
 	// artist name

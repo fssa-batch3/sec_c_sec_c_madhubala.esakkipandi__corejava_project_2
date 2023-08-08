@@ -52,12 +52,9 @@ public class ServiceProviding {
     	
     }
 
-
- public boolean deleteServiceById( int artistId,int id) throws ServiceValueInvalidException {
-	    if ( serviceProvidingDAO.deleteService(artistId, id)) {
-	        return true; // Return true if service was deleted
-	    }
-	    return false; 
+ public boolean deleteServiceById(int artistId, int id) throws ServiceValueInvalidException {
+	    boolean isDeleted = serviceProvidingDAO.deleteService(artistId, id);
+	    return isDeleted;
 	}
 
     

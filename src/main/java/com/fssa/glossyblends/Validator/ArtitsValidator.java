@@ -14,7 +14,7 @@ import com.fssa.glossyblends.model.Artist.gender;
 
 public class ArtitsValidator {
 	public static boolean validateArtist(Artist artist)
-			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
+			throws IllegalArgumentException {
 		if (artist == null) {
 			throw new IllegalArgumentException("Artist object is null");
 		}

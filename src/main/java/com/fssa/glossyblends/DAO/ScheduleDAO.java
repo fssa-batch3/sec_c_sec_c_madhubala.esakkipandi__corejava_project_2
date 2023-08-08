@@ -85,7 +85,7 @@ public class ScheduleDAO {
     
     
     public List<Schedule> getSchedulesByArtistId(int artistId) {
-        List<Schedule> schedulesList = new ArrayList<Schedule>();
+        List<Schedule> schedulesList = new ArrayList<>();
 
         String query = "SELECT * FROM artist_schedule WHERE artist_id = ?";
         try (PreparedStatement smt = connection.prepareStatement(query)) {

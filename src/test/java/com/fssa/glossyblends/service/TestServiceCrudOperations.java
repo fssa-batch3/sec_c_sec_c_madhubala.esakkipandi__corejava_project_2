@@ -102,7 +102,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
         ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
         ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
 
-        boolean deleted = serviceProviding.deleteServiceById(9, 9);
+        boolean deleted = serviceProviding.deleteServiceById(9,22);
 
         
         Assertions.assertTrue(deleted);
@@ -117,7 +117,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
     
     
     @Test
-    public void testUpdateServiceWithInvalidValues() {
+     void testUpdateServiceWithInvalidValues() {
         Connection connection = ConnectionUtil.getConnection();
 
         ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
