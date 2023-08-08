@@ -117,7 +117,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 			System.out.println(updatedArtist.getYearsOfExperience());
 
 			Assertions.assertEquals("Jothi", updatedArtist.getUsername());
-			Assertions.assertEquals("joo123@example.com", updatedArtist.getEmail());
+			Assertions.assertEquals("joo1234@example.com", updatedArtist.getEmail());
 			Assertions.assertEquals("1234567890", updatedArtist.getPhonenNumber());
 			Assertions.assertEquals(3, updatedArtist.getYearsOfExperience());
 			Assertions.assertEquals(false, updatedArtist.isAvailable());
@@ -143,7 +143,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 	    ArtistService artistService = new ArtistService(artistDAO);
 	    
-	    int artistIdToDelete =34; 
+	    int artistIdToDelete =36; 
 	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {

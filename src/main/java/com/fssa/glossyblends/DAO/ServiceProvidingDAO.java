@@ -34,7 +34,6 @@ public class ServiceProvidingDAO {
                 return rows > 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -62,7 +61,6 @@ public class ServiceProvidingDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return servicesList;
@@ -89,7 +87,6 @@ public class ServiceProvidingDAO {
                
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             
             return false;
         }
@@ -107,7 +104,6 @@ public class ServiceProvidingDAO {
                 return rows > 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -134,7 +130,6 @@ public class ServiceProvidingDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return service;
