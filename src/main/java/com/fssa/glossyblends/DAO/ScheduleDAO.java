@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.sql.ResultSet;
 
 import com.fssa.glossyblends.Validator.ScheduleValidations;
-import com.fssa.glossyblends.model.schedule;
+import com.fssa.glossyblends.model.Schedule;
 
 public class ScheduleDAO {
 
@@ -22,7 +22,7 @@ public class ScheduleDAO {
         this.connection = connection;
     }
 
-    public boolean addSchedule(schedule listOfSchedule) throws IllegalArgumentException {
+    public boolean addSchedule(Schedule listOfSchedule) throws IllegalArgumentException {
         if (ScheduleValidations.validateSchedule(listOfSchedule)) {
             String query = "INSERT INTO artist_schedule (artist_id, event_date, event_name, event_time) VALUES (?, ?, ?, ?)";
             try (PreparedStatement smt = connection.prepareStatement(query)) {
@@ -84,8 +84,8 @@ public class ScheduleDAO {
 
     
     
-    public List<schedule> getSchedulesByArtistId(int artistId) {
-        List<schedule> schedulesList = new ArrayList<schedule>();
+    public List<Schedule> getSchedulesByArtistId(int artistId) {
+        List<Schedule> schedulesList = new ArrayList<Schedule>();
 
         String query = "SELECT * FROM artist_schedule WHERE artist_id = ?";
         try (PreparedStatement smt = connection.prepareStatement(query)) {
@@ -93,7 +93,7 @@ public class ScheduleDAO {
 
             try (ResultSet rs = smt.executeQuery()) {
                 while (rs.next()) {
-                    schedule schedule = new schedule();
+                	Schedule schedule = new Schedule();
                     schedule.setArtistId(rs.getInt("artist_id"));
                     schedule.setEventName(rs.getString("event_name"));
 

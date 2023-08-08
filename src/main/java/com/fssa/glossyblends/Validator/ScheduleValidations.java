@@ -2,24 +2,34 @@ package com.fssa.glossyblends.Validator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
+
 
 import com.fssa.glossyblends.model.ErrorMessages;
-import com.fssa.glossyblends.model.schedule;
+import com.fssa.glossyblends.model.Schedule;
 
 public class ScheduleValidations {
+    private static final ScheduleValidations instance = new ScheduleValidations();
 
-	 public static boolean validateSchedule(schedule listOfSchedule) throws IllegalArgumentException {
+    private ScheduleValidations() {
+    }
+
+    public static ScheduleValidations getInstance() {
+        return instance;
+    }
+	    public static boolean validateSchedule(Schedule listOfSchedule) throws IllegalArgumentException {
 	        try {
+	            // Uncovered code
 	            validateName(listOfSchedule.getEventName());
 	            validateDate(listOfSchedule.getDate());
 	            validateTimeOfEvent(listOfSchedule.getTimeOfEvent());
 	            return true;
 	        } catch (IllegalArgumentException ex) {
-	            throw ex; // Rethrow the caught exception
+	            // Handle the exception here, e.g., log it or perform additional actions
+	            throw ex; // Rethrow the caught exception (optional)
 	        }
 	    }
+	
+
 
   
 

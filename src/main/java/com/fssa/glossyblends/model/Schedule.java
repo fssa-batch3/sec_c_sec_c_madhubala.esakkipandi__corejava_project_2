@@ -3,14 +3,14 @@ package com.fssa.glossyblends.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class schedule {
+public class Schedule {
     private int artistId;
     private int schduleId;
     private LocalDate date;
     private String eventName;
     private LocalDateTime timeOfEvent;
 
-    public schedule(int artistId, String eventName, LocalDate date, LocalDateTime timeOfEvent) {
+    public Schedule(int artistId, String eventName, LocalDate date, LocalDateTime timeOfEvent) {
         this.artistId = artistId;
 //        this.schduleId = schduleId;
         this.date = date;
@@ -20,7 +20,7 @@ public class schedule {
 
   
 
-	public schedule() {
+	public Schedule() {
 		
 	}
 

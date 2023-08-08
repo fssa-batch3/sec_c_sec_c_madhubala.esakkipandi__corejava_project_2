@@ -1,6 +1,6 @@
 package com.fssa.glossyblends.model;
 
-public interface ErrorMessages {
+public class  ErrorMessages {
 
 	    public static final String INVALID_STUDENT_NULL = "Student can't be null";
 	    public static final String INVALID_ARTIST_ID_NULL = "Artist ID can't be null";

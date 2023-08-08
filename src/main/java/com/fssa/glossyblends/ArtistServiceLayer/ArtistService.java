@@ -2,6 +2,8 @@ package com.fssa.glossyblends.ArtistServiceLayer;
 
 import com.fssa.glossyblends.CustomException.PostValueInvalidException;
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
+//import com.fssa.glossyblends.CustomException.PostValueInvalidException;
+//import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
 import com.fssa.glossyblends.DAO.ArtistDAO;
 import com.fssa.glossyblends.Validator.ArtitsValidator;
 import com.fssa.glossyblends.model.Artist;
@@ -54,14 +56,14 @@ public class ArtistService {
 			return false;
 		}
 
-		List<String> emailList = ArtistDAO.getAllEmails();
+//		List<String> emailList = ArtistDAO.getAllEmails();
 
 		ArtistDAO.updateArtist(artist);
 		return true;
 	}
 
 	public static boolean deleteArtist(Artist artist)
-			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
+			throws IllegalArgumentException {
 		// Validate the artist object using the ArtistValidator
 
 		return ArtistDAO.deleteArtist(artist);

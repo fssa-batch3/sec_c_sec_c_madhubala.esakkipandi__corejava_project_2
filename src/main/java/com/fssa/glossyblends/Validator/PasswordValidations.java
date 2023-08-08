@@ -7,7 +7,7 @@ import com.fssa.glossyblends.model.ErrorMessages;
 
 public class PasswordValidations {
 
-	public static boolean ValidatePassword(String password) throws IllegalArgumentException {
+	public static boolean validatePassword(String password) throws IllegalArgumentException {
 		if (password == null) {
 			throw new IllegalArgumentException(ErrorMessages.PASSWORD_NULL);
 		}

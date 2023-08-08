@@ -15,10 +15,10 @@ import com.fssa.glossyblends.DAO.PostDAO;
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.util.ConnectionUtil;
 
-public class TestPostCrud {
+ class TestPostCrud {
 
 	@Test
-	public void AddPostTestCase() throws PostValueInvalidException, SQLException {
+	 void AddPostTestCase() throws PostValueInvalidException, SQLException {
 
 		try {
 			Connection connection = ConnectionUtil.getConnection();
@@ -43,7 +43,7 @@ public class TestPostCrud {
 	}
 
 	@Test
-	public void testDeletePostByID() throws SQLException {
+	 void testDeletePostByID() throws SQLException {
 	    Connection connection = ConnectionUtil.getConnection();
 
 	    PostDAO postDao = new PostDAO(connection);
@@ -61,7 +61,7 @@ public class TestPostCrud {
 	
 
 	@Test
-	public void GetPostsByArtistIdTest() throws SQLException {
+	 void GetPostsByArtistIdTest() throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
 		PostDAO postDao = new PostDAO(connection);
 		PostServiceLayer serviceLayer = new PostServiceLayer(postDao);

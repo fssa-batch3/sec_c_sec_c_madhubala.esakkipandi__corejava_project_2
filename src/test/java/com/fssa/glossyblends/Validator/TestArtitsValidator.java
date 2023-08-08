@@ -1,5 +1,8 @@
 package com.fssa.glossyblends.Validator;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,13 +22,13 @@ import com.fssa.glossyblends.model.ErrorMessages;
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.model.ServiceCategory;
 import com.fssa.glossyblends.model.Services;
-import com.fssa.glossyblends.model.schedule;
+import com.fssa.glossyblends.model.Schedule;
 
-public class TestArtitsValidator {
+ class TestArtitsValidator {
 
 //validTestcase for username
 	@Test
-	public void testValidationOfUserNameValid() {
+	 void testValidationOfUserNameValid() {
 
 		Artist artist = new Artist();
 
@@ -37,7 +40,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidationEmailValid() {
+	 void testValidationEmailValid() {
 
 		Artist ar = new Artist();
 
@@ -47,7 +50,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidationNullEmailValid() {
+	 void testValidationNullEmailValid() {
 
 		Artist ar = new Artist();
 
@@ -64,7 +67,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidationEmailInValid() {
+	 void testValidationEmailInValid() {
 
 		Artist ar = new Artist();
 
@@ -81,14 +84,14 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateArtist_ValidArtist_ReturnsTrue()
+	 void testValidateArtist_ValidArtist_ReturnsTrue()
 			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
 
 		Artist artist = new Artist();
 		artist.setUsername("TestArtist");
 		artist.setPassword("TestPassword123");
 		artist.setEmail("test@example.com");
-		artist.setPhone_number("1234567890");
+		artist.setPhonenNumber("1234567890");
 		artist.setYearsOfExperience(5);
 		artist.setAvailable(true);
 		artist.setLanguagesSpoken("English");
@@ -119,7 +122,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateArtistWithNull()
+	 void testValidateArtistWithNull()
 			throws IllegalArgumentException, ServiceValueInvalidException, PostValueInvalidException {
 		try {
 			Artist artist = null;
@@ -131,7 +134,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateArtist_InvalidUsername_ThrowsIllegalArgumentException()
+	 void testValidateArtist_InvalidUsername_ThrowsIllegalArgumentException()
 			throws PostValueInvalidException, ServiceValueInvalidException {
 		try {
 			Artist artist = new Artist();
@@ -146,7 +149,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void validUsername() throws IllegalArgumentException {
+	 void validUsername() throws IllegalArgumentException {
 
 		Artist artist = new Artist();
 		artist.setUsername("Madhubala"); // Invalid username
@@ -157,7 +160,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateArtist_InvalidPassword_ThrowsIllegalArgumentException()
+	 void testValidateArtist_InvalidPassword_ThrowsIllegalArgumentException()
 			throws PostValueInvalidException, ServiceValueInvalidException {
 		try {
 			Artist artist = new Artist();
@@ -174,7 +177,7 @@ public class TestArtitsValidator {
 	// InvalidTestcase for username
 
 	@Test
-	public void testValidationOfUserNameInValid() {
+	 void testValidationOfUserNameInValid() {
 
 		try {
 			Artist artist = new Artist();
@@ -194,7 +197,7 @@ public class TestArtitsValidator {
 	@Test
 
 	// Valid testcases year of experience
-	public void testValidateYearsOfExperienceValid() {
+	 void testValidateYearsOfExperienceValid() {
 
 		Artist artist = new Artist();
 
@@ -208,7 +211,7 @@ public class TestArtitsValidator {
 	// IllegalArgumentException
 //Invalid input testcases 
 	@Test
-	public void testValidateYearsOfExperienceInvalid() {
+	 void testValidateYearsOfExperienceInvalid() {
 		int yearsOfExperience = -2;
 
 		Artist artist = new Artist();
@@ -228,23 +231,23 @@ public class TestArtitsValidator {
 
 	// phone number testcase valid
 	@Test
-	public void testValidatePhoneNumberValid() {
+	 void testValidatePhoneNumberValid() {
 
 		Artist artist = new Artist();
-		artist.setPhone_number("12345678");
+		artist.setPhonenNumber("12345678");
 
-		Assertions.assertTrue(ArtitsValidator.validatePhoneNumber(artist.getPhone_number()));
+		Assertions.assertTrue(ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber()));
 	}
 
 	@Test
-	public void testValidatePhoneNumberInValid() {
+	 void testValidatePhoneNumberInValid() {
 
 		try {
 
 			Artist artist = new Artist();
-			artist.setPhone_number("Madh123342");
+			artist.setPhonenNumber("Madh123342");
 
-			ArtitsValidator.validatePhoneNumber(artist.getPhone_number());
+			ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
 
 			Assertions.fail("expected exception was not thrown.");
 
@@ -257,12 +260,12 @@ public class TestArtitsValidator {
 	// null Mobile number Testcase
 	@Test
 
-	public void testValidatePhoneNumberNull() {
+	 void testValidatePhoneNumberNull() {
 		Artist artist = new Artist();
-		artist.setPhone_number(null);
+		artist.setPhonenNumber(null);
 
 		try {
-			ArtitsValidator.validatePhoneNumber(artist.getPhone_number());
+			ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
 			Assertions.fail("expected exception was not thrown.");
 
 		} catch (IllegalArgumentException e) {
@@ -272,12 +275,12 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidatePhoneNumberEmpty() {
+	 void testValidatePhoneNumberEmpty() {
 
 		Artist artist = new Artist();
-		artist.setPhone_number(" ");
+		artist.setPhonenNumber(" ");
 		try {
-			ArtitsValidator.validatePhoneNumber(artist.getPhone_number());
+			ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
 			Assertions.fail("expected exception was not thrown.");
 
 		} catch (IllegalArgumentException e) {
@@ -289,7 +292,7 @@ public class TestArtitsValidator {
 //teast case for valid input for post
 
 	@Test
-	public void testValidatePost_ValidPost_ReturnsTrue() throws PostValueInvalidException {
+	 void testValidatePost_ValidPost_ReturnsTrue() throws PostValueInvalidException {
 		Post validPost = new Post(1, 1, "Valid Titl", "Valid Description", "https://example.com/image.jpg");
 //	        validPost.setTitle("Valid Title");
 //	        validPost.setDescription("Valid Description");
@@ -301,7 +304,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateTitle_NullTitle_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	 void testValidateTitle_NullTitle_ThrowsIllegalArgumentException() throws PostValueInvalidException {
 		try {
 			Post invalidPost = new Post();
 			invalidPost.setTitle(null);
@@ -313,7 +316,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateTitle_InvalidTitleFormat_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	 void testValidateTitle_InvalidTitleFormat_ThrowsIllegalArgumentException() throws PostValueInvalidException {
 		try {
 			Post invalidPost = new Post();
 			invalidPost.setTitle("Invalid#$%Title");
@@ -325,7 +328,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateDescription_NullDescription_ThrowsIllegalArgumentException()
+	 void testValidateDescription_NullDescription_ThrowsIllegalArgumentException()
 			throws PostValueInvalidException {
 		try {
 			Post invalidPost = new Post();
@@ -338,7 +341,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateDescription_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	 void testValidateDescription_ThrowsIllegalArgumentException() throws PostValueInvalidException {
 
 		Post invalidPost = new Post();
 		invalidPost.setDescription("Valid Description");
@@ -348,7 +351,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidTitle_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	 void testValidTitle_ThrowsIllegalArgumentException() throws PostValueInvalidException {
 
 		Post invalidPost = new Post();
 		invalidPost.setTitle("Valid Title");
@@ -357,7 +360,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testInValidateDescription_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	 void testInValidateDescription_ThrowsIllegalArgumentException() throws PostValueInvalidException {
 		try {
 			Post invalidPost = new Post();
 			invalidPost.setDescription(".....");
@@ -369,7 +372,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidatePost_ValidPostt_ReturnsTrue() throws PostValueInvalidException {
+	 void testValidatePost_ValidPostt_ReturnsTrue() throws PostValueInvalidException {
 		Post validPost = new Post(1, 1, "Valid Title", "Valid Description", "https://example.com/image.jpg");
 
 		boolean result = PostValidations.validatePost(validPost);
@@ -378,7 +381,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateImageUrl_NullImageUrl() throws PostValueInvalidException {
+	 void testValidateImageUrl_NullImageUrl() throws PostValueInvalidException {
 		try {
 			Post invalidPost = new Post();
 			invalidPost.setPostUrl(null);
@@ -390,7 +393,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateImageUrl_InvalidImageUrlFormat()
+	 void testValidateImageUrl_InvalidImageUrlFormat()
 			throws PostValueInvalidException {
 		try {
 			Post invalidPost = new Post();
@@ -406,7 +409,7 @@ public class TestArtitsValidator {
 //
 	@Test
 //
-	public void testValidateSerivecValid() throws IllegalArgumentException, ServiceValueInvalidException {
+	 void testValidateSerivecValid() throws IllegalArgumentException, ServiceValueInvalidException {
 		List<Services> ServiceList = new ArrayList<Services>();
 		Services Service1 = new Services(0, ServiceCategory.HAIR_STYLE, "Haircut", 50,
 				"https://example.com/haircut.jpg");
@@ -418,7 +421,7 @@ public class TestArtitsValidator {
 //testcase for pasword null
 
 	@Test
-	public void testValidationOfPasswordValid() {
+	 void testValidationOfPasswordValid() {
 		Artist artist = new Artist();
 		artist.setPassword("StrongPass123");
 
@@ -429,7 +432,7 @@ public class TestArtitsValidator {
 // InvalidTestcase for password
 
 	@Test
-	public void testValidationOfPasswordNullValid() {
+	 void testValidationOfPasswordNullValid() {
 		Artist artist = new Artist();
 		artist.setPassword(null);
 
@@ -445,7 +448,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidationOfPasswordInValid() {
+	 void testValidationOfPasswordInValid() {
 		Artist artist = new Artist();
 		artist.setPassword("madhu");
 
@@ -463,7 +466,7 @@ public class TestArtitsValidator {
 //testcase for Location null
 
 	@Test
-	public void testValidationOfLocationValid() {
+	 void testValidationOfLocationValid() {
 		Artist artist = new Artist();
 		artist.setLocation("chennai");
 
@@ -474,7 +477,7 @@ public class TestArtitsValidator {
 //InvalidTestcase for validate Location
 
 	@Test
-	public void testValidationOfLoctionNull() {
+	 void testValidationOfLoctionNull() {
 		Artist artist = new Artist();
 		artist.setLocation(null);
 
@@ -489,7 +492,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidationOfLoctionInValid() {
+	 void testValidationOfLoctionInValid() {
 
 		try {
 			Artist ar = new Artist();
@@ -507,7 +510,7 @@ public class TestArtitsValidator {
 //validations for languages spoken
 
 	@Test
-	public void testValidationOfLanguagesSpoken() {
+	 void testValidationOfLanguagesSpoken() {
 		Artist ar = new Artist();
 		ar.setLanguagesSpoken(null);
 
@@ -528,7 +531,7 @@ public class TestArtitsValidator {
 //valid input for languages
 
 	@Test
-	public void ValidationOflanguageValid() {
+	 void ValidationOflanguageValid() {
 
 		String language = "Tamil";
 		Artist artist = new Artist();
@@ -540,7 +543,7 @@ public class TestArtitsValidator {
 //testcase for socaial media link
 
 	@Test
-	public void testValidSocialMediaLinks() {
+	 void testValidSocialMediaLinks() {
 
 		Artist artist = new Artist();
 
@@ -552,7 +555,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testEmptyList() {
+	 void testEmptyList() {
 		List<String> emptyList = new ArrayList<String>();
 		try {
 			ArtitsValidator.validateSocialMediaLinks(emptyList);
@@ -563,7 +566,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testNullList() {
+	 void testNullList() {
 		try {
 
 			Artist artist = new Artist();
@@ -576,7 +579,7 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testInvalidLink() {
+	 void testInvalidLink() {
 
 		List<String> invalidLinks = Arrays.asList("www.example.com", "ftp://example.com", "https:/twitter.com/user123",
 				"http://facebook .com/page456");
@@ -590,11 +593,11 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateSchedule() {
-		List<schedule> scheduleList = new ArrayList<>();
+	 void testValidateSchedule() {
+		List<Schedule> scheduleList = new ArrayList<>();
 
 		// Create valid schedules
-		schedule schedule1 = new schedule(1, "Event", LocalDate.now(), LocalDateTime.now());
+		Schedule schedule1 = new Schedule(1, "Event", LocalDate.now(), LocalDateTime.now());
 
 		scheduleList.add(schedule1);
 
@@ -609,9 +612,9 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateScheduleNullEventName() {
+	 void testValidateScheduleNullEventName() {
 		try {
-			schedule invalidSchedule = new schedule();
+			Schedule invalidSchedule = new Schedule();
 			invalidSchedule.setArtistId(3);
 			invalidSchedule.setSchduleId(3);
 			invalidSchedule.setEventName(null);
@@ -629,9 +632,9 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateSchedulePastDate() {
+	 void testValidateSchedulePastDate() {
 		try {
-			schedule invalidSchedule = new schedule(1, "EventName", LocalDate.of(2021, 1, 1), LocalDateTime.now());
+			Schedule invalidSchedule = new Schedule(1, "EventName", LocalDate.of(2021, 1, 1), LocalDateTime.now());
 			invalidSchedule.setArtistId(3);
 			ScheduleValidations.validateSchedule(invalidSchedule);
 
@@ -642,9 +645,9 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateScheduleNullTimeOfEvent() {
+	 void testValidateScheduleNullTimeOfEvent() {
 		try {
-			schedule invalidSchedule = new schedule(1, "EventName", LocalDate.now(), null);
+			Schedule invalidSchedule = new Schedule(1, "EventName", LocalDate.now(), null);
 			invalidSchedule.setArtistId(3);
 			ScheduleValidations.validateSchedule(invalidSchedule);
 
@@ -655,10 +658,10 @@ public class TestArtitsValidator {
 	}
 
 	@Test
-	public void testValidateScheduleNullDate() {
+	 void testValidateScheduleNullDate() {
 
 		try {
-			schedule invalidSchedule = new schedule(1, "EventName", null, LocalDateTime.now());
+			Schedule invalidSchedule = new Schedule(1, "EventName", null, LocalDateTime.now());
 			invalidSchedule.setArtistId(3);
 			ScheduleValidations.validateSchedule(invalidSchedule);
 
@@ -670,7 +673,7 @@ public class TestArtitsValidator {
 	
 	
 	 @Test
-	    public void testValidateGender_Valid() {
+	     void testValidateGender_Valid() {
 	        try {
 	            Artist artist = new Artist();
 	            artist.setGenderOfArtist(gender.FEMALE);
@@ -685,7 +688,7 @@ public class TestArtitsValidator {
 
 	 
 	    @Test
-	    public void testValidateGender_NullGender() {
+	     void testValidateGender_NullGender() {
 	        try {
 	            Artist artist = new Artist();
 
@@ -693,6 +696,80 @@ public class TestArtitsValidator {
 	            Assertions.fail("Expected IllegalArgumentException was not thrown");
 	        } catch (IllegalArgumentException ex) {
 	        	Assertions.assertEquals("Gender of artist is required", ex.getMessage());
+	        }
+	    }
+	    
+	    
+	    @Test
+	    void testValidateArtist_NullArtist_ThrowsIllegalArgumentException() throws PostValueInvalidException, ServiceValueInvalidException {
+	        try {
+	            ArtitsValidator.validateArtist(null);
+	            fail("Expected IllegalArgumentException was not thrown.");
+	        } catch (IllegalArgumentException e) {
+	            assertEquals("Artist object is null", e.getMessage());
+	        }
+	    }
+
+	    @Test
+	    void testValidateGender_NullGender_ThrowsIllegalArgumentException() {
+	        try {
+	            Artist artist = new Artist();
+	            artist.setGenderOfArtist(null);
+	            ArtitsValidator.validateGender(artist.getGenderOfArtist());
+	            fail("Expected IllegalArgumentException was not thrown.");
+	        } catch (IllegalArgumentException e) {
+	            assertEquals("Gender of artist is required", e.getMessage());
+	        }
+	    }
+	    @Test
+	    void testValidateService_ValidServices_ReturnsTrue() throws ServiceValueInvalidException {
+	        List<Services> services = new ArrayList<>();
+	        Services validService = new Services(1, ServiceCategory.MEHANDI, "Service", 122, "https://example.com/new_artwork.jpg");
+	        services.add(validService);
+
+	        boolean result = ArtitsValidator.validateService(services);
+
+	        Assertions.assertTrue(result);
+	    }
+
+	    @Test
+	    void testValidateService_EmptyServiceList_ReturnsTrue() throws ServiceValueInvalidException {
+	        List<Services> emptyServices = new ArrayList<>();
+
+	        boolean result = ArtitsValidator.validateService(emptyServices);
+
+	        Assertions.assertTrue(result);
+	    }
+
+	    // Test cases for validateSocialMediaLinks
+	    @Test
+	    void testValidateSocialMediaLinks_ValidLinks_ReturnsTrue() {
+	        List<String> validLinks = Arrays.asList("https://www.example.com", "http://www.example.com");
+
+	        boolean result = ArtitsValidator.validateSocialMediaLinks(validLinks);
+
+	        Assertions.assertTrue(result);
+	    }
+
+	    // Test cases for validateLocation
+	    @Test
+	    void testValidateLocation_ValidLocation_ReturnsTrue() {
+	        String validLocation = "Chennai";
+
+	        boolean result = ArtitsValidator.validateLocation(validLocation);
+
+	        Assertions.assertTrue(result);
+	    }
+
+	    @Test
+	    void testValidateLocation_InvalidLocation_ThrowsIllegalArgumentException() {
+	        String invalidLocation = "Madhurai";
+
+	        try {
+	            ArtitsValidator.validateLocation(invalidLocation);
+	            Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	        } catch (IllegalArgumentException e) {
+	            Assertions.assertEquals(ErrorMessages.INVALID_LOCATION, e.getMessage());
 	        }
 	    }
 

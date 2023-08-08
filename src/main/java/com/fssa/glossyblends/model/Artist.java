@@ -1,7 +1,7 @@
 package com.fssa.glossyblends.model;
 
 import java.util.List;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Artist {
 	private int artist_id;
@@ -10,12 +10,12 @@ public class Artist {
 	private String username;
 	private String password;
 	private String email;
-	private String phone_number; 
-	private int years_of_experience; 
-	private boolean is_available; //
-	private List<Post> workLink = new ArrayList<Post>();
-	private List<Services> providingServices;
-	private List<schedule> workingDaysCalender;
+	private String phoneNumber; 
+	private int yearsOfExperience; 
+	private boolean isAvailable; //
+//	private List<Post> workLink ;
+//	private List<Services> providingServices;
+//	private List<Schedule> workingDaysCalender;
 	private gender genderOfArtist;
 	private List<String> socialMediaLinks;
 	private String languagesSpoken;
@@ -32,41 +32,41 @@ public class Artist {
 	}
 
 	/// working blocking day calendar
-	public List<schedule> getWorkingDaysCalender() {
-		return workingDaysCalender;
-	}
+//	public List<Schedule> getWorkingDaysCalender() {
+//		return workingDaysCalender;
+//	}
+//
+//	public void setWorkingDaysCalender(List<Schedule> workingDaysCalender) {
+//		this.workingDaysCalender = workingDaysCalender;
+//	}
 
-	public void setWorkingDaysCalender(List<schedule> workingDaysCalender) {
-		this.workingDaysCalender = workingDaysCalender;
-	}
-
-	public Artist() {
-		workLink = new ArrayList<Post>(); // Initialize the workLink list in the constructor
-		providingServices = new ArrayList<Services>();
-
-	}
+//	public Artist() {
+//		workLink = new ArrayList<Post>(); // Initialize the workLink list in the constructor
+//		providingServices = new ArrayList<Services>();
+//
+//	}
 
 
 
 	
 
-	// Service providing calendar
-	public List<Services> getProvidingServices() {
-		return providingServices;
-	}
-
-	public void setProvidingServices(List<Services> providingServices) {
-		this.providingServices = providingServices;
-	}
-
-	// Getter and setter for workLink (list of posts)
-	public List<Post> getWorkLink() {
-		return workLink;
-	}
-
-	public void setWorkLink(List<Post> workLink) {
-		this.workLink = workLink;
-	}
+//	// Service providing calendar
+//	public List<Services> getProvidingServices() {
+//		return providingServices;
+//	}
+//
+//	public void setProvidingServices(List<Services> providingServices) {
+//		this.providingServices = providingServices;
+//	}
+//
+//	// Getter and setter for workLink (list of posts)
+//	public List<Post> getWorkLink() {
+//		return workLink;
+//	}
+//
+//	public void setWorkLink(List<Post> workLink) {
+//		this.workLink = workLink;
+//	}
 
 	// The addPost method remains the same as before
 
@@ -107,32 +107,32 @@ public class Artist {
 	}
 
 	// artist mobile number
-	public String getPhone_number() {	
-		return phone_number;
+	public String getPhonenNumber() {	
+		return phoneNumber;
 	}
 
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhonenNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	
 	// year of experience
 	public int getYearsOfExperience() {
-		return years_of_experience;
+		return yearsOfExperience;
 	}
 
 	public void setYearsOfExperience(int yearsOfExperience) {
-		this.years_of_experience = yearsOfExperience;
+		this.yearsOfExperience = yearsOfExperience;
 	}
 	
 
 	/// availability of artist
 	public boolean isAvailable() {
-		return is_available;
+		return isAvailable;
 	}
 
 	public void setAvailable(boolean isAvailable) {
-		this.is_available = isAvailable;
+		this.isAvailable = isAvailable;
 	}
 
 	// location of artist

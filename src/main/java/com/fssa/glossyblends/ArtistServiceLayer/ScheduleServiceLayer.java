@@ -8,7 +8,7 @@ import com.fssa.glossyblends.DAO.ScheduleDAO;
 import com.fssa.glossyblends.Validator.PostValidations;
 import com.fssa.glossyblends.Validator.ScheduleValidations;
 import com.fssa.glossyblends.model.Post;
-import com.fssa.glossyblends.model.schedule;
+import com.fssa.glossyblends.model.Schedule;
 
 public class ScheduleServiceLayer {
 
@@ -18,7 +18,7 @@ public class ScheduleServiceLayer {
 this.scheduleDAO=scheduleDAO;
 }
 
-	public boolean addSchedule(schedule listOfSchedule) {
+	public boolean addSchedule(Schedule listOfSchedule) {
 		// Validate the schedule before adding
 		if (ScheduleValidations.validateSchedule(listOfSchedule)) {
 			LocalDateTime timeOfEvent = listOfSchedule.getTimeOfEvent();
@@ -37,7 +37,7 @@ this.scheduleDAO=scheduleDAO;
 
 	}
 
-	public List<schedule> getSchedulesByArtistId(int id) {
+	public List<Schedule> getSchedulesByArtistId(int id) {
 
 		return scheduleDAO.getSchedulesByArtistId(id);
 

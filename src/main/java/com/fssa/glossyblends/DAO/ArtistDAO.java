@@ -52,7 +52,7 @@ public class ArtistDAO {
 				stmt.setString(1, artist.getUsername());
 				stmt.setString(2, artist.getPassword());
 				stmt.setString(3, artist.getEmail());
-				stmt.setString(4, artist.getPhone_number());
+				stmt.setString(4, artist.getPhonenNumber());
 				stmt.setInt(5, artist.getYearsOfExperience());
 				stmt.setBoolean(6, artist.isAvailable());
 				stmt.setString(7, artist.getLocation());
@@ -95,6 +95,7 @@ public class ArtistDAO {
 					return false;
 				}
 
+				
 				return rowsAffected > 0;
 			}
 		} catch (SQLException e) {
@@ -110,7 +111,7 @@ public class ArtistDAO {
 				stmt.setString(1, artist.getUsername());
 				stmt.setString(2, artist.getPassword());
 				stmt.setString(3, artist.getEmail());
-				stmt.setString(4, artist.getPhone_number());
+				stmt.setString(4, artist.getPhonenNumber());
 				stmt.setInt(5, artist.getYearsOfExperience());
 				stmt.setBoolean(6, artist.isAvailable());
 				stmt.setString(7, artist.getLocation());
@@ -148,7 +149,7 @@ public class ArtistDAO {
 						artist.setUsername(rs.getString("username"));
 						artist.setPassword(rs.getString("password"));
 						artist.setEmail(rs.getString("email"));
-						artist.setPhone_number(rs.getString("phone_number"));
+						artist.setPhonenNumber(rs.getString("phone_number"));
 						artist.setYearsOfExperience(rs.getInt("years_of_experience"));
 						artist.setAvailable(rs.getBoolean("is_available"));
 						artist.setLocation(rs.getString("location"));

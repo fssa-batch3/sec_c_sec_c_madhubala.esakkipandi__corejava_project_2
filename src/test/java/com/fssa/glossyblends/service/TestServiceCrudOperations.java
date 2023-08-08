@@ -17,10 +17,10 @@ import com.fssa.glossyblends.model.ServiceCategory;
 import com.fssa.glossyblends.model.Services;
 import com.fssa.glossyblends.util.ConnectionUtil;
 
-public class TestServiceCrudOperations {
+ class TestServiceCrudOperations {
 
     @Test
-    public void testAddService() {
+     void testAddService() {
         try {
             Connection connection = ConnectionUtil.getConnection();
 
@@ -47,7 +47,7 @@ public class TestServiceCrudOperations {
     
     
     @Test
-    public void testGetServicesByArtistId() {
+     void testGetServicesByArtistId() {
         try {
             Connection connection = ConnectionUtil.getConnection();
 
@@ -67,7 +67,7 @@ public class TestServiceCrudOperations {
     }
 
     @Test
-    public void testUpdateService() {
+     void testUpdateService() {
         try {
             Connection connection = ConnectionUtil.getConnection();
             ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
@@ -97,13 +97,15 @@ public class TestServiceCrudOperations {
     }
 
     @Test
-    public void testDeleteService() throws ServiceValueInvalidException {
+     void testDeleteService() throws ServiceValueInvalidException {
         Connection connection = ConnectionUtil.getConnection();
         ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
         ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
 
         boolean deleted = serviceProviding.deleteServiceById(9, 14);
 
+        
+        Assertions.assertTrue(deleted);
         if (deleted) {
             System.out.println("Deleted");
         } else {
@@ -127,11 +129,20 @@ public class TestServiceCrudOperations {
         invalidService.setName(null);
         invalidService.setCost(-1);
 
+        
+        
+        
         try {
-            serviceProviding.updateService(invalidService);
+          boolean updated  =serviceProviding.updateService(invalidService);
+            
+
+            Assertions.assertFalse(updated);
         } catch (ServiceValueInvalidException e) {
             System.out.println(e.getMessage());
         }
+        
+        
+        
     }
     
     

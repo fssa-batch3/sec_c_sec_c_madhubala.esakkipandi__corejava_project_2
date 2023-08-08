@@ -18,9 +18,9 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 
 
-public class TestArtistCrud {
+ class TestArtistCrud {
 	@Test
-	public void testAddArtist_ValidInput() {
+	 void testAddArtist_ValidInput() {
 		try {
 //			Connection connection = ConnectionUtil.getConnection();
 			ArtistDAO artistDAO = new ArtistDAO();
@@ -30,8 +30,8 @@ public class TestArtistCrud {
 			Artist artist = new Artist();
 			artist.setUsername("jallela");
 			artist.setPassword("TestPassword123");
-			artist.setEmail("jaleela1234578@gmail.com");
-			artist.setPhone_number("1234567890");
+			artist.setEmail("jaleela12345789@gmail.com");
+			artist.setPhonenNumber("1234567890");
 			artist.setYearsOfExperience(5);
 			artist.setAvailable(true);
 
@@ -76,7 +76,7 @@ public class TestArtistCrud {
 	}
 
 	@Test
-	public void UpdateArtistTestService()
+	 void UpdateArtistTestService()
 			throws SQLException, IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
 		Connection connection = ConnectionUtil.getConnection();
 	
@@ -118,7 +118,7 @@ public class TestArtistCrud {
 
 			Assertions.assertEquals("Jothi", updatedArtist.getUsername());
 			Assertions.assertEquals("joo123@example.com", updatedArtist.getEmail());
-			Assertions.assertEquals("1234567890", updatedArtist.getPhone_number());
+			Assertions.assertEquals("1234567890", updatedArtist.getPhonenNumber());
 			Assertions.assertEquals(3, updatedArtist.getYearsOfExperience());
 			Assertions.assertEquals(false, updatedArtist.isAvailable());
 			Assertions.assertEquals("English", updatedArtist.getLanguagesSpoken());
@@ -136,7 +136,7 @@ public class TestArtistCrud {
 	
 	
 	@Test
-	public void deleteArtistTestCase() throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
+	 void deleteArtistTestCase() throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
 		ArtistDAO artistDAO = new ArtistDAO();
 
 	
@@ -172,7 +172,8 @@ public class TestArtistCrud {
 	
 	
 	@Test
-	public void testGetPostsByArtistId_ValidInput() {
+	
+	void testGetPostsByArtistId_ValidInput() {
 	    try {
 
 			ArtistDAO artistDAO = new ArtistDAO();
@@ -201,7 +202,7 @@ public class TestArtistCrud {
 	    }
 	}
 	@Test
-	public void testGetPostsByArtistId_InvalidArtistId() {
+	 void testGetPostsByArtistId_InvalidArtistId() {
 	    try {
 
 			ArtistDAO artistDAO = new ArtistDAO();

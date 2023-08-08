@@ -10,20 +10,20 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.ArtistServiceLayer.ScheduleServiceLayer;
 import com.fssa.glossyblends.DAO.ScheduleDAO;
-import com.fssa.glossyblends.model.schedule;
+import com.fssa.glossyblends.model.Schedule;
 import com.fssa.glossyblends.util.ConnectionUtil;
 
-public class TestScheduleCrud {
+ class TestScheduleCrud {
 
 	@Test
-	public void testAddSchedule() {
+	 void testAddSchedule() {
 
 		Connection connection = ConnectionUtil.getConnection();
 		ScheduleDAO scheduleDao = new ScheduleDAO(connection);
 
 		ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer(scheduleDao);
 
-		schedule Schedule = new schedule();
+		Schedule Schedule = new Schedule();
 		Schedule.setArtistId(7);
 		Schedule.setDate(LocalDate.now());
 		Schedule.setEventName("Event in chennai");
@@ -36,7 +36,7 @@ public class TestScheduleCrud {
 	}
 
 	@Test
-	public void testDeleteSchedule() {
+	 void testDeleteSchedule() {
 
 		Connection connection = ConnectionUtil.getConnection();
 		ScheduleDAO scheduleDao = new ScheduleDAO(connection);
@@ -52,7 +52,7 @@ public class TestScheduleCrud {
 	
 	
 	@Test
-	public void testReadingListOfScehdule() {
+	 void testReadingListOfScehdule() {
 		
 		Connection connection = ConnectionUtil.getConnection();
 		ScheduleDAO scheduleDao = new ScheduleDAO(connection);
@@ -61,10 +61,10 @@ public class TestScheduleCrud {
 
 		
 		
-		List<schedule> schedules=serviceOfSchedule.getSchedulesByArtistId(13);
+		List<Schedule> schedules=serviceOfSchedule.getSchedulesByArtistId(13);
 		
 		Assertions.assertEquals(1,schedules.size());
-		for(schedule list:schedules) {
+		for(Schedule list:schedules) {
 			
 			System.out.println(list.getEventName());
 		}

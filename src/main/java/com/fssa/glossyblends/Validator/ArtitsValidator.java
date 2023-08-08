@@ -7,9 +7,9 @@ import com.fssa.glossyblends.CustomException.PostValueInvalidException;
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.ErrorMessages;
-import com.fssa.glossyblends.model.Post;
+//import com.fssa.glossyblends.model.Post;
+import com.fssa.glossyblends.model.Schedule;
 import com.fssa.glossyblends.model.Services;
-import com.fssa.glossyblends.model.schedule;
 import com.fssa.glossyblends.model.Artist.gender;
 
 public class ArtitsValidator {
@@ -24,7 +24,7 @@ public class ArtitsValidator {
 		validateUsername(artist.getUsername());
 		validatePassword(artist.getPassword());
 		validateEmail(artist.getEmail());
-		validatePhoneNumber(artist.getPhone_number());
+		validatePhoneNumber(artist.getPhonenNumber());
 		validateYearsOfExperience(artist.getYearsOfExperience());
 		validateIsAvailable(artist.isAvailable());
 //        validateSocialMediaLinks(artist.getSocialMediaLinks());
@@ -64,12 +64,12 @@ public class ArtitsValidator {
 //    }
 
 	// Validations for list of posts
-	public static boolean validateschedule(List<schedule> scheduleList) throws PostValueInvalidException {
+	public static boolean validateschedule(List<Schedule> scheduleList) throws PostValueInvalidException {
 		if (scheduleList == null || scheduleList.isEmpty()) {
 			throw new PostValueInvalidException(ErrorMessages.SHEDULE_NULL_INVALID);
 		}
 
-		for (schedule sch : scheduleList) {
+		for (Schedule sch : scheduleList) {
 			ScheduleValidations.validateSchedule(sch);
 		}
 
@@ -91,7 +91,7 @@ public class ArtitsValidator {
 	// Validation for password
 	public static boolean validatePassword(String password) throws IllegalArgumentException {
 
-		PasswordValidations.ValidatePassword(password);
+		PasswordValidations.validatePassword(password);
 		return true;
 
 	}
@@ -111,7 +111,7 @@ public class ArtitsValidator {
 		if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
 			throw new IllegalArgumentException(ErrorMessages.INVALID_PHONE_NUMBER_NULL);
 		}
-		phoneNumberValidations.validateNumber(phoneNumber);
+		PhoneNumberValidations.validateNumber(phoneNumber);
 		return true;
 	}
 
@@ -179,10 +179,11 @@ public class ArtitsValidator {
 
 	}
 	
-	
-	public static void validateGender(gender genderOfArtist) throws IllegalArgumentException {
+	public static boolean validateGender(gender genderOfArtist) throws IllegalArgumentException {
 	    if (genderOfArtist == null) {
 	        throw new IllegalArgumentException("Gender of artist is required");
 	    }
+	    return true;
 	}
+
 }
