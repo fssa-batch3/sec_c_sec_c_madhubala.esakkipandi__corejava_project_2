@@ -12,37 +12,35 @@ import com.fssa.glossyblends.model.Artist.schedule;
 
 public class ScheduleServiceLayer {
 
-    private ScheduleDAO scheduleDAO;
+	private ScheduleDAO scheduleDAO;
 
-    public ScheduleServiceLayer(Connection connection) {
-        scheduleDAO = new ScheduleDAO(connection);
-    }
+	public ScheduleServiceLayer(ScheduleDAO scheduleDAO) {
+this.scheduleDAO=scheduleDAO;
+}
 
-   
-    
-    
-    
-    
-    public boolean addSchedule(schedule listOfSchedule)  {
-        // Validate the schedule before adding
-        if (ScheduleValidations.validateSchedule(listOfSchedule)) {
-            LocalDateTime timeOfEvent = listOfSchedule.getTimeOfEvent();
-            if (timeOfEvent != null) {
-                return scheduleDAO.addSchedule(listOfSchedule);
-            } 
+	public boolean addSchedule(schedule listOfSchedule) {
+		// Validate the schedule before adding
+		if (ScheduleValidations.validateSchedule(listOfSchedule)) {
+			LocalDateTime timeOfEvent = listOfSchedule.getTimeOfEvent();
+			if (timeOfEvent != null) {
+				return scheduleDAO.addSchedule(listOfSchedule);
+			}
 
-        }
-        return false;
+		}
+		return false;
 
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+	}
+
+	public boolean deleteSchedule(int artistId, int id) {
+
+		return scheduleDAO.deleteSchedule(artistId, id);
+
+	}
+
+	public List<schedule> getSchedulesByArtistId(int id) {
+
+		return scheduleDAO.getSchedulesByArtistId(id);
+
+	}
+
 }

@@ -21,7 +21,7 @@ public class Artist {
 	private String languagesSpoken;
 	private String location;
 	private double averageRating;
-	private List<String> reviews;
+
 
 	// ENUM for gender
 
@@ -154,14 +154,7 @@ public class Artist {
 		this.averageRating = averageRating;
 	}
 
-	/// list of reviews for artist
-	public List<String> getReviews() {
-		return reviews;
-	}
 
-	public void setReviews(List<String> reviews) {
-		this.reviews = reviews;
-	}
 
 	// social media link
 	public List<String> getSocialMediaLinks() {

@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
+import java.sql.ResultSet;
 
 import com.fssa.glossyblends.Validator.ScheduleValidations;
 import com.fssa.glossyblends.model.Artist.schedule;
@@ -20,7 +23,6 @@ public class ScheduleDAO {
     }
 
     public boolean addSchedule(schedule listOfSchedule) throws IllegalArgumentException {
-        // Validate the schedule before adding
         if (ScheduleValidations.validateSchedule(listOfSchedule)) {
             String query = "INSERT INTO artist_schedule (artist_id, event_date, event_name, event_time) VALUES (?, ?, ?, ?)";
             try (PreparedStatement smt = connection.prepareStatement(query)) {
@@ -31,6 +33,7 @@ public class ScheduleDAO {
                 } else {
                     throw new IllegalArgumentException("Event date cannot be null.");
                 }
+                
                 
                 LocalDateTime timeOfEvent = listOfSchedule.getTimeOfEvent();
                 if (timeOfEvent != null) {
@@ -56,5 +59,61 @@ public class ScheduleDAO {
         return false;
     }
 
+    
+   
+ // ScheduleDAO class
+    public boolean deleteSchedule(int artistId, int id) {
+        String query = "DELETE FROM artist_schedule WHERE artist_id = ? AND id = ?";
+        try (PreparedStatement smt = connection.prepareStatement(query)) {
+            smt.setInt(1, artistId);
+            smt.setInt(2, id);
+
+            int rowsAffected = smt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Schedule details deleted from the database.");
+                return true;
+            } else {
+                System.out.println("Failed to delete schedule details from the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    
+    
+    public List<schedule> getSchedulesByArtistId(int artistId) {
+        List<schedule> schedulesList = new ArrayList<schedule>();
+
+        String query = "SELECT * FROM artist_schedule WHERE artist_id = ?";
+        try (PreparedStatement smt = connection.prepareStatement(query)) {
+            smt.setInt(1, artistId);
+
+            try (ResultSet rs = smt.executeQuery()) {
+                while (rs.next()) {
+                    schedule schedule = new schedule();
+                    schedule.setArtistId(rs.getInt("artist_id"));
+                    schedule.setEventName(rs.getString("event_name"));
+
+                    LocalDate eventDate = rs.getDate("event_date").toLocalDate();
+                    schedule.setDate(eventDate);
+
+                    LocalDateTime eventTime = rs.getTimestamp("event_time").toLocalDateTime();
+                    schedule.setTimeOfEvent(eventTime);
+
+                    schedulesList.add(schedule);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return schedulesList;
+    }
+    
+    
+    
 
 }

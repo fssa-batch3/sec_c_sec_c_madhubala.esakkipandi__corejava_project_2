@@ -684,8 +684,7 @@ public class TestArtitsValidator {
 	    }
 
 	 
-	 
-	 
+
 	 
 	    @Test
 	    public void testValidateGender_NullGender() {

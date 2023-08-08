@@ -1,6 +1,5 @@
 package com.fssa.glossyblends.ServiceTestCase;
 
-import Connection.ConnectionUtil;
 import com.fssa.glossyblends.DAO.*;
 
 import org.junit.jupiter.api.Test;
@@ -10,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.fssa.glossyblends.model.Artist.*;
+import com.fssa.glossyblends.util.ConnectionUtil;
 import com.fssa.glossyblends.ArtistServiceLayer.*;
 import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
 
@@ -24,7 +24,7 @@ public class TestServiceCrudOperations {
             ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
 
             Services service = new Services();
-            service.setArtistId(4);
+            service.setArtistId(9);
             service.setCategory(ServiceCategory.HAIR_STYLE);
             service.setCost(90000);
             service.setName("Haircuting");
@@ -46,13 +46,13 @@ public class TestServiceCrudOperations {
 
             ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
             ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
-            List<Services> service = serviceProviding.getServicesByArtistId(2);
+            List<Services> service = serviceProviding.getServicesByArtistId(12);
 
             for (Services ser : service) {
                 System.out.println(ser.getCategory());
             }
 
-            assertEquals(25, service.size(), "Size should match.");
+            assertEquals(1, service.size(), "Size should match.");
 
         } catch (ServiceValueInvalidException ex) {
             ex.getMessage();
@@ -66,12 +66,12 @@ public class TestServiceCrudOperations {
             ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
             ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
 
-            Services serviceToUpdate = serviceProviding.getServiceById(91, 4);
+            Services serviceToUpdate = serviceProviding.getServiceById(3, 12);
 
             System.out.println("before" + serviceToUpdate.getCost());
 
-            Services updatedService = serviceProviding.getServiceById(91, 4);
-            updatedService.setCost(45678);
+            Services updatedService = serviceProviding.getServiceById(2, 2);
+            updatedService.setCost(10000);
             boolean updated2 = serviceProviding.updateService(updatedService);
 
             assertTrue(updated2);
@@ -80,7 +80,7 @@ public class TestServiceCrudOperations {
                 System.out.println("after" + updatedService.getCost());
             }
 
-            assertEquals(45678, updatedService.getCost(), "Service cost not updated.");
+            assertEquals(10000, updatedService.getCost(), "Service cost not updated.");
 
         } catch (ServiceValueInvalidException ex) {
             ex.printStackTrace();
@@ -93,7 +93,7 @@ public class TestServiceCrudOperations {
         ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
         ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
 
-        boolean deleted = serviceProviding.deleteServiceById(99, 4);
+        boolean deleted = serviceProviding.deleteServiceById(4, 13);
 
         if (deleted) {
             System.out.println("Deleted");
@@ -102,6 +102,8 @@ public class TestServiceCrudOperations {
         }
     }
 
+    
+    
     @Test
     public void testUpdateServiceWithInvalidValues() {
         Connection connection = ConnectionUtil.getConnection();
@@ -121,4 +123,7 @@ public class TestServiceCrudOperations {
             System.out.println(e.getMessage());
         }
     }
+    
+    
+    
 }

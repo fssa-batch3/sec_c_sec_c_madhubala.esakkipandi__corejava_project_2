@@ -16,32 +16,33 @@ public class ArtistService {
 		this.artistDAO = artistDAO;
 	}
 
-	// Method to check if an artist with a given name is already present in the
-	// database
-	private boolean isEmailPresent(List<String> emailList, String email) {
+
+	private boolean isEmailPresent(List<String> emailList, String email) {	
+		
+		System.out.println("lkjhgfd");
+		
 		return emailList.contains(email);
+
+		
+
 	}
 
-	public boolean addArtist(Artist artist)
-			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
-		// Validate the artist object using the ArtistValidator
+	public boolean addArtist(Artist artist) throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
+	    if (ArtitsValidator.validateArtist(artist)) {
+	        List<String> emailList = artistDAO.getAllEmails();
 
-		if (ArtitsValidator.validateArtist(artist)) {
-			artistDAO.addArtist(artist);
-			return true;
+	        if (!isEmailPresent(emailList, artist.getEmail())) {
+	            artistDAO.addArtist(artist);
+	            System.out.println("Madhu alaaded");
+	            return true;
+	            
+	        }
+	    }
 
-		}
-
-		// Get all emails from the DAO
-		List<String> emailList = artistDAO.getAllEmails();
-
-		// Check if the artist email is already present in the list
-		if (isEmailPresent(emailList, artist.getEmail())) {
-			return false;
-		}
-
-		return true;
+	    return false;
 	}
+
+
 
 	public boolean updateArtist(Artist artist)
 			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
@@ -51,17 +52,9 @@ public class ArtistService {
 			return false;
 		}
 
-		// Get all emails from the DAO
 		List<String> emailList = artistDAO.getAllEmails();
 
-		// Check if the artist email is already present in the list (exclude the
-		// artist's own email)
-//        for (String email : emailList) {
-//            if (email.equals(artist.getEmail())) {
-//                System.out.println("Artist with the email '" + artist.getEmail() + "' already exists.");
-//                return false;
-//            }
-//        }
+
 
 		artistDAO.updateArtist(artist);
 		return true;

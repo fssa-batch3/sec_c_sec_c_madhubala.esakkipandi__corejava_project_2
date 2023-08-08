@@ -6,11 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.fssa.glossyblends.DAO.ArtistDAO;
 import com.fssa.glossyblends.model.Artist.Artist;
 import com.fssa.glossyblends.model.Artist.Artist.gender;
+import com.fssa.glossyblends.util.ConnectionUtil;
 import com.fssa.glossyblends.model.Artist.Post;
-
-
-import Connection.ConnectionUtil;
-
 import com.fssa.glossyblends.ArtistServiceLayer.ArtistService;
 
 import com.fssa.glossyblends.CustomException.PostValueInvalidException;
@@ -34,9 +31,9 @@ public class TestArtistCrud {
 			ArtistService artistService = new ArtistService(artistDAO);
 
 			Artist artist = new Artist();
-			artist.setUsername("Madhubala");
+			artist.setUsername("joo");
 			artist.setPassword("TestPassword123");
-			artist.setEmail("joo12@example.com");
+			artist.setEmail("Madhubal@gmail.com");
 			artist.setPhone_number("1234567890");
 			artist.setYearsOfExperience(5);
 			artist.setAvailable(true);
@@ -46,23 +43,18 @@ public class TestArtistCrud {
 			artist.setGenderOfArtist(Artist.gender.FEMALE);
 			artist.setAverageRating(3);
 
-			// Note: artist_id is not set here, as it's typically auto-incremented in the
-			// database
-			// Set other properties such as social media links, services, posts, schedules
-
+			
 			boolean isAdded = artistService.addArtist(artist);
 			Assertions.assertTrue(isAdded);
 
-			Assertions.assertTrue(isAdded);
+			
 
-//			// Now check if the added artist exists in the database
 			int artistId = artistDAO.getArtistByName(artist.getUsername());
-			Assertions.assertTrue(artistId > 0); // Assuming artist ID should be greater than 0
+			Assertions.assertTrue(artistId > 0); 
 
-			// Retrieve the artist from the database and compare attributes
 			Artist addedArtist = artistDAO.getArtistById(String.valueOf(artistId));
-			Assertions.assertEquals("Madhubala", addedArtist.getUsername());
-			Assertions.assertEquals("joo12@example.com", addedArtist.getEmail());
+			Assertions.assertEquals("joo", addedArtist.getUsername());
+			Assertions.assertEquals("Madhubal@gmail.com", addedArtist.getEmail());
 			Assertions.assertEquals("1234567890", addedArtist.getPhone_number());
 			Assertions.assertEquals(5, addedArtist.getYearsOfExperience());
 			Assertions.assertTrue(addedArtist.isAvailable());
@@ -95,7 +87,7 @@ public class TestArtistCrud {
 			retrievedArtist.setAverageRating(4.5);
 
 			retrievedArtist.setYearsOfExperience(3);
-
+			retrievedArtist.setUsername("Jothi");
 			retrievedArtist.setAvailable(false);
 
 			System.out.println(retrievedArtist.getYearsOfExperience() + "uyht");
@@ -116,12 +108,12 @@ public class TestArtistCrud {
 			System.out.println(updatedArtist.getAverageRating());
 			System.out.println(updatedArtist.getYearsOfExperience());
 
-			Assertions.assertEquals("Madhubala", updatedArtist.getUsername());
-			Assertions.assertEquals("Jalele@example.com", updatedArtist.getEmail());
-			Assertions.assertEquals("1234567", updatedArtist.getPhone_number());
+			Assertions.assertEquals("Jothi", updatedArtist.getUsername());
+			Assertions.assertEquals("joo123@example.com", updatedArtist.getEmail());
+			Assertions.assertEquals("1234567890", updatedArtist.getPhone_number());
 			Assertions.assertEquals(3, updatedArtist.getYearsOfExperience());
 			Assertions.assertEquals(false, updatedArtist.isAvailable());
-			Assertions.assertEquals("English, Hindi", updatedArtist.getLanguagesSpoken());
+			Assertions.assertEquals("English", updatedArtist.getLanguagesSpoken());
 			Assertions.assertEquals("chennai", updatedArtist.getLocation());
 			Assertions.assertEquals(gender.FEMALE, updatedArtist.getGenderOfArtist());
 
@@ -141,9 +133,7 @@ public class TestArtistCrud {
 	    ArtistDAO artistDao = new ArtistDAO(connection);
 	    ArtistService artistService = new ArtistService(artistDao);
 	    
-	    int artistIdToDelete =1; // Replace this with the artist ID you want to delete
-	    
-	    // Retrieve the artist by ID
+	    int artistIdToDelete =5; 
 	    Artist artistToDelete = artistDao.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
@@ -178,24 +168,18 @@ public class TestArtistCrud {
 	        
 	        ArtistService artistService = new ArtistService(artistDAO);
 
-	        int artistId = 2; // Replace with a valid artist ID
-
+	        int artistId = 10; 
 	        List<Post> posts = artistService.getPostByArtistId(artistId);
 	        
 	        Assertions.assertFalse(posts.isEmpty());
 	       
-	      Assertions.assertEquals(6,posts.size());
+	      Assertions.assertEquals(1,posts.size());
 
 	        
 	        
-	        // You can add more assertions or validation here based on your actual data
-	        // For example:
-	        // assertEquals(expectedSize, posts.size());
-	        
 	        for (Post post : posts) {
 	            System.out.println("Post Title: " + post.getTitle());
-	            // Add more print statements or assertions here based on your data
-	            // assertEquals(expectedValue, post.getSomeProperty());
+	            
 	        }
 
 	        connection.close();
@@ -212,7 +196,7 @@ public class TestArtistCrud {
 	        
 	        ArtistService artistService = new ArtistService(artistDAO);
 
-	        int invalidArtistId = -1; // Replace with an invalid artist ID
+	        int invalidArtistId = -1; 
 
 	        List<Post> posts = artistService.getPostByArtistId(invalidArtistId);
 	        
