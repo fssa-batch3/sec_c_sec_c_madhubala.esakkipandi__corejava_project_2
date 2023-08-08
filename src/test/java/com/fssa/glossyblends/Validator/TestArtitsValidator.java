@@ -754,7 +754,7 @@ import com.fssa.glossyblends.model.Schedule;
 	    // Test cases for validateLocation
 	    @Test
 	    void testValidateLocation_ValidLocation_ReturnsTrue() {
-	        String validLocation = "Chennai";
+	        String validLocation = "chennai";
 
 	        boolean result = ArtitsValidator.validateLocation(validLocation);
 
