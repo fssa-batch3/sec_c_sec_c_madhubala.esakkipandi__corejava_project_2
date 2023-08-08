@@ -102,7 +102,7 @@ public class TestServiceCrudOperations {
         ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
         ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
 
-        boolean deleted = serviceProviding.deleteServiceById(9, 15);
+        boolean deleted = serviceProviding.deleteServiceById(9, 14);
 
         if (deleted) {
             System.out.println("Deleted");
