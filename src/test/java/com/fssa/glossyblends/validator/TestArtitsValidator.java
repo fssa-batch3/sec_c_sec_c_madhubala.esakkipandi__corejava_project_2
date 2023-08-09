@@ -18,9 +18,7 @@ import com.fssa.glossyblends.customexception.PostValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
-import com.fssa.glossyblends.validator.ArtitsValidator;
-import com.fssa.glossyblends.validator.PostValidations;
-import com.fssa.glossyblends.validator.ScheduleValidations;
+
 import com.fssa.glossyblends.model.ErrorMessages;
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.model.ServiceCategory;
