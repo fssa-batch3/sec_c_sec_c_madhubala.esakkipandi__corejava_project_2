@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.glossyblends.ArtistServiceLayer.PostServiceLayer;
-import com.fssa.glossyblends.CustomException.PostValueInvalidException;
-import com.fssa.glossyblends.DAO.PostDAO;
+import com.fssa.glossyblends.artistservicelayer.PostServiceLayer;
+import com.fssa.glossyblends.customexception.PostValueInvalidException;
+import com.fssa.glossyblends.dao.PostDAO;
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.util.ConnectionUtil;
 
@@ -49,7 +49,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 	    PostDAO postDao = new PostDAO(connection);
 	    PostServiceLayer serviceLayer = new PostServiceLayer(postDao);
 	    
-	    int postIdToDelete = 38;
+	    int postIdToDelete = 39;
 	    int artistId=9;
 
 	    boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);

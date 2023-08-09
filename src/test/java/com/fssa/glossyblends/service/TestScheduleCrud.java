@@ -8,8 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.glossyblends.ArtistServiceLayer.ScheduleServiceLayer;
-import com.fssa.glossyblends.DAO.ScheduleDAO;
+import com.fssa.glossyblends.artistservicelayer.ScheduleServiceLayer;
+import com.fssa.glossyblends.dao.ScheduleDAO;
 import com.fssa.glossyblends.model.Schedule;
 import com.fssa.glossyblends.util.ConnectionUtil;
 
@@ -43,7 +43,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 		ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer(scheduleDao);
 
-		boolean deleted = serviceOfSchedule.deleteSchedule(7, 24);
+		boolean deleted = serviceOfSchedule.deleteSchedule(7, 17);
 
 		Assertions.assertTrue(deleted);
 

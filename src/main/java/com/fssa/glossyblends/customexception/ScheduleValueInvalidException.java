@@ -1,4 +1,4 @@
-package com.fssa.glossyblends.CustomException;
+package com.fssa.glossyblends.customexception;
 
 public class ScheduleValueInvalidException extends Exception{
 

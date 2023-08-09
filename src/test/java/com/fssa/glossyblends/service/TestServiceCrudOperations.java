@@ -10,9 +10,9 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.glossyblends.ArtistServiceLayer.ServiceProviding;
-import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
-import com.fssa.glossyblends.DAO.ServiceProvidingDAO;
+import com.fssa.glossyblends.artistservicelayer.ServiceProviding;
+import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
+import com.fssa.glossyblends.dao.ServiceProvidingDAO;
 import com.fssa.glossyblends.model.ServiceCategory;
 import com.fssa.glossyblends.model.Services;
 import com.fssa.glossyblends.util.ConnectionUtil;
@@ -102,7 +102,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
         ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
         ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
 
-        boolean deleted = serviceProviding.deleteServiceById(9,25);
+        boolean deleted = serviceProviding.deleteServiceById(9,27);
 
         
         Assertions.assertTrue(deleted);

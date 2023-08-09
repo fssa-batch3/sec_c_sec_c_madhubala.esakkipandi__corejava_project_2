@@ -7,10 +7,10 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.glossyblends.ArtistServiceLayer.ArtistService;
-import com.fssa.glossyblends.CustomException.PostValueInvalidException;
-import com.fssa.glossyblends.CustomException.ServiceValueInvalidException;
-import com.fssa.glossyblends.DAO.ArtistDAO;
+import com.fssa.glossyblends.artistservicelayer.ArtistService;
+import com.fssa.glossyblends.customexception.PostValueInvalidException;
+import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
+import com.fssa.glossyblends.dao.ArtistDAO;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 import com.fssa.glossyblends.model.Post;
@@ -30,7 +30,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 			Artist artist = new Artist();
 			artist.setUsername("jallela");
 			artist.setPassword("TestPassword123");
-			artist.setEmail("jaleela12@gmail.com");
+			artist.setEmail("jaleela0@gmail.com");
 			artist.setPhonenNumber("1234567890");
 			artist.setYearsOfExperience(5);
 			artist.setAvailable(true);
@@ -42,7 +42,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 			
 			
-			boolean isAdded = artistService.addArtist(artist);
+			boolean isAdded = ArtistService.addArtist(artist);
 			Assertions.assertTrue(isAdded);
 
 			if(isAdded) {
@@ -143,7 +143,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 	    ArtistService artistService = new ArtistService(artistDAO);
 	    
-	    int artistIdToDelete =35; 
+	    int artistIdToDelete =36; 
 	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
