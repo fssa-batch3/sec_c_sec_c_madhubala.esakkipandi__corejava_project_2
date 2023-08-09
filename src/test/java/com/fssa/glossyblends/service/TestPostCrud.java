@@ -49,7 +49,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 	    PostDAO postDao = new PostDAO(connection);
 	    PostServiceLayer serviceLayer = new PostServiceLayer(postDao);
 	    
-	    int postIdToDelete = 48;
+	    int postIdToDelete = 41;
 	    int artistId=9;
 
 	    boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);
