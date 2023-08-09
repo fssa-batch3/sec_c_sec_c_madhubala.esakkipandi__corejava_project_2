@@ -102,7 +102,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
         ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
         ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
 
-        boolean deleted = serviceProviding.deleteServiceById(9,26);
+        boolean deleted = serviceProviding.deleteServiceById(9,33);
 
         
         Assertions.assertTrue(deleted);
