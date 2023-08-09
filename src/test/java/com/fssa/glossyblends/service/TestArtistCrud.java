@@ -1,6 +1,5 @@
 package com.fssa.glossyblends.service;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import com.fssa.glossyblends.dao.ArtistDAO;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 import com.fssa.glossyblends.model.Post;
-import com.fssa.glossyblends.util.ConnectionUtil;
 
 
 
@@ -30,7 +28,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 			Artist artist = new Artist();
 			artist.setUsername("jallela");
 			artist.setPassword("TestPassword123");
-			artist.setEmail("jaleela0@gmail.com");
+			artist.setEmail("jal@gmail.com");
 			artist.setPhonenNumber("1234567890");
 			artist.setYearsOfExperience(5);
 			artist.setAvailable(true);
@@ -78,7 +76,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 	@Test
 	 void UpdateArtistTestService()
 			throws SQLException, IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
-		Connection connection = ConnectionUtil.getConnection();
+//		Connection connection = ConnectionUtil.getConnection();
 	
 		ArtistDAO artistDAO = new ArtistDAO();
 
@@ -141,9 +139,9 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 	
 
-	    ArtistService artistService = new ArtistService(artistDAO);
+	 new ArtistService(artistDAO);
 	    
-	    int artistIdToDelete =36; 
+	    int artistIdToDelete =38; 
 	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
@@ -180,7 +178,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 //			ArtistService artistService = new ArtistService(artistDAO);
 	        
-	        ArtistService artistService = new ArtistService(artistDAO);
+	  new ArtistService(artistDAO);
 
 	        int artistId = 10; 
 	        List<Post> posts = ArtistService.getPostByArtistId(artistId);
@@ -210,7 +208,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 //			ArtistService artistService = new ArtistService(artistDAO);
 	      
 	        
-	        ArtistService artistService = new ArtistService(artistDAO);
+	  new ArtistService(artistDAO);
 
 	        int invalidArtistId = -1; 
 

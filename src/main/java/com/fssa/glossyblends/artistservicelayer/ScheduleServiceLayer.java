@@ -1,13 +1,12 @@
 package com.fssa.glossyblends.artistservicelayer;
 
-import java.sql.Connection;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fssa.glossyblends.dao.ScheduleDAO;
-import com.fssa.glossyblends.model.Post;
+
 import com.fssa.glossyblends.model.Schedule;
-import com.fssa.glossyblends.validator.PostValidations;
+
 import com.fssa.glossyblends.validator.ScheduleValidations;
 
 public class ScheduleServiceLayer {
@@ -44,3 +43,12 @@ this.scheduleDAO=scheduleDAO;
 	}
 
 }
+
+
+
+
+
+
+
+
+
