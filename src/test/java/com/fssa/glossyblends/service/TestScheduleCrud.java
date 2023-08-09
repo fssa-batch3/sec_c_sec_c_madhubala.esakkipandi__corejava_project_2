@@ -43,7 +43,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 		ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer(scheduleDao);
 
-		boolean deleted = serviceOfSchedule.deleteSchedule(7, 34);
+		boolean deleted = serviceOfSchedule.deleteSchedule(7, 36);
 
 		Assertions.assertTrue(deleted);
 
