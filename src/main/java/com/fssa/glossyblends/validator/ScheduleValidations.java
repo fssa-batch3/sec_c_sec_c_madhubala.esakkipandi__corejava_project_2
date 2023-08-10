@@ -9,7 +9,10 @@ public class ScheduleValidations {
     private ScheduleValidations() {
     }
     public static ScheduleValidations getInstance() {
+    	
+    	
         return instance;
+        
     }
     
     public static boolean validateSchedule(Schedule listOfSchedule) throws IllegalArgumentException {
