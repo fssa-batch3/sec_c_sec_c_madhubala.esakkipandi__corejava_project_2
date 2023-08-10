@@ -28,7 +28,7 @@ import com.fssa.glossyblends.model.Post;
 			Artist artist = new Artist();
 			artist.setUsername("jallela");
 			artist.setPassword("TestPassword123");
-			artist.setEmail("jaleealll@gmail.com");
+			artist.setEmail("jaleeallll@gmail.com");
 			artist.setPhonenNumber("1234567890");
 			artist.setYearsOfExperience(5);
 			artist.setAvailable(true);
@@ -141,7 +141,7 @@ import com.fssa.glossyblends.model.Post;
 
 	 new ArtistService(artistDAO);
 	    
-	    int artistIdToDelete =28; 
+	    int artistIdToDelete =45; 
 	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
