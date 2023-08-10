@@ -42,6 +42,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 	}
 
+	
 	@Test
 	 void testDeletePostByID() throws SQLException {
 	    Connection connection = ConnectionUtil.getConnection();
@@ -49,7 +50,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 	    PostDAO postDao = new PostDAO(connection);
 	    PostServiceLayer serviceLayer = new PostServiceLayer(postDao);
 	    
-	    int postIdToDelete = 53;
+	    int postIdToDelete = 57;
 	    int artistId=9;
 
 	    boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);
