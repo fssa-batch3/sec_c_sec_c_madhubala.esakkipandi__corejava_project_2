@@ -83,7 +83,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
      void testDeleteService() throws ServiceValueInvalidException {
         ServiceProviding serviceProviding = new ServiceProviding();
 
-        boolean deleted = serviceProviding.deleteServiceById(9,48);
+        boolean deleted = serviceProviding.deleteServiceById(9,49);
 
         
         Assertions.assertTrue(deleted);

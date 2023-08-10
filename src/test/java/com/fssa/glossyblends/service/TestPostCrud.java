@@ -43,7 +43,7 @@ import com.fssa.glossyblends.model.Post;
 	   
 	    PostServiceLayer serviceLayer = new PostServiceLayer();
 	    
-	    int postIdToDelete = 58;
+	    int postIdToDelete = 59;
 	    int artistId=9;
 
 	    boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);

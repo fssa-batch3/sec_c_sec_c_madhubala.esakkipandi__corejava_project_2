@@ -139,7 +139,7 @@ import com.fssa.glossyblends.model.Post;
 	
 
 		ArtistService artistservice= new ArtistService();	    
-	    int artistIdToDelete =51; 
+	    int artistIdToDelete =52; 
 	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
@@ -210,6 +210,7 @@ import com.fssa.glossyblends.model.Post;
 	        
 	        Assertions.assertNotNull(posts);
 	        Assertions.assertTrue(posts.isEmpty());
+	        
 	        
 	       
 	    } catch (SQLException  e) {
