@@ -3,7 +3,6 @@ package com.fssa.glossyblends.service;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,9 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.PostServiceLayer;
 import com.fssa.glossyblends.customexception.PostValueInvalidException;
-import com.fssa.glossyblends.dao.PostDAO;
 import com.fssa.glossyblends.model.Post;
-import com.fssa.glossyblends.util.ConnectionUtil;
 
  class TestPostCrud {
 
@@ -22,10 +19,8 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 	 void AddPostTestCase() throws PostValueInvalidException, SQLException {
 
 		try {
-			Connection connection = ConnectionUtil.getConnection();
 
-			PostDAO postDao = new PostDAO(connection);
-			PostServiceLayer serviceLayer = new PostServiceLayer(postDao);
+			PostServiceLayer serviceLayer = new PostServiceLayer();
 			Post post = new Post();
 			post.setArtistId(9);
 			post.setDescription("The second work");
@@ -34,7 +29,6 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
 			boolean added = serviceLayer.addPost(post);
 			Assertions.assertTrue(added);
-			   connection.close();
 		} catch (PostValueInvalidException e) {
 
 			fail(e.getMessage());
@@ -46,33 +40,28 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 	
 	@Test
 	 void testDeletePostByID() throws SQLException {
-	    Connection connection = ConnectionUtil.getConnection();
-
-	    PostDAO postDao = new PostDAO(connection);
-	    PostServiceLayer serviceLayer = new PostServiceLayer(postDao);
+	   
+	    PostServiceLayer serviceLayer = new PostServiceLayer();
 	    
-	    int postIdToDelete = 57;
+	    int postIdToDelete = 58;
 	    int artistId=9;
 
 	    boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);
 
 	    Assertions.assertTrue( deleted);
-	    connection.close();
 	}
 
 	
 
 	@Test
 	 void GetPostsByArtistIdTest() throws SQLException {
-		Connection connection = ConnectionUtil.getConnection();
-		PostDAO postDao = new PostDAO(connection);
-		PostServiceLayer serviceLayer = new PostServiceLayer(postDao);
+		
+		PostServiceLayer serviceLayer = new PostServiceLayer();
 		int artistId = 10;
 
 		List<Post> posts = serviceLayer.getPostsByArtistId(artistId);
 
 		Assertions.assertEquals(1, posts.size());
-		   connection.close();
 	}
 
 }

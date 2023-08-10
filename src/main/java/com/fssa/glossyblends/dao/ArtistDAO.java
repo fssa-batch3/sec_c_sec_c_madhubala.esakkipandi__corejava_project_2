@@ -7,12 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fssa.glossyblends.customexception.PostValueInvalidException;
-import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.util.ConnectionUtil;
-import com.fssa.glossyblends.validator.ArtitsValidator;
 
  public class ArtistDAO {
 
@@ -38,13 +35,8 @@ import com.fssa.glossyblends.validator.ArtitsValidator;
 	}
 
 	// adding the artist artist object
-	public static boolean addArtist(Artist artist) throws PostValueInvalidException, ServiceValueInvalidException {
-//		try {
-//			ArtitsValidator.validateArtist(artist);
-//		} catch (IllegalArgumentException e) {
-//			e.printStackTrace();
-//			throw new IllegalArgumentException("Invalid artist passed to DAO Layer", e);
-//		}
+	public static boolean addArtist(Artist artist)   {
+
 		try (Connection connection = ConnectionUtil.getConnection()) {
 			try (PreparedStatement stmt = connection.prepareStatement(
 					"INSERT INTO artists (username, password, email, phone_number, years_of_experience, is_available, location, languages_spoken, genderOfArtist, averageRating) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {

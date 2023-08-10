@@ -11,14 +11,12 @@ import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.util.ConnectionUtil;
 
 public class PostDAO {
-    private Connection connection;
-
-    public PostDAO(Connection connection) {
-        this.connection = connection;
-    }
-
+   
     // adding post
-    public boolean addPost(Post post) {
+    public  static boolean addPost(Post post) {
+    	
+    	
+    	try(Connection connection=ConnectionUtil.getConnection()){
         try (PreparedStatement stmt = connection.prepareStatement(
                 "INSERT INTO artist_posts (artist_id, title, description, post_url) VALUES (?, ?, ?, ?)")) {
             int artistId = post.getArtistId();
@@ -31,15 +29,19 @@ public class PostDAO {
 
             int rows = stmt.executeUpdate();
             return rows > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+        } 
+    }catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+
+    }
+
     }
 
     // get the post by artist if
-    public List<Post> getPostsByArtistId(int artistId) {
+    public static List<Post> getPostsByArtistId(int artistId)   {
         List<Post> postsList = new ArrayList<>();
+    	try(Connection connection=ConnectionUtil.getConnection()){
 
         try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM artist_posts WHERE artist_id = ?")) {
             stmt.setInt(1, artistId);
@@ -56,15 +58,17 @@ public class PostDAO {
                     postsList.add(post);
                 }
             }
+        }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return postsList;
+	
+     	
+   	   return postsList;
+   
     }
-
-    public boolean deletePost(int postId, int artistId) {
-        try {
+    public  static boolean deletePost(int postId, int artistId) {
+    	try(Connection connection=ConnectionUtil.getConnection()){
             try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM artist_posts WHERE id = ? AND artist_id = ?")) {
                 stmt.setInt(1, postId);
                 stmt.setInt(2, artistId);

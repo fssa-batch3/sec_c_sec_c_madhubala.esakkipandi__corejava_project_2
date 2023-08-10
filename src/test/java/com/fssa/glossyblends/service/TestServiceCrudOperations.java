@@ -22,26 +22,18 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
     @Test
      void testAddService() {
-        try {
-            Connection connection = ConnectionUtil.getConnection();
+        ServiceProviding serviceProviding = new ServiceProviding();
 
-            ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
-            ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
+		Services service = new Services();
+		service.setArtistId(9);
+		service.setCategory(ServiceCategory.HAIR_STYLE);
+		service.setCost(90000);
+		service.setName("Haircuting");
+		service.setSampleImage("https://example.com/haircut.jpg");
 
-            Services service = new Services();
-            service.setArtistId(9);
-            service.setCategory(ServiceCategory.HAIR_STYLE);
-            service.setCost(90000);
-            service.setName("Haircuting");
-            service.setSampleImage("https://example.com/haircut.jpg");
+		boolean added = serviceProviding.addService(service);
 
-            boolean added = serviceProviding.addService(service);
-
-            assertTrue(added, "Service should have been added successfully.");
-
-        } catch (ServiceValueInvalidException ex) {
-            fail("Exception should not have been thrown: " + ex.getMessage());
-        }
+		assertTrue(added, "Service should have been added successfully.");
     }
 
     
@@ -49,30 +41,20 @@ import com.fssa.glossyblends.util.ConnectionUtil;
     
     @Test
      void testGetServicesByArtistId() {
-        try {
-            Connection connection = ConnectionUtil.getConnection();
+        ServiceProviding serviceProviding = new ServiceProviding();
+		List<Services> service = serviceProviding.getServicesByArtistId(12);
 
-            ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
-            ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
-            List<Services> service = serviceProviding.getServicesByArtistId(12);
+		for (Services ser : service) {
+		    System.out.println(ser.getCategory());
+		}
 
-            for (Services ser : service) {
-                System.out.println(ser.getCategory());
-            }
-
-            assertEquals(1, service.size(), "Size should match.");
-
-        } catch (ServiceValueInvalidException ex) {
-            ex.getMessage();
-        }
+		assertEquals(1, service.size(), "Size should match.");
     }
 
     @Test
      void testUpdateService() {
         try {
-            Connection connection = ConnectionUtil.getConnection();
-            ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
-            ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
+            ServiceProviding serviceProviding = new ServiceProviding();
 
             Services serviceToUpdate = serviceProviding.getServiceById(3, 12);
 
@@ -99,11 +81,9 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
     @Test
      void testDeleteService() throws ServiceValueInvalidException {
-        Connection connection = ConnectionUtil.getConnection();
-        ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
-        ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
+        ServiceProviding serviceProviding = new ServiceProviding();
 
-        boolean deleted = serviceProviding.deleteServiceById(9,47);
+        boolean deleted = serviceProviding.deleteServiceById(9,48);
 
         
         Assertions.assertTrue(deleted);
@@ -121,8 +101,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
      void testUpdateServiceWithInvalidValues() {
         Connection connection = ConnectionUtil.getConnection();
 
-        ServiceProvidingDAO serviceDAO = new ServiceProvidingDAO(connection);
-        ServiceProviding serviceProviding = new ServiceProviding(serviceDAO);
+        ServiceProviding serviceProviding = new ServiceProviding();
 
         Services invalidService = new Services();
         invalidService.setId(91);

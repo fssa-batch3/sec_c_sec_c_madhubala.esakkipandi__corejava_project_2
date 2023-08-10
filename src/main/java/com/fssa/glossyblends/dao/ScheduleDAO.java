@@ -11,20 +11,19 @@ import java.util.ArrayList;
 import java.sql.ResultSet;
 
 import com.fssa.glossyblends.model.Schedule;
+import com.fssa.glossyblends.util.ConnectionUtil;
 import com.fssa.glossyblends.validator.ScheduleValidations;
 
 public class ScheduleDAO {
 
 	
-    private Connection connection;
-
-    public ScheduleDAO(Connection connection) {
-        this.connection = connection;
-    }
-
-    public boolean addSchedule(Schedule listOfSchedule) throws IllegalArgumentException {
-        if (ScheduleValidations.validateSchedule(listOfSchedule)) {
+ 
+    public static boolean addSchedule(Schedule listOfSchedule) throws IllegalArgumentException, SQLException {
+       
             String query = "INSERT INTO artist_schedule (artist_id, event_date, event_name, event_time) VALUES (?, ?, ?, ?)";
+            
+        	try(Connection connection=ConnectionUtil.getConnection()){
+
             try (PreparedStatement smt = connection.prepareStatement(query)) {
                 smt.setInt(1, listOfSchedule.getArtistId());
                 LocalDate eventDate = listOfSchedule.getDate(); 
@@ -52,18 +51,21 @@ public class ScheduleDAO {
                 } else {
                     System.out.println("Failed to save schedule details to the database.");
                 }
-            } catch (SQLException e) {
+            } 
+        }
+        	catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
         return false;
     }
 
     
    
  // ScheduleDAO class
-    public boolean deleteSchedule(int artistId, int id) {
+    public static boolean deleteSchedule(int artistId, int id) throws SQLException {
         String query = "DELETE FROM artist_schedule WHERE artist_id = ? AND id = ?";
+    	try(Connection connection=ConnectionUtil.getConnection()){
+
         try (PreparedStatement smt = connection.prepareStatement(query)) {
             smt.setInt(1, artistId);
             smt.setInt(2, id);
@@ -80,14 +82,17 @@ public class ScheduleDAO {
             e.printStackTrace();
         }
         return false;
+    	}
     }
 
     
     
-    public List<Schedule> getSchedulesByArtistId(int artistId) {
+    public static List<Schedule> getSchedulesByArtistId(int artistId) {
         List<Schedule> schedulesList = new ArrayList<>();
 
         String query = "SELECT * FROM artist_schedule WHERE artist_id = ?";
+    	try(Connection connection=ConnectionUtil.getConnection()){
+
         try (PreparedStatement smt = connection.prepareStatement(query)) {
             smt.setInt(1, artistId);
 
@@ -106,14 +111,15 @@ public class ScheduleDAO {
                     schedulesList.add(schedule);
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        } 
+    }catch (SQLException e) {
+        e.printStackTrace();
+    }
 
-        return schedulesList;
+    return schedulesList;
+    
+    }
     }
     
-    
-    
 
-}
+

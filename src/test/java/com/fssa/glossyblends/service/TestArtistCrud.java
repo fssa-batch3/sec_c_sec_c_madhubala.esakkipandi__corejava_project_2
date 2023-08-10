@@ -17,19 +17,19 @@ import com.fssa.glossyblends.model.Post;
 
 
 
+
  class TestArtistCrud {
 	@Test
 	 void testAddArtist_ValidInput() {
 		try {
-//			Connection connection = ConnectionUtil.getConnection();
-			ArtistDAO artistDAO = new ArtistDAO();
+			
 
-			ArtistService artistService = new ArtistService(artistDAO);
+			ArtistService artistservice= new ArtistService();
 
 			Artist artist = new Artist();
 			artist.setUsername("jallela");
 			artist.setPassword("TestPassword123");
-			artist.setEmail("MadhuBalaesakkipandi@gmail.com");
+			artist.setEmail("MadhuBalaesakki@gmail.com");
 			artist.setPhonenNumber("1234567890");
 			artist.setYearsOfExperience(5);
 			artist.setAvailable(true);
@@ -41,7 +41,7 @@ import com.fssa.glossyblends.model.Post;
 
 			
 			
-			boolean isAdded = ArtistService.addArtist(artist);
+			boolean isAdded = artistservice.addArtist(artist);
 			Assertions.assertTrue(isAdded);
 
 			if(isAdded) {
@@ -77,11 +77,8 @@ import com.fssa.glossyblends.model.Post;
 	@Test
 	 void UpdateArtistTestService()
 			throws SQLException, IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
-//		Connection connection = ConnectionUtil.getConnection();
 	
-		ArtistDAO artistDAO = new ArtistDAO();
-
-		ArtistService artistService = new ArtistService(artistDAO);
+		ArtistService artistService = new ArtistService();
 
 		int artistId =9;
 
@@ -126,7 +123,7 @@ import com.fssa.glossyblends.model.Post;
 
 			Assertions.assertEquals(4.5, updatedArtist.getAverageRating());
 		} else {
-
+//
 			Assertions.fail("Retrieved artist is null.");
 
 		}
@@ -137,18 +134,17 @@ import com.fssa.glossyblends.model.Post;
 	
 	@Test
 	 void deleteArtistTestCase() throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
-		ArtistDAO artistDAO = new ArtistDAO();
+	
 
 	
 
-	 new ArtistService(artistDAO);
-	    
-	    int artistIdToDelete =47; 
+		ArtistService artistservice= new ArtistService();	    
+	    int artistIdToDelete =51; 
 	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
 	        // Delete the artist
-	        boolean isDeleted = ArtistService.deleteArtist(artistToDelete);
+	        boolean isDeleted = artistservice.deleteArtist(artistToDelete);
 	        
 	        if (isDeleted) {
 	            System.out.println("Artist with ID " + artistIdToDelete + " deleted successfully.");
@@ -176,14 +172,13 @@ import com.fssa.glossyblends.model.Post;
 	void testGetPostsByArtistId_ValidInput() {
 	    try {
 
-			ArtistDAO artistDAO = new ArtistDAO();
+		
 
-//			ArtistService artistService = new ArtistService(artistDAO);
-	        
-	  new ArtistService(artistDAO);
+			ArtistService artistservice= new ArtistService();	    
+
 
 	        int artistId = 10; 
-	        List<Post> posts = ArtistService.getPostByArtistId(artistId);
+	        List<Post> posts = artistservice.getPostByArtistId(artistId);
 	        
 	        Assertions.assertFalse(posts.isEmpty());
 	       
@@ -205,16 +200,13 @@ import com.fssa.glossyblends.model.Post;
 	 void testGetPostsByArtistId_InvalidArtistId() {
 	    try {
 
-			ArtistDAO artistDAO = new ArtistDAO();
 
-//			ArtistService artistService = new ArtistService(artistDAO);
+			ArtistService artistservice= new ArtistService();	    
 	      
-	        
-	  new ArtistService(artistDAO);
 
 	        int invalidArtistId = -1; 
 
-	        List<Post> posts = ArtistService.getPostByArtistId(invalidArtistId);
+	        List<Post> posts = artistservice.getPostByArtistId(invalidArtistId);
 	        
 	        Assertions.assertNotNull(posts);
 	        Assertions.assertTrue(posts.isEmpty());

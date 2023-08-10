@@ -37,19 +37,6 @@ public class ConnectionUtil {
 	        
 	    }
 	
-	  public static void main(String[] args) {
-	        Connection con = getConnection();
-	        if (con != null) {
-	            System.out.println("Connection successful");
-	            try {
-	                con.close();
-	                System.out.println("Connection closed");
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        } else {
-	            System.out.println("Connection failed");
-	        }
-	    }
+	
 
 }
