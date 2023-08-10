@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 
 import com.fssa.glossyblends.model.Schedule;
 import com.fssa.glossyblends.util.ConnectionUtil;
-import com.fssa.glossyblends.validator.ScheduleValidations;
 
 public class ScheduleDAO {
 
@@ -46,11 +45,8 @@ public class ScheduleDAO {
 
                                 
                 if (rowsAffected > 0) {
-                    System.out.println("Schedule details saved to the database.");
                     return true;
-                } else {
-                    System.out.println("Failed to save schedule details to the database.");
-                }
+                } 
             } 
         }
         	catch (SQLException e) {
@@ -73,11 +69,8 @@ public class ScheduleDAO {
             int rowsAffected = smt.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Schedule details deleted from the database.");
                 return true;
-            } else {
-                System.out.println("Failed to delete schedule details from the database.");
-            }
+            } 
         } catch (SQLException e) {
             e.printStackTrace();
         }

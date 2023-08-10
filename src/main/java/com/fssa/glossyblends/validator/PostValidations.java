@@ -9,6 +9,12 @@ import com.fssa.glossyblends.model.Post;
 
 public class PostValidations {
 
+	
+	
+private PostValidations() {
+		
+		
+	}
     private static final String TITLE_REGEX = "^[a-zA-Z0-9\\s]{1,100}$";
     private static final String DESCRIPTION_REGEX = "^[a-zA-Z0-9\\s]{1,500}$";
     private static final String IMAGE_URL_REGEX = "^(https?://).*$";

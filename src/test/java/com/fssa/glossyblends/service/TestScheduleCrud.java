@@ -37,7 +37,7 @@ import com.fssa.glossyblends.model.Schedule;
 
 		ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 
-		boolean deleted = serviceOfSchedule.deleteSchedule(7, 46);
+		boolean deleted = serviceOfSchedule.deleteSchedule(7, 49);
 
 		Assertions.assertTrue(deleted);
 

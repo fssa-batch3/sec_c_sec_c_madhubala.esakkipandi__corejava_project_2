@@ -8,6 +8,10 @@ import java.util.regex.Matcher;
 
 public class EmailValidations {
 
+	private EmailValidations() {
+		
+		
+	}
 	// Validation for email
 	public static void validateEmail(String email) throws IllegalArgumentException {
 

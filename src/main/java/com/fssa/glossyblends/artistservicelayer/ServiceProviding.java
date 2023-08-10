@@ -6,6 +6,7 @@ import com.fssa.glossyblends.model.Services;
 import com.fssa.glossyblends.validator.ServiceValidations;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class ServiceProviding {
@@ -16,13 +17,10 @@ public class ServiceProviding {
             } else {
                 throw new ServiceValueInvalidException("Invalid service values");
             }
-        } catch (ServiceValueInvalidException e) {
+        } catch (ServiceValueInvalidException | SQLException e) {
             e.printStackTrace();
             return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+        } 
     }
 
     public boolean updateService(Services service) throws ServiceValueInvalidException {
@@ -44,7 +42,7 @@ public class ServiceProviding {
             return ServiceProvidingDAO.getServicesByArtistId(id);
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return Collections.emptyList() ;
         }
     }
 

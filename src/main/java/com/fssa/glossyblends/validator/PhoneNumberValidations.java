@@ -8,7 +8,10 @@ import com.fssa.glossyblends.model.ErrorMessages;
 public class PhoneNumberValidations {
 
 	
-	
+private PhoneNumberValidations() {
+		
+		
+	}
 	
 	public static boolean validateNumber(String number)throws IllegalArgumentException{
 		

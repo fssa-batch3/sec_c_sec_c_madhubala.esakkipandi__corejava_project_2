@@ -7,6 +7,11 @@ import com.fssa.glossyblends.model.ErrorMessages;
 import java.util.regex.Matcher;
 
 public class ImageUrlValidations {
+	
+private ImageUrlValidations() {
+		
+		
+	}
 	public static boolean validateImageUrl(String imageUrl) throws IllegalArgumentException {
 		if (imageUrl == null) {
 			throw new IllegalArgumentException(ErrorMessages.INVALID_IMAGE_URL);

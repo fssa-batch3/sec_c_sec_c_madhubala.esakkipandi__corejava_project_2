@@ -1,7 +1,5 @@
 package com.fssa.glossyblends.artistservicelayer;
 
-import com.fssa.glossyblends.customexception.PostValueInvalidException;
-import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.dao.ArtistDAO;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Post;
@@ -21,13 +19,12 @@ public class ArtistService {
 	
 	
 	public boolean addArtist(Artist artist)
-			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
+			throws IllegalArgumentException {
 		if (ArtitsValidator.validateArtist(artist)) {
 			List<String> emailList = ArtistDAO.getAllEmails();
 
 			if (!isEmailPresent(emailList, artist.getEmail())) {
 				ArtistDAO.addArtist(artist);
-				System.out.println("Madhu alaaded");
 				return true;
 
 			}
@@ -40,7 +37,6 @@ public class ArtistService {
 	public boolean updateArtist(Artist artist) throws IllegalArgumentException {
 		// Validate the artist object using the ArtistValidator
 		if (!ArtitsValidator.validateArtist(artist)) {
-			System.out.println("Invalid artist information for update.");
 			return false;
 		}
 

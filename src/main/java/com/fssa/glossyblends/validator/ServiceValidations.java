@@ -10,7 +10,10 @@ import com.fssa.glossyblends.model.Services;
 
 
 public class ServiceValidations {
-	
+private ServiceValidations() {
+		
+		
+	}
 
     public static boolean validateService(Services service) throws ServiceValueInvalidException {
         if (service == null) {

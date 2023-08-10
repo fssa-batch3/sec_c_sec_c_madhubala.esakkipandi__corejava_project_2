@@ -21,57 +21,27 @@ import com.fssa.glossyblends.model.Post;
  class TestArtistCrud {
 	@Test
 	 void testAddArtist_ValidInput() {
-		try {
-			
+		ArtistService artistservice= new ArtistService();
 
-			ArtistService artistservice= new ArtistService();
+		Artist artist = new Artist();
+		artist.setUsername("jallela");
+		artist.setPassword("TestPassword123");
+		artist.setEmail("MadhuBalaesakkii@gmail.com");
+		artist.setPhonenNumber("1234567890");
+		artist.setYearsOfExperience(5);
+		artist.setAvailable(true);
 
-			Artist artist = new Artist();
-			artist.setUsername("jallela");
-			artist.setPassword("TestPassword123");
-			artist.setEmail("MadhuBalaesakki@gmail.com");
-			artist.setPhonenNumber("1234567890");
-			artist.setYearsOfExperience(5);
-			artist.setAvailable(true);
+		artist.setLanguagesSpoken("English");
+		artist.setLocation("chennai");
+		artist.setGenderOfArtist(Artist.gender.FEMALE);
+		artist.setAverageRating(3);
 
-			artist.setLanguagesSpoken("English");
-			artist.setLocation("chennai");
-			artist.setGenderOfArtist(Artist.gender.FEMALE);
-			artist.setAverageRating(3);
+		
+		
+		boolean isAdded = artistservice.addArtist(artist);
+		Assertions.assertTrue(isAdded);
 
-			
-			
-			boolean isAdded = artistservice.addArtist(artist);
-			Assertions.assertTrue(isAdded);
-
-			if(isAdded) {
-				
-				System.out.println("Added");
-			}
-			else {
-				System.out.println(" not Added");
-
-			}
-
-			
-//			int artistId = ArtistDAO.getArtistByName(artist.getUsername());
-//			Assertions.assertTrue(artistId > 0); 
-//
-//			Artist addedArtist = ArtistDAO.getArtistById(String.valueOf(artistId));
-//			Assertions.assertEquals("joo", addedArtist.getUsername());
-//			Assertions.assertEquals("Madhubal@gmail.com", addedArtist.getEmail());
-//			Assertions.assertEquals("1234567890", addedArtist.getPhone_number());
-//			Assertions.assertEquals(5, addedArtist.getYearsOfExperience());
-//			Assertions.assertTrue(addedArtist.isAvailable());
-//
-//			Assertions.assertEquals("English", addedArtist.getLanguagesSpoken());
-//			Assertions.assertEquals("chennai", addedArtist.getLocation());
-//			Assertions.assertEquals(Artist.gender.FEMALE, addedArtist.getGenderOfArtist());
-
-			
-		} catch (  PostValueInvalidException | ServiceValueInvalidException e) {
-			Assertions.fail("Exception thrown: " + e.getMessage());
-		}
+		
 	}
 
 	@Test
@@ -87,30 +57,22 @@ import com.fssa.glossyblends.model.Post;
 		if (retrievedArtist != null) {
 
 			double originalAverageRating = retrievedArtist.getAverageRating();
-			System.out.println(originalAverageRating);
 			retrievedArtist.setAverageRating(4.5);
 
 			retrievedArtist.setYearsOfExperience(3);
 			retrievedArtist.setUsername("Jothi");
 			retrievedArtist.setAvailable(false);
 
-			System.out.println(retrievedArtist.getYearsOfExperience() + "uyht");
 			boolean isUpdated = artistService.updateArtist(retrievedArtist);
 
-			System.out.println(retrievedArtist.getArtistId() + "id");
 
 			
-			if (isUpdated) {
-
-				System.out.println("Updated");
-
-			}
+			
 			Assertions.assertTrue(isUpdated);
 
 			Artist updatedArtist = ArtistDAO.getArtistById(String.valueOf(artistId));
 
-			System.out.println(updatedArtist.getAverageRating());
-			System.out.println(updatedArtist.getYearsOfExperience());
+		
 
 			Assertions.assertEquals("Jothi", updatedArtist.getUsername());
 			Assertions.assertEquals("joo123@example.com", updatedArtist.getEmail());
@@ -139,18 +101,14 @@ import com.fssa.glossyblends.model.Post;
 	
 
 		ArtistService artistservice= new ArtistService();	    
-	    int artistIdToDelete =52; 
+	    int artistIdToDelete =53; 
 	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	    
 	    if (artistToDelete != null) {
 	        // Delete the artist
 	        boolean isDeleted = artistservice.deleteArtist(artistToDelete);
 	        
-	        if (isDeleted) {
-	            System.out.println("Artist with ID " + artistIdToDelete + " deleted successfully.");
-	        } else {
-	            System.out.println("Failed to delete artist with ID " + artistIdToDelete + ".");
-	        }
+	        
 	        
 	        
 	        
@@ -161,7 +119,6 @@ import com.fssa.glossyblends.model.Post;
 	        Artist deletedArtist = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 	        Assertions.assertNull(deletedArtist, "Deleted artist should not be found.");
 	    } else {
-	        System.out.println("Artist with ID " + artistIdToDelete + " not found.");
 	        Assertions.fail("Artist to delete not found.");
 	    }
 	}

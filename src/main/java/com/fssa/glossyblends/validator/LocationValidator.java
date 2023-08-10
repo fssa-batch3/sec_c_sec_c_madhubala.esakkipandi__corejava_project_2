@@ -3,6 +3,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LocationValidator {
+	
+private LocationValidator() {
+		
+		
+	}
     private static final List<String> allowedLocations = Arrays.asList(
         "chennai", "tirunelveli", "coimbatore", "trichy", 
         "madurai", "salem", "erode", "vellore", 

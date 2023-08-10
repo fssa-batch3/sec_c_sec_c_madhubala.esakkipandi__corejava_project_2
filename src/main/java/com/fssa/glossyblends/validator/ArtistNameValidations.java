@@ -6,6 +6,10 @@ import java.util.regex.Pattern;
 import com.fssa.glossyblends.model.ErrorMessages;
 
 public class ArtistNameValidations {
+	private ArtistNameValidations() {
+		
+		
+	}
 
 	public static boolean validateName(String name) throws IllegalArgumentException {
 

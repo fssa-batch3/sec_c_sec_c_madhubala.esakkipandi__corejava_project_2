@@ -58,7 +58,6 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
             Services serviceToUpdate = serviceProviding.getServiceById(3, 12);
 
-            System.out.println("before" + serviceToUpdate.getCost());
 
             Services updatedService = serviceProviding.getServiceById(3, 12);
             
@@ -68,9 +67,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
             Assertions.assertTrue(updated2);
 
-            if (updated2) {
-                System.out.println("after" + updatedService.getCost()+"updated");
-            }
+           
 
             assertEquals(10000, updatedService.getCost(), "Service cost not updated.");
 
@@ -83,15 +80,11 @@ import com.fssa.glossyblends.util.ConnectionUtil;
      void testDeleteService() throws ServiceValueInvalidException {
         ServiceProviding serviceProviding = new ServiceProviding();
 
-        boolean deleted = serviceProviding.deleteServiceById(9,49);
+        boolean deleted = serviceProviding.deleteServiceById(9,50);
 
         
         Assertions.assertTrue(deleted);
-        if (deleted) {
-            System.out.println("Deleted");
-        } else {
-            System.out.println("Not deleted");
-        }
+        
     }
 
     
@@ -99,7 +92,6 @@ import com.fssa.glossyblends.util.ConnectionUtil;
     
     @Test
      void testUpdateServiceWithInvalidValues() {
-        Connection connection = ConnectionUtil.getConnection();
 
         ServiceProviding serviceProviding = new ServiceProviding();
 
@@ -118,7 +110,7 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 
             Assertions.assertFalse(updated);
         } catch (ServiceValueInvalidException e) {
-            System.out.println(e.getMessage());
+        	e.getMessage();
         }
         
         

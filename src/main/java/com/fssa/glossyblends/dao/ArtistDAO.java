@@ -53,15 +53,10 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 				stmt.setDouble(10, artist.getAverageRating());
 
 				int rows;
-				try {
+				
 					rows = stmt.executeUpdate();
 
-					System.out.println(rows);
-				} catch (SQLException e) {
-					e.printStackTrace();
-					System.out.println(e.getMessage());
-					return false;
-				}
+				
 
 				return rows > 0;
 			}
@@ -114,12 +109,10 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 				stmt.setInt(11, artist.getArtistId());
 
 				int rows;
-				try {
+			
 					rows = stmt.executeUpdate();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					return false;
-				}
+		          	
+				
 				return rows > 0;
 			}
 		} catch (SQLException e) {
@@ -168,7 +161,6 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 					String email = resultSet.getString("email");
 					emailList.add(email);
 				}
-				System.out.println("sdfghjk");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

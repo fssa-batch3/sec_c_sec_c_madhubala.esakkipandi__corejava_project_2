@@ -73,14 +73,12 @@ public class PostDAO {
                 stmt.setInt(1, postId);
                 stmt.setInt(2, artistId);
                 int rows = stmt.executeUpdate();
-                System.out.println(rows);
-                System.out.println("kjhgfd");
+              
                 return rows > 0;
                
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
             return false;
         }
     }

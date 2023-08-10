@@ -13,7 +13,6 @@ public class Artist {
 	private String phoneNumber; 
 	private int yearsOfExperience; 
 	private boolean isAvailable; //
-//	private List<Post> workLink ;
 //	private List<Services> providingServices;
 //	private List<Schedule> workingDaysCalender;
 	private gender genderOfArtist;
@@ -31,42 +30,10 @@ public class Artist {
 
 	}
 
-	/// working blocking day calendar
-//	public List<Schedule> getWorkingDaysCalender() {
-//		return workingDaysCalender;
-//	}
-//
-//	public void setWorkingDaysCalender(List<Schedule> workingDaysCalender) {
-//		this.workingDaysCalender = workingDaysCalender;
-//	}
-
-//	public Artist() {
-//		workLink = new ArrayList<Post>(); // Initialize the workLink list in the constructor
-//		providingServices = new ArrayList<Services>();
-//
-//	}
-
-
-
+	
 	
 
-//	// Service providing calendar
-//	public List<Services> getProvidingServices() {
-//		return providingServices;
-//	}
-//
-//	public void setProvidingServices(List<Services> providingServices) {
-//		this.providingServices = providingServices;
-//	}
-//
-//	// Getter and setter for workLink (list of posts)
-//	public List<Post> getWorkLink() {
-//		return workLink;
-//	}
-//
-//	public void setWorkLink(List<Post> workLink) {
-//		this.workLink = workLink;
-//	}
+
 
 	// The addPost method remains the same as before
 

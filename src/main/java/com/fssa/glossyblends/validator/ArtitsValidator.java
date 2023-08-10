@@ -13,6 +13,12 @@ import com.fssa.glossyblends.model.Services;
 import com.fssa.glossyblends.model.Artist.gender;
 
 public class ArtitsValidator {
+	
+	
+	private ArtitsValidator() {
+		
+		
+	}
 	public static boolean validateArtist(Artist artist)
 			throws IllegalArgumentException {
 		if (artist == null) {
@@ -20,25 +26,17 @@ public class ArtitsValidator {
 		}
 		
 
-//        validateArtistId(artist.getArtistId());
 		validateUsername(artist.getUsername());
 		validatePassword(artist.getPassword());
 		validateEmail(artist.getEmail());
 		validatePhoneNumber(artist.getPhonenNumber());
 		validateYearsOfExperience(artist.getYearsOfExperience());
 		validateIsAvailable(artist.isAvailable());
-//        validateSocialMediaLinks(artist.getSocialMediaLinks());
 		validateLanguagesSpoken(artist.getLanguagesSpoken());
 		validateLocation(artist.getLocation());
 		validateGender(artist.getGenderOfArtist());
-		
-//        validatePost(artist.getWorkLink()); 
-		// Corrected method name here, using getWorkLink()
-//        validateschedule(artist.getWorkingDaysCalender());
 
-//        validateService(artist.getProvidingServices());
-
-//    
+   
 
 		return true;
 

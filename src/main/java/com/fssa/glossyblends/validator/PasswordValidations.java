@@ -7,6 +7,10 @@ import com.fssa.glossyblends.model.ErrorMessages;
 
 public class PasswordValidations {
 
+private PasswordValidations() {
+		
+		
+	}
 	 private static final String COMPLEXITY_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
 
 	    // Regular expression for enforcing password complexity:
