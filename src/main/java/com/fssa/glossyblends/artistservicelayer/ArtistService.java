@@ -10,52 +10,43 @@ import java.util.List;
 
 public class ArtistService {
 
+    // Check if the email is present in the list
 	private boolean isEmailPresent(List<String> emailList, String email) {
+        return emailList.contains(email);
+    }
 
-		return emailList.contains(email);
+    // Method for adding an artist
+    public boolean addArtist(Artist artist) throws IllegalArgumentException {
+        if (ArtitsValidator.validateArtist(artist)) { // Validate the artist using the validator
+            List<String> emailList = ArtistDAO.getAllEmails(); // Get a list of all emails
 
-	}
+            if (!isEmailPresent(emailList, artist.getEmail())) { // Check if email is not already in use
+                ArtistDAO.addArtist(artist); // Add the artist to the database
+                return true; // Successfully added
+            }
+        }
 
-	
-	
-	public boolean addArtist(Artist artist)
-			throws IllegalArgumentException {
-		if (ArtitsValidator.validateArtist(artist)) {
-			List<String> emailList = ArtistDAO.getAllEmails();
+        return false; // Failed to add artist
+    }
 
-			if (!isEmailPresent(emailList, artist.getEmail())) {
-				ArtistDAO.addArtist(artist);
-				return true;
+    // Method for updating artist details
+    public boolean updateArtist(Artist artist) throws IllegalArgumentException {
+        if (!ArtitsValidator.validateArtist(artist)) { // Validate the artist using the validator
+            return false; // Invalid artist data
+        }
 
-			}
+        ArtistDAO.updateArtist(artist); // Update the artist in the database
+        return true; // Successfully updated
+    }
 
-		}
+    // Method for deleting an artist record
+    public boolean deleteArtist(Artist artist) throws IllegalArgumentException {
+        // No need to validate here, directly delete the artist
+        return ArtistDAO.deleteArtist(artist); // Delete the artist from the database
+    }
 
-		return false;
-	}
-
-	public boolean updateArtist(Artist artist) throws IllegalArgumentException {
-		// Validate the artist object using the ArtistValidator
-		if (!ArtitsValidator.validateArtist(artist)) {
-			return false;
-		}
-
-
-
-		ArtistDAO.updateArtist(artist);
-		return true;
-	}
-
-	public boolean deleteArtist(Artist artist) throws IllegalArgumentException {
-		// Validate the artist object using the ArtistValidator
-
-		return ArtistDAO.deleteArtist(artist);
-	}
-
-	public List<Post> getPostByArtistId(int artistId) throws SQLException {
-
-		return ArtistDAO.getPostsByArtistId(artistId);
-
-	}
-
+    // Method for getting all the artist's posts using the artist ID
+    public List<Post> getPostByArtistId(int artistId) throws SQLException {
+        return ArtistDAO.getPostsByArtistId(artistId); // Get the artist's posts from the database
+    }
 }

@@ -3,29 +3,31 @@ package com.fssa.glossyblends.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.glossyblends.model.ErrorMessages;
+import com.fssa.glossyblends.errormessages.ErrorMessages;
 
 public class ArtistNameValidations {
-	private ArtistNameValidations() {
+	private ArtistNameValidations() {//default constructor for namevalidation with private access modifier
 		
 		
 	}
 
 	public static boolean validateName(String name) throws IllegalArgumentException {
 
-		String serviceNameValidationPattern = "^[a-zA-Z\\s]+$";
+		String serviceNameValidationPattern = "^[a-zA-Z\\s]+$";//pattern for name using regex
 
-		Pattern pattern = Pattern.compile(serviceNameValidationPattern);
+		Pattern pattern = Pattern.compile(serviceNameValidationPattern);//compile the regex pattern
 
-		Matcher emialValidation = pattern.matcher(name);
-		boolean isValid = emialValidation.matches();
+		Matcher emialValidation = pattern.matcher(name);//checking the name with the regex pattern
+		boolean isValid = emialValidation.matches();//it return the boolean value according to the input string
+		
 
-		if (!isValid) {
+
+		if (!isValid) {//if not valid it will throw exception
 
 			throw new IllegalArgumentException(ErrorMessages.INVALID_SERVICE_NAME_PATTERN);
 
 		}
-		return true;
+		return true;//otherwise return true
 
 	}
 

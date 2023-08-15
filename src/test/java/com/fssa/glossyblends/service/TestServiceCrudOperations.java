@@ -1,11 +1,8 @@
-
 package com.fssa.glossyblends.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
-import java.sql.Connection;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -13,61 +10,66 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.ServiceProviding;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
-import com.fssa.glossyblends.dao.ServiceProvidingDAO;
 import com.fssa.glossyblends.model.ServiceCategory;
 import com.fssa.glossyblends.model.Services;
-import com.fssa.glossyblends.util.ConnectionUtil;
 
- class TestServiceCrudOperations {
+/**
+ * Unit tests for CRUD (Create, Read, Update, Delete) operations on services.
+ */
+class TestServiceCrudOperations {
 
+    /**
+     * Test adding a new service.
+     *
+     * @throws ServiceValueInvalidException if the service value is invalid
+     */
     @Test
-     void testAddService() {
+    void testAddService() throws ServiceValueInvalidException {
         ServiceProviding serviceProviding = new ServiceProviding();
 
-		Services service = new Services();
-		service.setArtistId(9);
-		service.setCategory(ServiceCategory.HAIR_STYLE);
-		service.setCost(90000);
-		service.setName("Haircuting");
-		service.setSampleImage("https://example.com/haircut.jpg");
+        Services service = new Services();
+        service.setArtistId(9);
+        service.setCategory(ServiceCategory.HAIR_STYLE);
+        service.setCost(90000);
+        service.setName("Haircutting");
+        service.setSampleImage("https://example.com/haircut.jpg");
 
-		boolean added = serviceProviding.addService(service);
+        boolean added = serviceProviding.addService(service);
 
-		assertTrue(added, "Service should have been added successfully.");
+        assertTrue(added, "Service should have been added successfully.");
     }
 
-    
-    
-    
+    /**
+     * Test getting services by artist ID.
+     */
     @Test
-     void testGetServicesByArtistId() {
+    void testGetServicesByArtistId() {
         ServiceProviding serviceProviding = new ServiceProviding();
-		List<Services> service = serviceProviding.getServicesByArtistId(12);
+        List<Services> serviceList = serviceProviding.getServicesByArtistId(12);
 
-		for (Services ser : service) {
-		    System.out.println(ser.getCategory());
-		}
+        for (Services service : serviceList) {
+            System.out.println(service.getCategory());
+        }
 
-		assertEquals(1, service.size(), "Size should match.");
+        assertEquals(1, serviceList.size(), "Size should match.");
     }
 
+    /**
+     * Test updating an existing service.
+     */
     @Test
-     void testUpdateService() {
+    void testUpdateService() {
         try {
             ServiceProviding serviceProviding = new ServiceProviding();
 
             Services serviceToUpdate = serviceProviding.getServiceById(3, 12);
 
-
             Services updatedService = serviceProviding.getServiceById(3, 12);
-            
-            
+
             updatedService.setCost(10000);
-            boolean updated2 = serviceProviding.updateService(updatedService);
+            boolean updated = serviceProviding.updateService(updatedService);
 
-            Assertions.assertTrue(updated2);
-
-           
+            Assertions.assertTrue(updated);
 
             assertEquals(10000, updatedService.getCost(), "Service cost not updated.");
 
@@ -76,22 +78,25 @@ import com.fssa.glossyblends.util.ConnectionUtil;
         }
     }
 
+    /**
+     * Test deleting a service.
+     *
+     * @throws ServiceValueInvalidException if the service value is invalid
+     */
     @Test
-     void testDeleteService() throws ServiceValueInvalidException {
+    void testDeleteService() throws ServiceValueInvalidException {
         ServiceProviding serviceProviding = new ServiceProviding();
 
-        boolean deleted = serviceProviding.deleteServiceById(9,50);
+        boolean deleted = serviceProviding.deleteServiceById(9, 55);
 
-        
         Assertions.assertTrue(deleted);
-        
     }
 
-    
-    
-    
+    /**
+     * Test updating a service with invalid values.
+     */
     @Test
-     void testUpdateServiceWithInvalidValues() {
+    void testUpdateServiceWithInvalidValues() {
 
         ServiceProviding serviceProviding = new ServiceProviding();
 
@@ -101,22 +106,13 @@ import com.fssa.glossyblends.util.ConnectionUtil;
         invalidService.setName(null);
         invalidService.setCost(-1);
 
-        
-        
-        
         try {
-          boolean updated  =serviceProviding.updateService(invalidService);
-            
+            boolean updated = serviceProviding.updateService(invalidService);
 
             Assertions.assertFalse(updated);
         } catch (ServiceValueInvalidException e) {
-        	e.getMessage();
+            e.getMessage();
         }
-        
-        
-        
+
     }
-    
-    
-    
 }

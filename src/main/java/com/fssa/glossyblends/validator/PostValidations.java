@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 
 import com.fssa.glossyblends.customexception.PostValueInvalidException;
 //import com.fssa.glossyblends.model.Artist;
-import com.fssa.glossyblends.model.ErrorMessages;
+import com.fssa.glossyblends.errormessages.ErrorMessages;
 import com.fssa.glossyblends.model.Post;
 //import com.fssa.glossyblends.model.Services;
 

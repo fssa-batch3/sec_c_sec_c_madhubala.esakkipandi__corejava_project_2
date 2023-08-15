@@ -1,4 +1,3 @@
-
 package com.fssa.glossyblends.service;
 
 import java.sql.SQLException;
@@ -15,168 +14,123 @@ import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 import com.fssa.glossyblends.model.Post;
 
+/**
+ * Unit tests for CRUD (Create, Read, Update, Delete) operations on artists.
+ */
+class TestArtistCrud {
 
+    @Test
+    void testAddArtist_ValidInput() {
+        ArtistService artistservice = new ArtistService();
 
+        Artist artist = new Artist();
+        artist.setUsername("jallelaa");
+        artist.setPassword("TestPassword123");
+        artist.setEmail("MadhuBalapandi@gmail.com");
+        artist.setPhonenNumber("1234567890");
+        artist.setYearsOfExperience(5);
+        artist.setAvailable(true);
+        artist.setLanguagesSpoken("English");
+        artist.setLocation("chennai");
+        artist.setGenderOfArtist(Artist.gender.FEMALE);
+        artist.setAverageRating(3);
 
- class TestArtistCrud {
-	@Test
-	 void testAddArtist_ValidInput() {
-		ArtistService artistservice= new ArtistService();
+        boolean isAdded = artistservice.addArtist(artist);
+        Assertions.assertTrue(isAdded);
+    }
 
-		Artist artist = new Artist();
-		artist.setUsername("jallela");
-		artist.setPassword("TestPassword123");
-		artist.setEmail("MadhuBalaesakkii@gmail.com");
-		artist.setPhonenNumber("1234567890");
-		artist.setYearsOfExperience(5);
-		artist.setAvailable(true);
+    @Test
+    void UpdateArtistTestService()
+            throws SQLException, IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
 
-		artist.setLanguagesSpoken("English");
-		artist.setLocation("chennai");
-		artist.setGenderOfArtist(Artist.gender.FEMALE);
-		artist.setAverageRating(3);
+        ArtistService artistService = new ArtistService();
 
-		
-		
-		boolean isAdded = artistservice.addArtist(artist);
-		Assertions.assertTrue(isAdded);
+        int artistId = 9;
 
-		
-	}
+        Artist retrievedArtist = ArtistDAO.getArtistById(String.valueOf(artistId));
 
-	@Test
-	 void UpdateArtistTestService()
-			throws SQLException, IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
-	
-		ArtistService artistService = new ArtistService();
+        if (retrievedArtist != null) {
 
-		int artistId =9;
+            double originalAverageRating = retrievedArtist.getAverageRating();
+            retrievedArtist.setAverageRating(4.5);
 
-		Artist retrievedArtist = ArtistDAO.getArtistById(String.valueOf(artistId));
+            retrievedArtist.setYearsOfExperience(3);
+            retrievedArtist.setUsername("Jothi");
+            retrievedArtist.setAvailable(false);
 
-		if (retrievedArtist != null) {
+            boolean isUpdated = artistService.updateArtist(retrievedArtist);
 
-			double originalAverageRating = retrievedArtist.getAverageRating();
-			retrievedArtist.setAverageRating(4.5);
+            Assertions.assertTrue(isUpdated);
 
-			retrievedArtist.setYearsOfExperience(3);
-			retrievedArtist.setUsername("Jothi");
-			retrievedArtist.setAvailable(false);
+            Artist updatedArtist = ArtistDAO.getArtistById(String.valueOf(artistId));
 
-			boolean isUpdated = artistService.updateArtist(retrievedArtist);
+            // Assert the updated values
+            Assertions.assertEquals("Jothi", updatedArtist.getUsername());
+            Assertions.assertEquals("joo123@example.com", updatedArtist.getEmail());
+            Assertions.assertEquals("1234567890", updatedArtist.getPhonenNumber());
+            Assertions.assertEquals(3, updatedArtist.getYearsOfExperience());
+            Assertions.assertEquals(false, updatedArtist.isAvailable());
+            Assertions.assertEquals("English", updatedArtist.getLanguagesSpoken());
+            Assertions.assertEquals("chennai", updatedArtist.getLocation());
+            Assertions.assertEquals(gender.FEMALE, updatedArtist.getGenderOfArtist());
+            Assertions.assertEquals(4.5, updatedArtist.getAverageRating());
+        } else {
+            Assertions.fail("Retrieved artist is null.");
+        }
+    }
 
+    @Test
+    void deleteArtistTestCase()
+            throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
 
-			
-			
-			Assertions.assertTrue(isUpdated);
+        ArtistService artistservice = new ArtistService();
+        int artistIdToDelete = 55;
+        Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 
-			Artist updatedArtist = ArtistDAO.getArtistById(String.valueOf(artistId));
+        if (artistToDelete != null) {
+            // Delete the artist
+            boolean isDeleted = artistservice.deleteArtist(artistToDelete);
+            Assertions.assertTrue(isDeleted);
 
-		
+            // Verify that the artist has been deleted
+            Artist deletedArtist = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
+            Assertions.assertNull(deletedArtist, "Deleted artist should not be found.");
+        } else {
+            Assertions.fail("Artist to delete not found.");
+        }
+    }
 
-			Assertions.assertEquals("Jothi", updatedArtist.getUsername());
-			Assertions.assertEquals("joo123@example.com", updatedArtist.getEmail());
-			Assertions.assertEquals("1234567890", updatedArtist.getPhonenNumber());
-			Assertions.assertEquals(3, updatedArtist.getYearsOfExperience());
-			Assertions.assertEquals(false, updatedArtist.isAvailable());
-			Assertions.assertEquals("English", updatedArtist.getLanguagesSpoken());
-			Assertions.assertEquals("chennai", updatedArtist.getLocation());
-			Assertions.assertEquals(gender.FEMALE, updatedArtist.getGenderOfArtist());
+    @Test
+    void testGetPostsByArtistId_ValidInput() {
+        try {
+            ArtistService artistservice = new ArtistService();
+            int artistId = 10;
 
-			Assertions.assertEquals(4.5, updatedArtist.getAverageRating());
-		} else {
-//
-			Assertions.fail("Retrieved artist is null.");
+            List<Post> posts = artistservice.getPostByArtistId(artistId);
 
-		}
+            Assertions.assertFalse(posts.isEmpty());
+            Assertions.assertEquals(1, posts.size());
 
-	}
-	
-	
-	
-	@Test
-	 void deleteArtistTestCase() throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
-	
+            for (Post post : posts) {
+                System.out.println("Post Title: " + post.getTitle());
+            }
+        } catch (SQLException e) {
+            Assertions.fail("Exception thrown: " + e.getMessage());
+        }
+    }
 
-	
+    @Test
+    void testGetPostsByArtistId_InvalidArtistId() {
+        try {
+            ArtistService artistservice = new ArtistService();
+            int invalidArtistId = -1;
 
-		ArtistService artistservice= new ArtistService();	    
-	    int artistIdToDelete =53; 
-	    Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
-	    
-	    if (artistToDelete != null) {
-	        // Delete the artist
-	        boolean isDeleted = artistservice.deleteArtist(artistToDelete);
-	        
-	        
-	        
-	        
-	        
-	        
-	        Assertions.assertTrue(isDeleted);
-	        
-	        // Verify that the artist has been deleted
-	        Artist deletedArtist = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
-	        Assertions.assertNull(deletedArtist, "Deleted artist should not be found.");
-	    } else {
-	        Assertions.fail("Artist to delete not found.");
-	    }
-	}
-	
-	
-	@Test
-	
-	void testGetPostsByArtistId_ValidInput() {
-	    try {
+            List<Post> posts = artistservice.getPostByArtistId(invalidArtistId);
 
-		
-
-			ArtistService artistservice= new ArtistService();	    
-
-
-	        int artistId = 10; 
-	        List<Post> posts = artistservice.getPostByArtistId(artistId);
-	        
-	        Assertions.assertFalse(posts.isEmpty());
-	       
-	      Assertions.assertEquals(1,posts.size());
-
-	        
-	        
-	        for (Post post : posts) {
-	            System.out.println("Post Title: " + post.getTitle());
-	            
-	        }
-
-	      
-	    } catch (SQLException  e) {
-	        Assertions.fail("Exception thrown: " + e.getMessage());
-	    }
-	}
-	@Test
-	 void testGetPostsByArtistId_InvalidArtistId() {
-	    try {
-
-
-			ArtistService artistservice= new ArtistService();	    
-	      
-
-	        int invalidArtistId = -1; 
-
-	        List<Post> posts = artistservice.getPostByArtistId(invalidArtistId);
-	        
-	        Assertions.assertNotNull(posts);
-	        Assertions.assertTrue(posts.isEmpty());
-	        
-	        
-	       
-	    } catch (SQLException  e) {
-	    	Assertions.fail("Exception thrown: " + e.getMessage());
-	    }
-	}
-
-	
-	
-	
-
+            Assertions.assertNotNull(posts);
+            Assertions.assertTrue(posts.isEmpty());
+        } catch (SQLException e) {
+            Assertions.fail("Exception thrown: " + e.getMessage());
+        }
+    }
 }

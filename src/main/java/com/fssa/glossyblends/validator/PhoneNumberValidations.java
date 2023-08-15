@@ -3,34 +3,42 @@ package com.fssa.glossyblends.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.glossyblends.model.ErrorMessages;
+import com.fssa.glossyblends.errormessages.ErrorMessages;
 
+/**
+ * Validation utility class for phone number-related operations.
+ */
 public class PhoneNumberValidations {
 
-	
-private PhoneNumberValidations() {
-		
-		
-	}
-	
-	public static boolean validateNumber(String number)throws IllegalArgumentException{
-		
-		
-		String mobilePattern = "^\\d{7,15}$";
+    // Private constructor to prevent instantiation
+    private PhoneNumberValidations() {
+    }
 
-		Pattern pattern=Pattern.compile(mobilePattern);
-		
-		Matcher patternmatching=pattern.matcher(number);
-		
-		boolean isValid=patternmatching.matches();
-		
-		if(!isValid) {
-			
-			
-			throw new IllegalArgumentException(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT);
-		}
-		return true;
-		
-	}
+    /**
+     * Validates a phone number using a regular expression pattern.
+     *
+     * @param number The phone number to validate
+     * @return True if the phone number is valid
+     * @throws IllegalArgumentException if the phone number format is invalid
+     */
+    public static boolean validateNumber(String number) throws IllegalArgumentException {
 
+        // Regular expression pattern for a valid phone number
+        String mobilePattern = "^\\d{7,15}$";
+
+        // Compile the pattern
+        Pattern pattern = Pattern.compile(mobilePattern);
+
+        // Match the pattern against the given phone number
+        Matcher patternMatching = pattern.matcher(number);
+
+        // Check if the phone number matches the pattern
+        boolean isValid = patternMatching.matches();
+
+        if (!isValid) {
+            // Throw an exception if the phone number format is invalid
+            throw new IllegalArgumentException(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT);
+        }
+        return true;
+    }
 }

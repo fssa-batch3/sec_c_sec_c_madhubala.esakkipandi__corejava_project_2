@@ -10,7 +10,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ServiceProviding {
-    public boolean addService(Services service) {
+
+    // Add a new service
+    public boolean addService(Services service) throws ServiceValueInvalidException {
         try {
             if (ServiceValidations.validateService(service)) {
                 return ServiceProvidingDAO.addService(service);
@@ -19,48 +21,52 @@ public class ServiceProviding {
             }
         } catch (ServiceValueInvalidException | SQLException e) {
             e.printStackTrace();
-            return false;
+            return false; // Failed to add service
         } 
     }
 
+    // Update an existing service
     public boolean updateService(Services service) throws ServiceValueInvalidException {
         try {
             if (!ServiceValidations.validateService(service)) {
-                return false;
+                return false; // Invalid service
             }
 
             ServiceProvidingDAO.updateService(service);
-            return true;
+            return true; // Service updated successfully
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return false; // Failed to update service
         }
     }
 
-    public List<Services> getServicesByArtistId(int id) {
+    // Get services by artist ID
+    public List<Services> getServicesByArtistId(int artistId) {
         try {
-            return ServiceProvidingDAO.getServicesByArtistId(id);
+            return ServiceProvidingDAO.getServicesByArtistId(artistId);
         } catch (SQLException e) {
             e.printStackTrace();
-            return Collections.emptyList() ;
+            return Collections.emptyList(); // Failed to retrieve services
         }
     }
 
-    public Services getServiceById(int id, int artistId) {
+    // Get a specific service by ID and artist ID
+    public Services getServiceById(int serviceId, int artistId) {
         try {
-            return ServiceProvidingDAO.getServiceById(id, artistId);
+            return ServiceProvidingDAO.getServiceById(serviceId, artistId);
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return null; // Failed to retrieve service
         }
     }
 
-    public boolean deleteServiceById(int artistId, int id) {
+    // Delete a service by ID and artist ID
+    public boolean deleteServiceById(int artistId, int serviceId) {
         try {
-            return ServiceProvidingDAO.deleteService(artistId, id);
+            return ServiceProvidingDAO.deleteService(artistId, serviceId);
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return false; // Failed to delete service
         }
     }
 }

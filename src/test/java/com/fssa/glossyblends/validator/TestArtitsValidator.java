@@ -1,6 +1,7 @@
 package com.fssa.glossyblends.validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
@@ -15,763 +16,875 @@ import org.junit.jupiter.api.Test;
 //import static org.junit.jupiter.api.Assertions.*;
 
 import com.fssa.glossyblends.customexception.PostValueInvalidException;
+import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 
-import com.fssa.glossyblends.model.ErrorMessages;
+import com.fssa.glossyblends.errormessages.ErrorMessages;
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.model.ServiceCategory;
 import com.fssa.glossyblends.model.Services;
 import com.fssa.glossyblends.model.Schedule;
 
- class TestArtitsValidator {
+
+
+
+/**
+ * Test class for validating Artist objects using JUnit tests.
+ */
+
+
+
+
+class TestArtitsValidator {
 
 //validTestcase for username
 	@Test
-	 void testValidationOfUserNameValid() {
-
-		Artist artist = new Artist();
-
-		String name = "Madhubala";
-		artist.setUsername(name);
-
-		Assertions.assertTrue(ArtitsValidator.validateUsername(artist.getUsername()));
-
+	void testValidationOfUserNameValid() {
+	    // Create an Artist object
+	    Artist artist = new Artist();
+	    
+	    // Set a valid username
+	    String name = "Madhubala";
+	    artist.setUsername(name);
+	    
+	    // Validate the username using ArtitsValidator class and assert the result
+	    Assertions.assertTrue(ArtitsValidator.validateUsername(artist.getUsername()));
 	}
 
 	@Test
-	 void testValidationEmailValid() {
-
-		Artist ar = new Artist();
-
-		ar.setEmail("Madhu@gamil.com");
-
-		Assertions.assertTrue(ArtitsValidator.validateEmail(ar.getEmail()));
+	void testValidationEmailValid() {
+	    // Create an Artist object
+	    Artist ar = new Artist();
+	    
+	    // Set a valid email address
+	    ar.setEmail("Madhu@gamil.com");
+	    
+	    // Validate the email using ArtitsValidator class and assert the result
+	    Assertions.assertTrue(ArtitsValidator.validateEmail(ar.getEmail()));
 	}
 
 	@Test
-	 void testValidationNullEmailValid() {
-
-		Artist ar = new Artist();
-
-		ar.setEmail(null);
-
-		try {
-
-			Assertions.assertTrue(ArtitsValidator.validateEmail(ar.getEmail()));
-			Assertions.fail("It should throw exception");
-		} catch (IllegalArgumentException ex) {
-
-			Assertions.assertEquals(ErrorMessages.INVALID_EMAIL_NULL, ex.getMessage());
-		}
+	void testValidationNullEmailValid() {
+	    // Create an Artist object
+	    Artist ar = new Artist();
+	    
+	    // Set the email to null
+	    ar.setEmail(null);
+	    
+	    try {
+	        // Attempt to validate the email (should throw an exception)
+	        Assertions.assertTrue(ArtitsValidator.validateEmail(ar.getEmail()));
+	        // If no exception is thrown, fail the test with an error message
+	        Assertions.fail("It should throw an exception");
+	    } catch (IllegalArgumentException ex) {
+	        // Assert that the correct error message is returned in the exception
+	        Assertions.assertEquals(ErrorMessages.INVALID_EMAIL_NULL, ex.getMessage());
+	    }
 	}
 
 	@Test
-	 void testValidationEmailInValid() {
-
-		Artist ar = new Artist();
-
-		ar.setEmail("Madhugamil.com");
-
-		try {
-
-			Assertions.assertTrue(ArtitsValidator.validateEmail(ar.getEmail()));
-			Assertions.fail("It should throw exception");
-		} catch (IllegalArgumentException ex) {
-
-			Assertions.assertEquals(ErrorMessages.INVALID_EMAIL_FORMAT, ex.getMessage());
-		}
+	void testValidationEmailInValid() {
+	    // Create an Artist object
+	    Artist ar = new Artist();
+	    
+	    // Set an invalid email address format
+	    ar.setEmail("Madhugamil.com");
+	    
+	    try {
+	        // Attempt to validate the email (should throw an exception)
+	        Assertions.assertTrue(ArtitsValidator.validateEmail(ar.getEmail()));
+	        // If no exception is thrown, fail the test with an error message
+	        Assertions.fail("It should throw an exception");
+	    } catch (IllegalArgumentException ex) {
+	        // Assert that the correct error message is returned in the exception
+	        Assertions.assertEquals(ErrorMessages.INVALID_EMAIL_FORMAT, ex.getMessage());
+	    }
 	}
 
 	@Test
-	 void testValidateArtist_ValidArtist_ReturnsTrue()
-			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
+	void testValidateArtist_ValidArtist_ReturnsTrue()
+	        throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException {
+	    // Create an Artist object
+	    Artist artist = new Artist();
+	    // Set valid properties for the artist
+	    artist.setUsername("TestArtist");
+	    artist.setPassword("TestPassword123");
+	    artist.setEmail("test@example.com");
+	    artist.setPhonenNumber("1234567890");
+	    artist.setYearsOfExperience(5);
+	    artist.setAvailable(true);
+	    artist.setLanguagesSpoken("English");
+	    artist.setLocation("chennai");
+	    artist.setGenderOfArtist(gender.FEMALE);
 
-		Artist artist = new Artist();
-		artist.setUsername("TestArtist");
-		artist.setPassword("TestPassword123");
-		artist.setEmail("test@example.com");
-		artist.setPhonenNumber("1234567890");
-		artist.setYearsOfExperience(5);
-		artist.setAvailable(true);
-		artist.setLanguagesSpoken("English");
-		artist.setLocation("chennai");
-		artist.setGenderOfArtist(gender.FEMALE);
-
-//
-//		List<Services> services = new ArrayList<>();
-//		services.add(new Services(1, ServiceCategory.MEHANDI, "Service", 122, "https://example.com/new_artwork.jpg"));
-//		artist.setProvidingServices(services);
-//
-//		List<Post> posts = new ArrayList<>();
-//		posts.add(new Post("Post1", 1, "aserA", "asdfghjS", "https://example.com/new_artwork.jpg"));
-//		artist.setWorkLink(posts);
-//		
-//		
-//		List<schedule> schedules = new ArrayList<>();
-//		schedules.add(new schedule( 1,"EventName", LocalDate.of(2023, 8, 3), LocalDateTime.of(2023, 8, 3, 10, 0)));
-//		schedules.add(new schedule(1,"EventName", LocalDate.of(2023, 8, 4), LocalDateTime.of(2023, 8, 4, 15, 30)));
-		// Add more schedules if needed
-
-//		artist.setWorkingDaysCalender(schedules); // Use setWorkingDaysCalender to set the schedules
-
-		boolean result = ArtitsValidator.validateArtist(artist);
-
-		Assertions.assertTrue(result);
-
+	    // Validate the artist using ArtitsValidator class and assert the result
+	    boolean result = ArtitsValidator.validateArtist(artist);
+	    Assertions.assertTrue(result);
 	}
 
 	@Test
-	 void testValidateArtistWithNull()
-			throws IllegalArgumentException, ServiceValueInvalidException, PostValueInvalidException {
-		try {
-			Artist artist = null;
-			ArtitsValidator.validateArtist(artist);
-			Assertions.fail("Expected IllegalArgumentException was not thrown");
-		} catch (IllegalArgumentException ex) {
-			Assertions.assertEquals("Artist object is null", ex.getMessage());
-		}
+	void testValidateArtistWithNull()
+	        throws IllegalArgumentException, ServiceValueInvalidException, PostValueInvalidException {
+	    try {
+	        Artist artist = null;
+	        ArtitsValidator.validateArtist(artist);
+	        Assertions.fail("Expected IllegalArgumentException was not thrown");
+	    } catch (IllegalArgumentException ex) {
+	        // Assert that the correct error message is returned in the exception
+	        Assertions.assertEquals("Artist object is null", ex.getMessage());
+	    }
 	}
 
 	@Test
-	 void testValidateArtist_InvalidUsername_ThrowsIllegalArgumentException()
-			throws PostValueInvalidException, ServiceValueInvalidException {
-		try {
-			Artist artist = new Artist();
-			artist.setUsername(null); // Invalid username
+	void testValidateArtist_InvalidUsername_ThrowsIllegalArgumentException()
+	        throws PostValueInvalidException, ServiceValueInvalidException {
+	    try {
+	        Artist artist = new Artist();
+	        artist.setUsername(null); // Invalid username
 
-			ArtitsValidator.validateUsername(artist.getUsername());
-			Assertions.fail("IllegalArgumentException should be thrown for invalid username.");
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_USERNAME_NULL, e.getMessage());
+	        // Attempt to validate the invalid username (should throw an exception)
+	        ArtitsValidator.validateUsername(artist.getUsername());
+	        Assertions.fail("IllegalArgumentException should be thrown for invalid username.");
+	    } catch (IllegalArgumentException e) {
+	        // Assert that the correct error message is returned in the exception
+	        Assertions.assertEquals(ErrorMessages.INVALID_USERNAME_NULL, e.getMessage());
 
-		}
+	    }
 	}
 
 	@Test
-	 void validUsername() throws IllegalArgumentException {
+	void validUsername() throws IllegalArgumentException {
+	    Artist artist = new Artist();
+	    artist.setUsername("Madhubala"); // Valid username
 
-		Artist artist = new Artist();
-		artist.setUsername("Madhubala"); // Invalid username
+	    // Validate the valid username using ArtitsValidator class and assert the result
+	    boolean val = ArtitsValidator.validateUsername(artist.getUsername());
 
-		boolean val = ArtitsValidator.validateUsername(artist.getUsername());
-
-		Assertions.assertTrue(val);
+	    Assertions.assertTrue(val);
 	}
 
 	@Test
-	 void testValidateArtist_InvalidPassword_ThrowsIllegalArgumentException()
-			throws PostValueInvalidException, ServiceValueInvalidException {
-		try {
-			Artist artist = new Artist();
+	void testValidateArtist_InvalidPassword_ThrowsIllegalArgumentException()
+	        throws PostValueInvalidException, ServiceValueInvalidException {
+	    try {
+	        Artist artist = new Artist();
 
-			artist.setPassword(null); // Invalid password
+	        artist.setPassword(null); // Invalid password
 
-			ArtitsValidator.validatePassword(artist.getPassword());
-			Assertions.fail("IllegalArgumentException should be thrown for invalid password.");
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.PASSWORD_NULL, e.getMessage());
-		}
-	}
-
-	// InvalidTestcase for username
-
-	@Test
-	 void testValidationOfUserNameInValid() {
-
-		try {
-			Artist artist = new Artist();
-
-			artist.setUsername(".23456789");
-
-			ArtitsValidator.validateUsername(artist.getUsername());
-			Assertions.fail("The testcase failed for name validations");
-
-		} catch (IllegalArgumentException ex) {
-
-			Assertions.assertEquals(ErrorMessages.INVALID_SERVICE_NAME_PATTERN, ex.getMessage());
-		}
-
+	        // Attempt to validate the invalid password (should throw an exception)
+	        ArtitsValidator.validatePassword(artist.getPassword());
+	        Assertions.fail("IllegalArgumentException should be thrown for invalid password.");
+	    } catch (IllegalArgumentException e) {
+	        // Assert that the correct error message is returned in the exception
+	        Assertions.assertEquals(ErrorMessages.PASSWORD_NULL, e.getMessage());
+	    }
 	}
 
 	@Test
+	void testValidationOfUserNameInValid() {
+	    try {
+	        Artist artist = new Artist();
 
-	// Valid testcases year of experience
-	 void testValidateYearsOfExperienceValid() {
+	        artist.setUsername(".23456789"); // Invalid username
 
-		Artist artist = new Artist();
+	        // Attempt to validate the invalid username (should throw an exception)
+	        ArtitsValidator.validateUsername(artist.getUsername());
+	        Assertions.fail("The testcase failed for name validations");
 
-		int yearsOfExperience = 5;
-
-		artist.setYearsOfExperience(yearsOfExperience);
-		Assertions.assertTrue(ArtitsValidator.validateYearsOfExperience(artist.getYearsOfExperience()));
-	}
-
-	// Invalid yearsOfExperience (less than or equal to 0) should throw an
-	// IllegalArgumentException
-//Invalid input testcases 
-	@Test
-	 void testValidateYearsOfExperienceInvalid() {
-		int yearsOfExperience = -2;
-
-		Artist artist = new Artist();
-
-		artist.setYearsOfExperience(yearsOfExperience);
-
-		try {
-
-			ArtitsValidator.validateYearsOfExperience(artist.getYearsOfExperience());
-			Assertions.fail("expected exception was not thrown.");
-
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_YEARS_OF_EXPERIENCE_NEGATIVE, e.getMessage());
-		}
-
-	}
-
-	// phone number testcase valid
-	@Test
-	 void testValidatePhoneNumberValid() {
-
-		Artist artist = new Artist();
-		artist.setPhonenNumber("12345678");
-
-		Assertions.assertTrue(ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber()));
+	    } catch (IllegalArgumentException ex) {
+	        // Assert that the correct error message is returned in the exception
+	        Assertions.assertEquals(ErrorMessages.INVALID_SERVICE_NAME_PATTERN, ex.getMessage());
+	    }
 	}
 
 	@Test
-	 void testValidatePhoneNumberInValid() {
+	// Valid testcases for years of experience
+	void testValidateYearsOfExperienceValid() {
+	    Artist artist = new Artist();
 
-		try {
+	    int yearsOfExperience = 5;
 
-			Artist artist = new Artist();
-			artist.setPhonenNumber("Madh123342");
+	    artist.setYearsOfExperience(yearsOfExperience);
 
-			ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
-
-			Assertions.fail("expected exception was not thrown.");
-
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT, e.getMessage());
-		}
-
+	    // Validate the valid years of experience using ArtitsValidator class and assert the result
+	    Assertions.assertTrue(ArtitsValidator.validateYearsOfExperience(artist.getYearsOfExperience()));
 	}
 
-	// null Mobile number Testcase
+	// Invalid yearsOfExperience (less than or equal to 0) should throw an IllegalArgumentException
 	@Test
+	void testValidateYearsOfExperienceInvalid() {
+	    int yearsOfExperience = -2;
 
-	 void testValidatePhoneNumberNull() {
-		Artist artist = new Artist();
-		artist.setPhonenNumber(null);
+	    Artist artist = new Artist();
 
-		try {
-			ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
-			Assertions.fail("expected exception was not thrown.");
+	    artist.setYearsOfExperience(yearsOfExperience);
 
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_NULL, e.getMessage());
-		}
+	    try {
+	        // Attempt to validate the invalid years of experience (should throw an exception)
+	        ArtitsValidator.validateYearsOfExperience(artist.getYearsOfExperience());
+	        Assertions.fail("Expected exception was not thrown.");
 
+	    } catch (IllegalArgumentException e) {
+	        // Assert that the correct error message is returned in the exception
+	        Assertions.assertEquals(ErrorMessages.INVALID_YEARS_OF_EXPERIENCE_NEGATIVE, e.getMessage());
+	    }
 	}
 
+	// Test case for valid phone number
 	@Test
-	 void testValidatePhoneNumberEmpty() {
+	void testValidatePhoneNumberValid() {
+	    // Create an Artist object with a valid phone number
+	    Artist artist = new Artist();
+	    artist.setPhonenNumber("12345678");
 
-		Artist artist = new Artist();
-		artist.setPhonenNumber(" ");
-		try {
-			ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
-			Assertions.fail("expected exception was not thrown.");
-
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_NULL, e.getMessage());
-		}
-
+	    // Validate the phone number, expect a valid result
+	    Assertions.assertTrue(ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber()));
 	}
 
-//teast case for valid input for post
-
+	// Test case for invalid phone number format
 	@Test
-	 void testValidatePost_ValidPost_ReturnsTrue() throws PostValueInvalidException {
-		Post validPost = new Post(1, 1, "Valid Titl", "Valid Description", "https://example.com/image.jpg");
-//	        validPost.setTitle("Valid Title");
-//	        validPost.setDescription("Valid Description");
-//	        validPost.setPostUrl("https://example.com/image.jpg");
-		validPost.setPostId(2);
-		validPost.setArtistId(2);
+	void testValidatePhoneNumberInValid() {
+	    try {
+	        // Create an Artist object with an invalid phone number
+	        Artist artist = new Artist();
+	        artist.setPhonenNumber("Madh123342");
 
-		Assertions.assertTrue(PostValidations.validatePost(validPost));
+	        // Validate the invalid phone number, expect an exception to be thrown
+	        ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
+
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected exception was not thrown.");
+	    } catch (IllegalArgumentException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT, e.getMessage());
+	    }
 	}
 
+	// Test case for null mobile number
 	@Test
-	 void testValidateTitle_NullTitle_ThrowsIllegalArgumentException() throws PostValueInvalidException {
-		try {
-			Post invalidPost = new Post();
-			invalidPost.setTitle(null);
-			PostValidations.validateTitle(invalidPost.getTitle());
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (PostValueInvalidException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
-		}
+	void testValidatePhoneNumberNull() {
+	    // Create an Artist object with a null phone number
+	    Artist artist = new Artist();
+	    artist.setPhonenNumber(null);
+
+	    try {
+	        // Validate the null phone number, expect an exception to be thrown
+	        ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
+
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected exception was not thrown.");
+	    } catch (IllegalArgumentException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_NULL, e.getMessage());
+	    }
 	}
 
+	// Test case for empty mobile number
 	@Test
-	 void testValidateTitle_InvalidTitleFormat_ThrowsIllegalArgumentException() throws PostValueInvalidException {
-		try {
-			Post invalidPost = new Post();
-			invalidPost.setTitle("Invalid#$%Title");
-			PostValidations.validateTitle(invalidPost.getTitle());
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (PostValueInvalidException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
-		}
+	void testValidatePhoneNumberEmpty() {
+	    // Create an Artist object with an empty phone number
+	    Artist artist = new Artist();
+	    artist.setPhonenNumber(" ");
+
+	    try {
+	        // Validate the empty phone number, expect an exception to be thrown
+	        ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
+
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected exception was not thrown.");
+	    } catch (IllegalArgumentException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_NULL, e.getMessage());
+	    }
 	}
 
+	// Test case for validating a valid post
 	@Test
-	 void testValidateDescription_NullDescription_ThrowsIllegalArgumentException()
-			throws PostValueInvalidException {
-		try {
-			Post invalidPost = new Post();
-			invalidPost.setDescription(null);
-			PostValidations.validateDescription(invalidPost.getDescription());
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (PostValueInvalidException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_POST_DESCRIPTION_NULL, e.getMessage());
-		}
+	void testValidatePost_ValidPost_ReturnsTrue() throws PostValueInvalidException {
+	    // Create a valid Post object
+	    Post validPost = new Post(1, 1, "Valid Title", "Valid Description", "https://example.com/image.jpg");
+
+	    // Set additional properties for the post
+	    validPost.setPostId(2);
+	    validPost.setArtistId(2);
+
+	    // Validate the post, expect a valid result
+	    Assertions.assertTrue(PostValidations.validatePost(validPost));
 	}
 
+	// Test case for validating null post title
 	@Test
-	 void testValidateDescription_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	void testValidateTitle_NullTitle_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	    try {
+	        // Create a Post object with a null title
+	        Post invalidPost = new Post();
+	        invalidPost.setTitle(null);
 
-		Post invalidPost = new Post();
-		invalidPost.setDescription("Valid Description");
-		PostValidations.validateDescription(invalidPost.getDescription());
-		Assertions.assertTrue(PostValidations.validateDescription(invalidPost.getDescription()));
+	        // Validate the null title, expect an exception to be thrown
+	        PostValidations.validateTitle(invalidPost.getTitle());
 
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (PostValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
+	    }
 	}
 
+	// Test case for validating invalid post title format
 	@Test
-	 void testValidTitle_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	void testValidateTitle_InvalidTitleFormat_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	    try {
+	        // Create a Post object with an invalid title format
+	        Post invalidPost = new Post();
+	        invalidPost.setTitle("Invalid#$%Title");
 
-		Post invalidPost = new Post();
-		invalidPost.setTitle("Valid Title");
-		Assertions.assertTrue(PostValidations.validateTitle(invalidPost.getTitle()));
+	        // Validate the invalid title, expect an exception to be thrown
+	        PostValidations.validateTitle(invalidPost.getTitle());
 
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (PostValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
+	    }
 	}
 
+	// Test case for validating null post description
 	@Test
-	 void testInValidateDescription_ThrowsIllegalArgumentException() throws PostValueInvalidException {
-		try {
-			Post invalidPost = new Post();
-			invalidPost.setDescription(".....");
-			PostValidations.validateDescription(invalidPost.getDescription());
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (PostValueInvalidException e) {
-			Assertions.assertEquals(ErrorMessages.DESCRIPTION_LENGTH_FORMAT, e.getMessage());
-		}
+	void testValidateDescription_NullDescription_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	    try {
+	        // Create a Post object with a null description
+	        Post invalidPost = new Post();
+	        invalidPost.setDescription(null);
+
+	        // Validate the null description, expect an exception to be thrown
+	        PostValidations.validateDescription(invalidPost.getDescription());
+
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (PostValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_POST_DESCRIPTION_NULL, e.getMessage());
+	    }
 	}
 
+	// Test case for validating non-null post description
 	@Test
-	 void testValidatePost_ValidPostt_ReturnsTrue() throws PostValueInvalidException {
-		Post validPost = new Post(1, 1, "Valid Title", "Valid Description", "https://example.com/image.jpg");
+	void testValidateDescription_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	    // Create a Post object with a valid description
+	    Post invalidPost = new Post();
+	    invalidPost.setDescription("Valid Description");
 
-		boolean result = PostValidations.validatePost(validPost);
-
-		Assertions.assertTrue(result);
+	    // Validate the valid description, expect a valid result
+	    Assertions.assertTrue(PostValidations.validateDescription(invalidPost.getDescription()));
 	}
 
+	// Test case for validating non-null post title
 	@Test
-	 void testValidateImageUrl_NullImageUrl() throws PostValueInvalidException {
-		try {
-			Post invalidPost = new Post();
-			invalidPost.setPostUrl(null);
-			PostValidations.validateImageUrl(invalidPost.getPostUrl());
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (PostValueInvalidException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_IMAGE_URL, e.getMessage());
-		}
+	void testValidTitle_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	    // Create a Post object with a valid title
+	    Post invalidPost = new Post();
+	    invalidPost.setTitle("Valid Title");
+
+	    // Validate the valid title, expect a valid result
+	    Assertions.assertTrue(PostValidations.validateTitle(invalidPost.getTitle()));
 	}
 
+	// Test case for validating invalid post description length
 	@Test
-	 void testValidateImageUrl_InvalidImageUrlFormat()
-			throws PostValueInvalidException {
-		try {
-			Post invalidPost = new Post();
-			invalidPost.setPostUrl("invalid-url");
-			PostValidations.validateImageUrl(invalidPost.getPostUrl());
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (PostValueInvalidException e) {
-			Assertions.assertEquals(ErrorMessages.INVALID_SERVICE_IMAGE_URL_FORMAT_PATTERN, e.getMessage());
-		}
+	void testInValidateDescription_ThrowsIllegalArgumentException() throws PostValueInvalidException {
+	    try {
+	        // Create a Post object with an invalid description length
+	        Post invalidPost = new Post();
+	        invalidPost.setDescription(".....");
+
+	        // Validate the invalid description length, expect an exception to be thrown
+	        PostValidations.validateDescription(invalidPost.getDescription());
+
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (PostValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.DESCRIPTION_LENGTH_FORMAT, e.getMessage());
+	    }
 	}
 
-//testcase for valid input for Service
-//
+	// Test case for validating a valid post
 	@Test
-//
-	 void testValidateSerivecValid() throws IllegalArgumentException, ServiceValueInvalidException {
-		List<Services> ServiceList = new ArrayList<Services>();
-		Services Service1 = new Services(0, ServiceCategory.HAIR_STYLE, "Haircut", 50,
-				"https://example.com/haircut.jpg");
+	void testValidatePost_ValidPostt_ReturnsTrue() throws PostValueInvalidException {
+	    // Create a valid Post object
+	    Post validPost = new Post(1, 1, "Valid Title", "Valid Description", "https://example.com/image.jpg");
 
-		ServiceList.add(Service1);
-		Assertions.assertTrue(ArtitsValidator.validateService(ServiceList));
+	    // Validate the post, expect a valid result
+	    boolean result = PostValidations.validatePost(validPost);
+	    Assertions.assertTrue(result);
 	}
 
-//testcase for pasword null
-
+	// Test case for validating null image URL
 	@Test
-	 void testValidationOfPasswordValid() {
-		Artist artist = new Artist();
-		artist.setPassword("StrongPass123");
+	void testValidateImageUrl_NullImageUrl() throws PostValueInvalidException {
+	    try {
+	        // Create a Post object with a null image URL
+	        Post invalidPost = new Post();
+	        invalidPost.setPostUrl(null);
 
-		Assertions.assertTrue(ArtitsValidator.validatePassword(artist.getPassword()));
+	        // Validate the null image URL, expect an exception to be thrown
+	        PostValidations.validateImageUrl(invalidPost.getPostUrl());
 
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (PostValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_IMAGE_URL, e.getMessage());
+	    }
 	}
 
-// InvalidTestcase for password
-
+	// Test case for validating invalid image URL format
 	@Test
-	 void testValidationOfPasswordNullValid() {
-		Artist artist = new Artist();
-		artist.setPassword(null);
+	void testValidateImageUrl_InvalidImageUrlFormat() throws PostValueInvalidException {
+	    try {
+	        // Create a Post object with an invalid image URL format
+	        Post invalidPost = new Post();
+	        invalidPost.setPostUrl("invalid-url");
 
-		try {
-			ArtitsValidator.validatePassword(artist.getPassword());
-			Assertions.fail("The testcase failed for Password validations");
+	        // Validate the invalid image URL format, expect an exception to be thrown
+	        PostValidations.validateImageUrl(invalidPost.getPostUrl());
 
-		} catch (IllegalArgumentException ex) {
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (PostValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_SERVICE_IMAGE_URL_FORMAT_PATTERN, e.getMessage());
+	    }
+	}
+	// Test case for validating a valid input for Service
+	@Test
+	void testValidateSerivecValid() throws IllegalArgumentException, ServiceValueInvalidException {
+	    // Create a list of valid services
+	    List<Services> serviceList = new ArrayList<>();
+	    Services service1 = new Services(0, ServiceCategory.HAIR_STYLE, "Haircut", 50, "https://example.com/haircut.jpg");
+	    serviceList.add(service1);
 
-			Assertions.assertEquals(ErrorMessages.PASSWORD_NULL, ex.getMessage());
-		}
-
+	    // Validate the list of services, expect a valid result
+	    Assertions.assertTrue(ArtitsValidator.validateService(serviceList));
 	}
 
+	// Test case for validating a valid password
 	@Test
-	 void testValidationOfPasswordInValid() {
-		Artist artist = new Artist();
-		artist.setPassword("madhu");
+	void testValidationOfPasswordValid() {
+	    // Create an Artist object with a valid password
+	    Artist artist = new Artist();
+	    artist.setPassword("StrongPass123");
 
-		try {
-			ArtitsValidator.validatePassword(artist.getPassword());
-			Assertions.fail("The testcase failed for Password validations");
-
-		} catch (IllegalArgumentException ex) {
-
-			Assertions.assertEquals(ErrorMessages.PASSWORD_INVALID_PATTERN, ex.getMessage());
-		}
-
+	    // Validate the password, expect a valid result
+	    Assertions.assertTrue(ArtitsValidator.validatePassword(artist.getPassword()));
 	}
 
-//testcase for Location null
-
+	// Test case for validating null password
 	@Test
-	 void testValidationOfLocationValid() {
-		Artist artist = new Artist();
-		artist.setLocation("chennai");
+	void testValidationOfPasswordNullValid() {
+	    // Create an Artist object with a null password
+	    Artist artist = new Artist();
+	    artist.setPassword(null);
 
-		Assertions.assertTrue(ArtitsValidator.validateLocation(artist.getLocation()));
+	    try {
+	        // Validate the null password, expect an exception to be thrown
+	        ArtitsValidator.validatePassword(artist.getPassword());
 
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("The testcase failed for Password validations");
+	    } catch (IllegalArgumentException ex) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.PASSWORD_NULL, ex.getMessage());
+	    }
+	}
+
+	// Test case for validating invalid password
+	@Test
+	void testValidationOfPasswordInValid() {
+	    // Create an Artist object with an invalid password
+	    Artist artist = new Artist();
+	    artist.setPassword("madhu");
+
+	    try {
+	        // Validate the invalid password, expect an exception to be thrown
+	        ArtitsValidator.validatePassword(artist.getPassword());
+
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("The testcase failed for Password validations");
+	    } catch (IllegalArgumentException ex) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_PASSWORD_PATTERN, ex.getMessage());
+	    }
+	}
+
+	// Test case for validating a valid location
+	@Test
+	void testValidationOfLocationValid() {
+	    // Create an Artist object with a valid location
+	    Artist artist = new Artist();
+	    artist.setLocation("chennai");
+
+	    // Validate the location, expect a valid result
+	    Assertions.assertTrue(ArtitsValidator.validateLocation(artist.getLocation()));
 	}
 
 //InvalidTestcase for validate Location
 
+	// Test case for validating null location
 	@Test
-	 void testValidationOfLoctionNull() {
-		Artist artist = new Artist();
-		artist.setLocation(null);
+	void testValidationOfLoctionNull() {
+	    Artist artist = new Artist();
+	    artist.setLocation(null);
 
-		try {
-			ArtitsValidator.validateLocation(artist.getLocation());
-
-		} catch (IllegalArgumentException ex) {
-
-			Assertions.assertEquals(ErrorMessages.INVALID_LOCATION_NULL, ex.getMessage());
-		}
-
-	}
-
-	@Test
-	 void testValidationOfLoctionInValid() {
-
-		try {
-			Artist ar = new Artist();
-			ar.setLocation("Madhurai");
-			ArtitsValidator.validateLocation(ar.getLocation());
-			Assertions.fail("The testcase failed for Password validations");
-
-		} catch (IllegalArgumentException ex) {
-
-			Assertions.assertEquals(ErrorMessages.INVALID_LOCATION, ex.getMessage());
-		}
-
-	}
-
-//validations for languages spoken
-
-	@Test
-	 void testValidationOfLanguagesSpoken() {
-		Artist ar = new Artist();
-		ar.setLanguagesSpoken(null);
-
-		try {
-
-			ArtitsValidator.validateLanguagesSpoken(ar.getLanguagesSpoken());
-
-			Assertions.fail("Expected errro mesage was nit occured Test case failed");
-
-		} catch (IllegalArgumentException ex) {
-
-			Assertions.assertEquals(ErrorMessages.INVALID_LANGUAGE_NULL, ex.getMessage());
-
-		}
-
-	}
-
-//valid input for languages
-
-	@Test
-	 void ValidationOflanguageValid() {
-
-		String language = "Tamil";
-		Artist artist = new Artist();
-		artist.setLanguagesSpoken(language);
-		Assertions.assertTrue(ArtitsValidator.validateLanguagesSpoken(artist.getLanguagesSpoken()));
-
-	}
-
-//testcase for socaial media link
-
-	@Test
-	 void testValidSocialMediaLinks() {
-
-		Artist artist = new Artist();
-
-		List<String> validLinks = Arrays.asList("https://www.example.com", "http://www.example.com",
-				"https://twitter.com/user123", "http://facebook.com/page456");
-		artist.setSocialMediaLinks(validLinks);
-
-		Assertions.assertTrue((ArtitsValidator.validateSocialMediaLinks(artist.getSocialMediaLinks())));
-	}
-
-	@Test
-	 void testEmptyList() {
-		List<String> emptyList = new ArrayList<String>();
-		try {
-			ArtitsValidator.validateSocialMediaLinks(emptyList);
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals("Social media links cannot be empty or null.", e.getMessage());
-		}
-	}
-
-	@Test
-	 void testNullList() {
-		try {
-
-			Artist artist = new Artist();
-			artist.setSocialMediaLinks(null);
-			ArtitsValidator.validateSocialMediaLinks(artist.getSocialMediaLinks());
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals("Social media links cannot be empty or null.", e.getMessage());
-		}
-	}
-
-	@Test
-	 void testInvalidLink() {
-
-		List<String> invalidLinks = Arrays.asList("www.example.com", "ftp://example.com", "https:/twitter.com/user123",
-				"http://facebook .com/page456");
-
-		try {
-			ArtitsValidator.validateSocialMediaLinks(invalidLinks);
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals("Invalid social media link: www.example.com", e.getMessage());
-		}
-
-	}
-
-	@Test
-	 void testValidateSchedule() {
-		List<Schedule> scheduleList = new ArrayList<>();
-
-		// Create valid schedules
-		Schedule schedule1 = new Schedule(1, "Event", LocalDate.now(), LocalDateTime.now());
-
-		scheduleList.add(schedule1);
-
-		boolean result = false;
-		try {
-			result = ArtitsValidator.validateschedule(scheduleList);
-		} catch (Exception e) {
-			Assertions.fail("Exception thrown: " + e.getMessage());
-		}
-
-		Assertions.assertTrue(result);
-	}
-
-	@Test
-	 void testValidateScheduleNullEventName() {
-		try {
-			Schedule invalidSchedule = new Schedule();
-			invalidSchedule.setArtistId(3);
-			invalidSchedule.setSchduleId(3);
-			invalidSchedule.setEventName(null);
-			;
-			invalidSchedule.setDate(LocalDate.now());
-			;
-			invalidSchedule.setTimeOfEvent(LocalDateTime.now());
-
-			ScheduleValidations.validateSchedule(invalidSchedule);
-
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.INVALI_EVENT_NAME_NULL, e.getMessage());
-		}
-	}
-
-	@Test
-	 void testValidateSchedulePastDate() {
-		try {
-			Schedule invalidSchedule = new Schedule(1, "EventName", LocalDate.of(2021, 1, 1), LocalDateTime.now());
-			invalidSchedule.setArtistId(3);
-			ScheduleValidations.validateSchedule(invalidSchedule);
-
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.DATE_EVENT_PASSED, e.getMessage());
-		}
-	}
-
-	@Test
-	 void testValidateScheduleNullTimeOfEvent() {
-		try {
-			Schedule invalidSchedule = new Schedule(1, "EventName", LocalDate.now(), null);
-			invalidSchedule.setArtistId(3);
-			ScheduleValidations.validateSchedule(invalidSchedule);
-
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.TIME_OF_EVENT_NULL, e.getMessage());
-		}
-	}
-
-	@Test
-	 void testValidateScheduleNullDate() {
-
-		try {
-			Schedule invalidSchedule = new Schedule(1, "EventName", null, LocalDateTime.now());
-			invalidSchedule.setArtistId(3);
-			ScheduleValidations.validateSchedule(invalidSchedule);
-
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (IllegalArgumentException e) {
-			Assertions.assertEquals(ErrorMessages.DATE_EVENT_NAME_NULL, e.getMessage());
-		}
-	}
-	
-	
-	 @Test
-	     void testValidateGender_Valid() {
-	        try {
-	            Artist artist = new Artist();
-	            artist.setGenderOfArtist(gender.FEMALE);
-
-	            ArtitsValidator.validateGender(artist.getGenderOfArtist());
-	        } catch (IllegalArgumentException ex) {
-	        	Assertions.fail("Unexpected IllegalArgumentException thrown: " + ex.getMessage());
-	        }
+	    try {
+	        // Validate the null location, expect an exception to be thrown
+	        ArtitsValidator.validateLocation(artist.getLocation());
+	    } catch (IllegalArgumentException ex) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_LOCATION_NULL, ex.getMessage());
 	    }
+	}
 
-	 
+	// Test case for validating invalid location
+	@Test
+	void testValidationOfLoctionInValid() {
+	    try {
+	        // Create an Artist object with an invalid location
+	        Artist artist = new Artist();
+	        artist.setLocation("Madhurai");
 
-	 
-	    @Test
-	     void testValidateGender_NullGender() {
-	        try {
-	            Artist artist = new Artist();
+	        // Validate the invalid location, expect an exception to be thrown
+	        ArtitsValidator.validateLocation(artist.getLocation());
 
-	            ArtitsValidator.validateGender(artist.getGenderOfArtist());
-	            Assertions.fail("Expected IllegalArgumentException was not thrown");
-	        } catch (IllegalArgumentException ex) {
-	        	Assertions.assertEquals("Gender of artist is required", ex.getMessage());
-	        }
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("The testcase failed for Location validations");
+	    } catch (IllegalArgumentException ex) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_LOCATION, ex.getMessage());
 	    }
+	}
+
+	// Test case for validating null languages spoken
+	@Test
+	void testValidationOfLanguagesSpoken() {
+	    Artist artist = new Artist();
+	    artist.setLanguagesSpoken(null);
+
+	    try {
+	        // Validate the null languages spoken, expect an exception to be thrown
+	        ArtitsValidator.validateLanguagesSpoken(artist.getLanguagesSpoken());
+
+	        // If no exception is thrown, the test fails
+	        Assertions.fail("Expected error message was not encountered. Test case failed");
+	    } catch (IllegalArgumentException ex) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_LANGUAGE_NULL, ex.getMessage());
+	    }
+	}
+
+	// Test case for validating valid languages spoken
+	@Test
+	void ValidationOflanguageValid() {
+	    String language = "Tamil";
+	    // Create an Artist object with a valid language
+	    Artist artist = new Artist();
+	    artist.setLanguagesSpoken(language);
 	    
-	    
-	    @Test
-	    void testValidateArtist_NullArtist_ThrowsIllegalArgumentException() throws PostValueInvalidException, ServiceValueInvalidException {
-	        try {
-	            ArtitsValidator.validateArtist(null);
-	            fail("Expected IllegalArgumentException was not thrown.");
-	        } catch (IllegalArgumentException e) {
-	            assertEquals("Artist object is null", e.getMessage());
-	        }
+	    // Validate the language, expect a valid result
+	    Assertions.assertTrue(ArtitsValidator.validateLanguagesSpoken(artist.getLanguagesSpoken()));
+	}
+
+	// Test case for validating valid social media links
+	@Test
+	void testValidSocialMediaLinks() {
+	    Artist artist = new Artist();
+	    // Create a list of valid social media links
+	    List<String> validLinks = Arrays.asList("https://www.example.com", "http://www.example.com", 
+	                                            "https://twitter.com/user123", "http://facebook.com/page456");
+	    artist.setSocialMediaLinks(validLinks);
+
+	    // Validate the social media links, expect a valid result
+	    Assertions.assertTrue((ArtitsValidator.validateSocialMediaLinks(artist.getSocialMediaLinks())));
+	}
+
+	// Test case for validating an empty list of social media links
+	@Test
+	void testEmptyList() {
+	    List<String> emptyList = new ArrayList<String>();
+	    try {
+	        // Validate an empty list of social media links, expect an exception to be thrown
+	        ArtitsValidator.validateSocialMediaLinks(emptyList);
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (IllegalArgumentException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals("Social media links cannot be empty or null.", e.getMessage());
+	    }
+	}
+
+	// Test case for validating a null list of social media links
+	@Test
+	void testNullList() {
+	    try {
+	        Artist artist = new Artist();
+	        artist.setSocialMediaLinks(null);
+	        // Validate a null list of social media links, expect an exception to be thrown
+	        ArtitsValidator.validateSocialMediaLinks(artist.getSocialMediaLinks());
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (IllegalArgumentException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals("Social media links cannot be empty or null.", e.getMessage());
+	    }
+	}
+
+	// Test case for validating invalid social media links
+	@Test
+	void testInvalidLink() {
+	    List<String> invalidLinks = Arrays.asList("www.example.com", "ftp://example.com", "https:/twitter.com/user123",
+	            "http://facebook .com/page456");
+
+	    try {
+	        // Validate invalid social media links, expect an exception to be thrown
+	        ArtitsValidator.validateSocialMediaLinks(invalidLinks);
+	    } catch (IllegalArgumentException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals("Invalid social media link: www.example.com", e.getMessage());
+	    }
+	}
+
+	// Test case for validating valid schedules
+	@Test
+	void testValidateSchedule() {
+	    List<Schedule> scheduleList = new ArrayList<>();
+
+	    // Create valid schedules
+	    Schedule schedule1 = new Schedule(1, "Event", LocalDate.now(), LocalDateTime.now());
+
+	    scheduleList.add(schedule1);
+
+	    boolean result = false;
+	    try {
+	        // Validate the list of schedules, expect a valid result
+	        result = ArtitsValidator.validateschedule(scheduleList);
+	    } catch (Exception e) {
+	        // If an exception is thrown, the test fails
+	        Assertions.fail("Exception thrown: " + e.getMessage());
 	    }
 
-	    @Test
-	    void testValidateGender_NullGender_ThrowsIllegalArgumentException() {
-	        try {
-	            Artist artist = new Artist();
-	            artist.setGenderOfArtist(null);
-	            ArtitsValidator.validateGender(artist.getGenderOfArtist());
-	            fail("Expected IllegalArgumentException was not thrown.");
-	        } catch (IllegalArgumentException e) {
-	            assertEquals("Gender of artist is required", e.getMessage());
-	        }
+	    // Check if the result is true
+	    Assertions.assertTrue(result);
+	}
+
+	// Test case for validating a schedule with null event name
+	@Test
+	void testValidateScheduleNullEventName() throws ScheduleValueInvalidException {
+	    try {
+	        Schedule invalidSchedule = new Schedule();
+	        invalidSchedule.setArtistId(3);
+	        invalidSchedule.setSchduleId(3);
+	        invalidSchedule.setEventName(null);
+	        invalidSchedule.setDate(LocalDate.now());
+	        invalidSchedule.setTimeOfEvent(LocalDateTime.now());
+
+	        // Validate the schedule with null event name, expect an exception to be thrown
+	        ScheduleValidations.validateSchedule(invalidSchedule);
+
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (ScheduleValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_EVENT_NAME_NULL, e.getMessage());
 	    }
-	    @Test
-	    void testValidateService_ValidServices_ReturnsTrue() throws ServiceValueInvalidException {
-	        List<Services> services = new ArrayList<>();
-	        Services validService = new Services(1, ServiceCategory.MEHANDI, "Service", 122, "https://example.com/new_artwork.jpg");
-	        services.add(validService);
+	}
 
-	        boolean result = ArtitsValidator.validateService(services);
+	// Test case for validating a schedule with a past date
+	@Test
+	void testValidateSchedulePastDate() throws ScheduleValueInvalidException {
+	    try {
+	        Schedule invalidSchedule = new Schedule(1, "EventName", LocalDate.of(2021, 1, 1), LocalDateTime.now());
+	        invalidSchedule.setArtistId(3);
 
-	        Assertions.assertTrue(result);
+	        // Validate the schedule with a past date, expect an exception to be thrown
+	        ScheduleValidations.validateSchedule(invalidSchedule);
+
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (ScheduleValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_DATE_EVENT_PASSED, e.getMessage());
 	    }
+	}
 
-	    @Test
-	    void testValidateService_EmptyServiceList_ReturnsTrue() throws ServiceValueInvalidException {
-	        List<Services> emptyServices = new ArrayList<>();
+	// Test case for validating a schedule with null time of event
+	@Test
+	void testValidateScheduleNullTimeOfEvent() throws ScheduleValueInvalidException {
+	    try {
+	        Schedule invalidSchedule = new Schedule(1, "EventName", LocalDate.now(), null);
+	        invalidSchedule.setArtistId(3);
 
-	        boolean result = ArtitsValidator.validateService(emptyServices);
+	        // Validate the schedule with null time of event, expect an exception to be thrown
+	        ScheduleValidations.validateSchedule(invalidSchedule);
 
-	        Assertions.assertTrue(result);
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (ScheduleValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_TIME_OF_EVENT_NULL, e.getMessage());
 	    }
+	}
 
-	    // Test cases for validateSocialMediaLinks
-	    @Test
-	    void testValidateSocialMediaLinks_ValidLinks_ReturnsTrue() {
-	        List<String> validLinks = Arrays.asList("https://www.example.com", "http://www.example.com");
+	// Test case for validating a schedule with null date
+	@Test
+	void testValidateScheduleNullDate() throws ScheduleValueInvalidException {
+	    try {
+	        Schedule invalidSchedule = new Schedule(1, "EventName", null, LocalDateTime.now());
+	        invalidSchedule.setArtistId(3);
 
-	        boolean result = ArtitsValidator.validateSocialMediaLinks(validLinks);
+	        // Validate the schedule with null date, expect an exception to be thrown
+	        ScheduleValidations.validateSchedule(invalidSchedule);
 
-	        Assertions.assertTrue(result);
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (ScheduleValueInvalidException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_DATE_NULL, e.getMessage());
 	    }
+	}
 
-	    // Test cases for validateLocation
-	    @Test
-	    void testValidateLocation_ValidLocation_ReturnsTrue() {
-	        String validLocation = "chennai";
+	// Test case for validating a valid gender
+	@Test
+	void testValidateGender_Valid() {
+	    try {
+	        // Create an artist instance with a valid gender
+	        Artist artist = new Artist();
+	        artist.setGenderOfArtist(gender.FEMALE);
 
-	        boolean result = ArtitsValidator.validateLocation(validLocation);
-
-	        Assertions.assertTrue(result);
+	        // Validate the gender, expect no exception to be thrown
+	        ArtitsValidator.validateGender(artist.getGenderOfArtist());
+	    } catch (IllegalArgumentException ex) {
+	        // If an exception is unexpectedly thrown, the test fails
+	        Assertions.fail("Unexpected IllegalArgumentException thrown: " + ex.getMessage());
 	    }
+	}
 
-	    @Test
-	    void testValidateLocation_InvalidLocation_ThrowsIllegalArgumentException() {
-	        String invalidLocation = "Madhurai";
+	@Test
+	void testValidateGender_NullGender() {
+	    try {
+	        // Create an artist instance without setting the gender
+	        Artist artist = new Artist();
 
-	        try {
-	            ArtitsValidator.validateLocation(invalidLocation);
-	            Assertions.fail("Expected IllegalArgumentException was not thrown.");
-	        } catch (IllegalArgumentException e) {
-	            Assertions.assertEquals(ErrorMessages.INVALID_LOCATION, e.getMessage());
-	        }
+	        // Validate the gender, expect an exception to be thrown
+	        ArtitsValidator.validateGender(artist.getGenderOfArtist());
+
+	        // If the exception is not thrown, the test fails
+	        Assertions.fail("Expected IllegalArgumentException was not thrown");
+	    } catch (IllegalArgumentException ex) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals("Gender of artist is required", ex.getMessage());
 	    }
+	}
+
+	@Test
+	void testValidateArtist_NullArtist_ThrowsIllegalArgumentException()
+	        throws PostValueInvalidException, ServiceValueInvalidException {
+	    try {
+	        // Validate a null artist object, expect an exception to be thrown
+	        ArtitsValidator.validateArtist(null);
+
+	        // If the exception is not thrown, the test fails
+	        fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (IllegalArgumentException e) {
+	        // Check if the correct error message is provided
+	        assertEquals("Artist object is null", e.getMessage());
+	    }
+	}
+
+	@Test
+	void testValidateGender_NullGender_ThrowsIllegalArgumentException() {
+	    try {
+	        // Create an artist instance without setting the gender
+	        Artist artist = new Artist();
+	        artist.setGenderOfArtist(null);
+
+	        // Validate the gender, expect an exception to be thrown
+	        ArtitsValidator.validateGender(artist.getGenderOfArtist());
+
+	        // If the exception is not thrown, the test fails
+	        fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (IllegalArgumentException e) {
+	        // Check if the correct error message is provided
+	        assertEquals("Gender of artist is required", e.getMessage());
+	    }
+	}
+
+
+	@Test
+	void testValidateService_ValidServices_ReturnsTrue() throws ServiceValueInvalidException {
+	    // Create a list of valid services
+	    List<Services> services = new ArrayList<>();
+	    Services validService = new Services(1, ServiceCategory.MEHANDI, "Service", 122,
+	            "https://example.com/new_artwork.jpg");
+	    services.add(validService);
+
+	    // Validate the list of services, expect a valid result
+	    boolean result = ArtitsValidator.validateService(services);
+
+	    // Assert that the result is true
+	    Assertions.assertTrue(result);
+	}
+
+	@Test
+	void testValidateService_EmptyServiceList_ReturnsTrue() throws ServiceValueInvalidException {
+	    // Create an empty list of services
+	    List<Services> emptyServices = new ArrayList<>();
+
+	    // Validate the empty list of services, expect a valid result
+	    boolean result = ArtitsValidator.validateService(emptyServices);
+
+	    // Assert that the result is true
+	    Assertions.assertTrue(result);
+	}
+
+	// Test cases for validateSocialMediaLinks
+	@Test
+	void testValidateSocialMediaLinks_ValidLinks_ReturnsTrue() {
+	    // Create a list of valid social media links
+	    List<String> validLinks = Arrays.asList("https://www.example.com", "http://www.example.com");
+
+	    // Validate the list of social media links, expect a valid result
+	    boolean result = ArtitsValidator.validateSocialMediaLinks(validLinks);
+
+	    // Assert that the result is true
+	    Assertions.assertTrue(result);
+	}
+
+	// Test cases for validateLocation
+	@Test
+	void testValidateLocation_ValidLocation_ReturnsTrue() {
+	    // Set a valid location
+	    String validLocation = "chennai";
+
+	    // Validate the location, expect a valid result
+	    boolean result = ArtitsValidator.validateLocation(validLocation);
+
+	    // Assert that the result is true
+	    Assertions.assertTrue(result);
+	}
+
+	@Test
+	void testValidateLocation_InvalidLocation_ThrowsIllegalArgumentException() {
+	    // Set an invalid location
+	    String invalidLocation = "Madhurai";
+
+	    try {
+	        // Validate the invalid location, expect an exception to be thrown
+	        ArtitsValidator.validateLocation(invalidLocation);
+
+	        // If the exception is not thrown, the test fails
+	        Assertions.fail("Expected IllegalArgumentException was not thrown.");
+	    } catch (IllegalArgumentException e) {
+	        // Check if the correct error message is provided
+	        Assertions.assertEquals(ErrorMessages.INVALID_LOCATION, e.getMessage());
+	    }
+	}
 
 }

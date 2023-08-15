@@ -1,7 +1,12 @@
 package com.fssa.glossyblends.customexception;
 
 public class ServiceValueInvalidException extends Exception {
-    public ServiceValueInvalidException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ServiceValueInvalidException() {
         super("Service value is invalid.");
     }
 

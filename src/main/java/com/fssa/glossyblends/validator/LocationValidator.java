@@ -1,13 +1,18 @@
 package com.fssa.glossyblends.validator;
+
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Validation utility class for location-related operations.
+ */
 public class LocationValidator {
-	
-private LocationValidator() {
-		
-		
-	}
+    
+    // Private constructor to prevent instantiation
+    private LocationValidator() {
+    }
+    
+    // List of allowed locations
     private static final List<String> allowedLocations = Arrays.asList(
         "chennai", "tirunelveli", "coimbatore", "trichy", 
         "madurai", "salem", "erode", "vellore", 
@@ -19,7 +24,11 @@ private LocationValidator() {
         "thiruvarur", "theni", "pollachi", "mayiladuthurai"
     );
 
-    // Method to get the allowed locations
+    /**
+     * Get the list of allowed locations.
+     *
+     * @return List of allowed locations
+     */
     public static List<String> getAllowedLocations() {
         return allowedLocations;
     }

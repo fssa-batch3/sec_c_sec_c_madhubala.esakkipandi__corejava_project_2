@@ -1,31 +1,38 @@
 package com.fssa.glossyblends.validator;
 
 import java.util.regex.Pattern;
-
-import com.fssa.glossyblends.model.ErrorMessages;
-
+import com.fssa.glossyblends.errormessages.ErrorMessages;
 import java.util.regex.Matcher;
 
+/**
+ * Validation utility class for email validation.
+ */
 public class EmailValidations {
 
-	private EmailValidations() {
-		
-		
-	}
-	// Validation for email
-	public static void validateEmail(String email) throws IllegalArgumentException {
+    // Private constructor to prevent instantiation
+    private EmailValidations() {
+    }
 
-		if (email == null) {
+    /**
+     * Validates the format of an email address.
+     *
+     * @param email The email address to be validated
+     * @throws IllegalArgumentException If the email address is invalid
+     */
+    public static void validateEmail(String email) throws IllegalArgumentException {
 
-			throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_NULL);
+        if (email == null) {
+            throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_NULL);
+        }
 
-		}
-
-		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(email);
-		if (!matcher.matches()) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_FORMAT);
-		}
-	}
+        // Regular expression pattern to match valid email addresses
+        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        
+        // Check if the email matches the pattern
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_FORMAT);
+        }
+    }
 }

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.dao.ScheduleDAO;
 
 import com.fssa.glossyblends.model.Schedule;
@@ -12,9 +13,7 @@ import com.fssa.glossyblends.validator.ScheduleValidations;
 
 public class ScheduleServiceLayer {
 
-
-
-	public boolean addSchedule(Schedule listOfSchedule) throws IllegalArgumentException, SQLException {
+	public boolean addSchedule(Schedule listOfSchedule) throws SQLException, ScheduleValueInvalidException {
 		// Validate the schedule before adding
 		if (ScheduleValidations.validateSchedule(listOfSchedule)) {
 			LocalDateTime timeOfEvent = listOfSchedule.getTimeOfEvent();
@@ -27,12 +26,14 @@ public class ScheduleServiceLayer {
 
 	}
 
+	// delete the schdule using te artist id and Schedule id
 	public boolean deleteSchedule(int artistId, int id) throws SQLException {
 
 		return ScheduleDAO.deleteSchedule(artistId, id);
 
 	}
 
+	// get the list of schdule using the id of particular artist
 	public List<Schedule> getSchedulesByArtistId(int id) {
 
 		return ScheduleDAO.getSchedulesByArtistId(id);
@@ -40,12 +41,3 @@ public class ScheduleServiceLayer {
 	}
 
 }
-
-
-
-
-
-
-
-
-

@@ -8,23 +8,22 @@ import com.fssa.glossyblends.validator.PostValidations;
 import java.util.List;
 
 public class PostServiceLayer {
-	
 
-	public boolean addPost(Post post) throws PostValueInvalidException {
-		if (PostValidations.validatePost(post)) {
-			return PostDAO.addPost(post);
-		}
-		return false;
-	}
+    // Add a new post
+    public boolean addPost(Post post) throws PostValueInvalidException {
+        if (PostValidations.validatePost(post)) { // Validate the post using PostValidations
+            return PostDAO.addPost(post); // Add the post to the database
+        }
+        return false; // Post is not valid, not added
+    }
 
-	public List<Post> getPostsByArtistId(int list) {
-		return PostDAO.getPostsByArtistId(list);
-	}
+    // Get all posts by artist ID
+    public List<Post> getPostsByArtistId(int artistId) {
+        return PostDAO.getPostsByArtistId(artistId); // Retrieve posts from the database by artist ID
+    }
 
-	public boolean deletePost(int post, int artistId) {
-
-		return PostDAO.deletePost(post, artistId);
-
-	}
-
+    // Delete a post by post ID and artist ID
+    public boolean deletePost(int postId, int artistId) {
+        return PostDAO.deletePost(postId, artistId); // Delete the post from the database
+    }
 }
