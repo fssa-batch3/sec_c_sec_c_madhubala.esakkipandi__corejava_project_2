@@ -111,6 +111,8 @@ class TestServiceCrudOperations {
 		invalidService.setCost(-1);
 
 		
+		
+		
 		try {
 			boolean updated = serviceProviding.updateService(invalidService);
 

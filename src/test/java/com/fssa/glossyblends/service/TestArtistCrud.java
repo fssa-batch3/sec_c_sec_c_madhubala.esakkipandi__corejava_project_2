@@ -27,7 +27,10 @@ class TestArtistCrud {
 		Artist artist = new Artist();
 		artist.setUsername("jallelaa");
 		artist.setPassword("TestPassword123");
+
 		artist.setEmail("Madhuubalaa@gmail.com");
+
+		artist.setEmail("Madh@gmail.com");
 		artist.setPhonenNumber("1234567890");
 		artist.setYearsOfExperience(5);
 		artist.setAvailable(true);
