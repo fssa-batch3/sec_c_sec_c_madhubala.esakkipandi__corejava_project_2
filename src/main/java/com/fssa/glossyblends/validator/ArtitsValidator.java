@@ -3,14 +3,13 @@ package com.fssa.glossyblends.validator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.fssa.glossyblends.*;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
-import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.errormessages.ErrorMessages;
+import com.fssa.glossyblends.model.Artist;
+import com.fssa.glossyblends.model.Artist.gender;
 import com.fssa.glossyblends.model.Schedule;
 import com.fssa.glossyblends.model.Services;
-import com.fssa.glossyblends.model.Artist.gender;
 
 /**
  * Validation utility class for validating Artist objects and associated data.
