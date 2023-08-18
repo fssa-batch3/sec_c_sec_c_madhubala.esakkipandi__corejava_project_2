@@ -12,3 +12,14 @@
 | location           | VARCHAR(100)       | Location of the artist                         |
 | languages_spoken   | VARCHAR(100)       | Languages spoken by the artist                  |
 | genderOfArtist     | ENUM('FEMALE', 'MALE', 'TRANSGENDER') | Gender of the artist |
+
+
+
+
+| Column Name | Data Type       | Description                               |
+|-------------|----------------|-------------------------------------------|
+| id          | INT (Primary Key) | Unique identifier for each schedule event |
+| artist_id   | INT            | Foreign key referencing artists table    |
+| event_date  | DATE           | Date of the event                        |
+| event_name  | VARCHAR(100)   | Name of the event                        |
+| event_time  | DATETIME       | Date and time of the event               |
