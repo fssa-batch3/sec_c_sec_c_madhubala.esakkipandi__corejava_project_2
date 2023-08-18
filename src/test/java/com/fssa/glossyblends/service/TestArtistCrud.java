@@ -27,10 +27,11 @@ class TestArtistCrud {
 		Artist artist = new Artist();
 		artist.setUsername("jallelaa");
 		artist.setPassword("TestPassword123");
-		artist.setEmail("MadhuBalapandiEsa@gmail.com");
+		artist.setEmail("Madh@gmail.com");
 		artist.setPhonenNumber("1234567890");
 		artist.setYearsOfExperience(5);
 		artist.setAvailable(true);
+		
 		artist.setLanguagesSpoken("English");
 		artist.setLocation("chennai");
 		artist.setGenderOfArtist(Artist.gender.FEMALE);
@@ -80,7 +81,7 @@ class TestArtistCrud {
 			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException, DatabaseConnectionException {
 
 		ArtistService artistservice = new ArtistService();
-		int artistIdToDelete = 60;
+		int artistIdToDelete = 63;
 		Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 
 		if (artistToDelete != null) {
@@ -88,6 +89,7 @@ class TestArtistCrud {
 			boolean isDeleted = artistservice.deleteArtist(artistToDelete);
 			Assertions.assertTrue(isDeleted);
 
+			
 			// Verify that the artist has been deleted
 			Artist deletedArtist = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 			Assertions.assertNull(deletedArtist, "Deleted artist should not be found.");

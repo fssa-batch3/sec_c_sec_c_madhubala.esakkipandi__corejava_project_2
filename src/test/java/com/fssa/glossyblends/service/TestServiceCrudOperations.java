@@ -90,7 +90,7 @@ class TestServiceCrudOperations {
 	void testDeleteService() throws ServiceValueInvalidException, DatabaseConnectionException {
 		ServiceProviding serviceProviding = new ServiceProviding();
 
-		boolean deleted = serviceProviding.deleteServiceById(9, 57);
+		boolean deleted = serviceProviding.deleteServiceById(9, 60);
 
 		Assertions.assertTrue(deleted);
 	}
