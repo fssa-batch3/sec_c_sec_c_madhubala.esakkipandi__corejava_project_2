@@ -52,7 +52,7 @@ class TestScheduleCrud {
 
         ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 
-        boolean deleted = serviceOfSchedule.deleteSchedule(7, 58);
+        boolean deleted = serviceOfSchedule.deleteSchedule(7, 59);
 
         Assertions.assertTrue(deleted);
     }
