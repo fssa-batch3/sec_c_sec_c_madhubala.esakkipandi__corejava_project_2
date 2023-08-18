@@ -1,8 +1,10 @@
+-- Create the Glossy_Blends_Artist database
+CREATE DATABASE IF NOT EXISTS Glossy_Blends_Artist;
 
-Create database Glossy_Blends_Artist;
-
+-- Switch to the Glossy_Blends_Artist database
 USE Glossy_Blends_Artist;
 
+-- Create the artists table to store artist information
 CREATE TABLE artists (
     artist_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
@@ -17,11 +19,7 @@ CREATE TABLE artists (
     averageRating DECIMAL(5, 2)
 );
 
-
-
-
-
-
+-- Create the artist_schedule table to store artist event schedules
 CREATE TABLE artist_schedule (
     id INT PRIMARY KEY AUTO_INCREMENT,
     artist_id INT,
@@ -31,11 +29,10 @@ CREATE TABLE artist_schedule (
     FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
 );
 
-USE Glossy_Blends_Artist;
+-- Display the contents of the artist_schedule table
+SELECT * FROM artist_schedule;
 
-Select * from artist_schedule;
-
-
+-- Create the artist_posts table to store artist posts
 CREATE TABLE artist_posts (
     id INT PRIMARY KEY AUTO_INCREMENT,
     artist_id INT,
@@ -46,8 +43,7 @@ CREATE TABLE artist_posts (
     FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
 );
 
-
-
+-- Create the artist_services table to store artist services
 CREATE TABLE artist_services (
     id INT PRIMARY KEY AUTO_INCREMENT,
     artist_id INT,
@@ -58,11 +54,10 @@ CREATE TABLE artist_services (
     FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
 );
 
+-- Display the contents of the artist_services table
+SELECT * FROM artist_services;
 
-USE Glossy_Blends_Artist;
-
-Select * from artist_services;
-
+-- Create the artist_reviews table to store artist reviews
 CREATE TABLE artist_reviews (
     id INT PRIMARY KEY AUTO_INCREMENT,
     artist_id INT,
@@ -70,36 +65,11 @@ CREATE TABLE artist_reviews (
     FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
 );
 
+
+-- Create the social_media_links table to store social media links for artists
 CREATE TABLE social_media_links (
     linkId INTEGER PRIMARY KEY AUTO_INCREMENT,
     artistId INTEGER,
     socialMediaLink TEXT NOT NULL,
-    FOREIGN KEY (artistId) REFERENCES artists (artist_id)
+    FOREIGN KEY (artistId) REFERENCES artists(artist_id)
 );
-
-
-USE Glossy_Blends_Artist;
-
-Select * from artists ;
-
-USE Glossy_Blends_Artist;
- Select * from  artist_posts;
- 
-USE Glossy_Blends_Artist;
-DELETE FROM artists WHERE artist_id > 0;
-DELETE FROM artists WHERE artist_id > 0;
-
-
-
-USE Glossy_Blends_Artist;
-
-SELECT * FROM artist_posts 
-
-
-
-
-
-
-
-
-

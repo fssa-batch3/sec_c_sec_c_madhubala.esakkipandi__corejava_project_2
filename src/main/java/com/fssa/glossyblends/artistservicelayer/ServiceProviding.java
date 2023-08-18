@@ -1,5 +1,6 @@
 package com.fssa.glossyblends.artistservicelayer;
 
+import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.dao.ServiceProvidingDAO;
 import com.fssa.glossyblends.model.Services;
@@ -12,7 +13,7 @@ import java.util.List;
 public class ServiceProviding {
 
     // Add a new service
-    public boolean addService(Services service) throws ServiceValueInvalidException {
+    public boolean addService(Services service) throws ServiceValueInvalidException, DatabaseConnectionException {
         try {
             if (ServiceValidations.validateService(service)) {
                 return ServiceProvidingDAO.addService(service);
@@ -24,9 +25,10 @@ public class ServiceProviding {
             return false; // Failed to add service
         } 
     }
+    
 
     // Update an existing service
-    public boolean updateService(Services service) throws ServiceValueInvalidException {
+    public boolean updateService(Services service) throws ServiceValueInvalidException, DatabaseConnectionException {
         try {
             if (!ServiceValidations.validateService(service)) {
                 return false; // Invalid service
@@ -41,7 +43,7 @@ public class ServiceProviding {
     }
 
     // Get services by artist ID
-    public List<Services> getServicesByArtistId(int artistId) {
+    public List<Services> getServicesByArtistId(int artistId) throws DatabaseConnectionException {
         try {
             return ServiceProvidingDAO.getServicesByArtistId(artistId);
         } catch (SQLException e) {
@@ -51,7 +53,7 @@ public class ServiceProviding {
     }
 
     // Get a specific service by ID and artist ID
-    public Services getServiceById(int serviceId, int artistId) {
+    public Services getServiceById(int serviceId, int artistId) throws DatabaseConnectionException {
         try {
             return ServiceProvidingDAO.getServiceById(serviceId, artistId);
         } catch (SQLException e) {
@@ -61,7 +63,7 @@ public class ServiceProviding {
     }
 
     // Delete a service by ID and artist ID
-    public boolean deleteServiceById(int artistId, int serviceId) {
+    public boolean deleteServiceById(int artistId, int serviceId) throws DatabaseConnectionException {
         try {
             return ServiceProvidingDAO.deleteService(artistId, serviceId);
         } catch (SQLException e) {

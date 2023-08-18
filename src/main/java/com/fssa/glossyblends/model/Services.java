@@ -6,16 +6,15 @@ public class Services {
 	private double cost;
 	private String sampleImage;
 	private int artistId;
-private int id;
+	private int id;
+
 	public int getId() {
-	return id;
-}
+		return id;
+	}
 
-
-public void setId(int id) {
-	this.id = id;
-}
-
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Services(int artistId, ServiceCategory category, String name, double cost, String sampleImage) {
 		this.category = category;
@@ -25,7 +24,6 @@ public void setId(int id) {
 		this.sampleImage = sampleImage;
 	}
 
-	
 	public Services() {
 	}
 
@@ -54,7 +52,7 @@ public void setId(int id) {
 	}
 
 	public String getSampleImage() {
-		
+
 		return sampleImage;
 	}
 
@@ -69,7 +67,5 @@ public void setId(int id) {
 	public void setArtistId(int artistId) {
 		this.artistId = artistId;
 	}
-
-	
 
 }

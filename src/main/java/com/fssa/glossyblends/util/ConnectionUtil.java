@@ -3,11 +3,13 @@ package com.fssa.glossyblends.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import com.fssa.glossyblends.customexception.DatabaseConnectionException;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConnectionUtil {
 
-    public static Connection getConnection() {
+    public static Connection getConnection() throws DatabaseConnectionException {
         Connection con = null;
 
         String url;
@@ -30,8 +32,9 @@ public class ConnectionUtil {
             con = DriverManager.getConnection(url, userName, passWord);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Unable to connect to the database");
+            throw new DatabaseConnectionException("Unable to connect to the database"+e.getMessage());
         }
         return con;
     }
 }
+

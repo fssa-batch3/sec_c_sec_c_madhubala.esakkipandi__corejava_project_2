@@ -1,5 +1,6 @@
 package com.fssa.glossyblends.artistservicelayer;
 
+import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.dao.ArtistDAO;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Post;
@@ -16,7 +17,7 @@ public class ArtistService {
     }
 
     // Method for adding an artist
-    public boolean addArtist(Artist artist) throws IllegalArgumentException {
+    public boolean addArtist(Artist artist) throws IllegalArgumentException, DatabaseConnectionException {
         if (ArtitsValidator.validateArtist(artist)) { // Validate the artist using the validator
             List<String> emailList = ArtistDAO.getAllEmails(); // Get a list of all emails
 
@@ -30,7 +31,7 @@ public class ArtistService {
     }
 
     // Method for updating artist details
-    public boolean updateArtist(Artist artist) throws IllegalArgumentException {
+    public boolean updateArtist(Artist artist) throws IllegalArgumentException, DatabaseConnectionException {
         if (!ArtitsValidator.validateArtist(artist)) { // Validate the artist using the validator
             return false; // Invalid artist data
         }
@@ -40,13 +41,13 @@ public class ArtistService {
     }
 
     // Method for deleting an artist record
-    public boolean deleteArtist(Artist artist) throws IllegalArgumentException {
+    public boolean deleteArtist(Artist artist) throws IllegalArgumentException, DatabaseConnectionException {
         // No need to validate here, directly delete the artist
         return ArtistDAO.deleteArtist(artist); // Delete the artist from the database
     }
 
     // Method for getting all the artist's posts using the artist ID
-    public List<Post> getPostByArtistId(int artistId) throws SQLException {
+    public List<Post> getPostByArtistId(int artistId) throws SQLException, DatabaseConnectionException {
         return ArtistDAO.getPostsByArtistId(artistId); // Get the artist's posts from the database
     }
 }

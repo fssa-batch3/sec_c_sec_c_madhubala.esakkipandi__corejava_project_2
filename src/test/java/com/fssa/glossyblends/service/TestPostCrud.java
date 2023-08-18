@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.PostServiceLayer;
+import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.customexception.PostValueInvalidException;
 import com.fssa.glossyblends.model.Post;
 
@@ -19,13 +20,13 @@ class TestPostCrud {
 
     /**
      * Test adding a new post.
+     * @throws DatabaseConnectionException 
      *
-     * @throws PostValueInvalidException if the post value is invalid
-     * @throws SQLException             if a SQL error occurs
      */
     @Test
-    void AddPostTestCase() throws PostValueInvalidException, SQLException {
+    void AddPostTestCase() throws PostValueInvalidException, SQLException, DatabaseConnectionException {
 
+    	
         try {
 
             PostServiceLayer serviceLayer = new PostServiceLayer();
@@ -47,14 +48,14 @@ class TestPostCrud {
 
     /**
      * Test deleting a post by ID.
+     * @throws DatabaseConnectionException 
      *
-     * @throws SQLException if a SQL error occurs
      */
     @Test
-    void testDeletePostByID() throws SQLException {
+    void testDeletePostByID() throws SQLException, DatabaseConnectionException {
         PostServiceLayer serviceLayer = new PostServiceLayer();
         
-        int postIdToDelete = 64;
+        int postIdToDelete = 65;
         int artistId = 9;
 
         boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);
@@ -64,11 +65,11 @@ class TestPostCrud {
 
     /**
      * Test getting posts by artist ID.
+     * @throws DatabaseConnectionException 
      *
-     * @throws SQLException if a SQL error occurs
      */
     @Test
-    void GetPostsByArtistIdTest() throws SQLException {
+    void GetPostsByArtistIdTest() throws SQLException, DatabaseConnectionException {
         PostServiceLayer serviceLayer = new PostServiceLayer();
         int artistId = 10;
 

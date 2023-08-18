@@ -15,7 +15,6 @@ public class Artist {
 	private List<String> socialMediaLinks;
 	private String languagesSpoken;
 	private String location;
-	private double averageRating;
 
 	// ENUM for gender
 
@@ -109,19 +108,14 @@ public class Artist {
 
 	// getter method for average rating for artist
 
-	public double getAverageRating() {
-		return averageRating;
-	}
 
-//setter method for averagerating
-	public void setAverageRating(double averageRating) {
-		this.averageRating = averageRating;
-	}
 
 	// getter method social media link
 	public List<String> getSocialMediaLinks() {
 		return socialMediaLinks;
 	}
+	
+	
 
 	// setter method for socialmedialink
 	public void setSocialMediaLinks(List<String> socialMediaLinks) {

@@ -13,65 +13,62 @@ import com.fssa.glossyblends.model.Services;
  */
 public class ServiceValidations {
 
-    private ServiceValidations() {
-        // Private constructor to prevent instantiation
-    }
+	private ServiceValidations() {
+		// Private constructor to prevent instantiation
+	}
 
-    /**
-     * Validates the given service object.
-     *
-     * @param service The service to validate
-     * @return True if the service is valid, otherwise throws an exception
-     * @throws ServiceValueInvalidException if the service value is invalid
-     */
-    public static boolean validateService(Services service) throws ServiceValueInvalidException {
-        if (service == null) {
-            throw new ServiceValueInvalidException(ErrorMessages.INVALID_SERVICE_OBJECT_NULL);
-        } else {
-            validateCategory(service.getCategory());
-            validateServiceName(service.getName());
-            validatePrice(service.getCost());
-            validateServiceImageUrl(service.getSampleImage());
-        }
-        return true;
-    }
+	/**
+	 * Validates the given service object.
+	 *
+	 */
+	public static boolean validateService(Services service) throws ServiceValueInvalidException {
+		if (service == null) {
+			throw new ServiceValueInvalidException(ErrorMessages.INVALID_SERVICE_OBJECT_NULL);
+		} else {
+			validateCategory(service.getCategory());
+			validateServiceName(service.getName());
+			validatePrice(service.getCost());
+			validateServiceImageUrl(service.getSampleImage());
+		}
+		return true;
+	}
 
-    private static boolean validateCategory(ServiceCategory category) throws ServiceValueInvalidException {
-        if (category == null) {
-            throw new ServiceValueInvalidException();
-        }
-        return true;
-    }
+	private static boolean validateCategory(ServiceCategory category) throws ServiceValueInvalidException {
+		if (category == null) {
+			throw new ServiceValueInvalidException();
+		}
+		return true;
+	}
 
-    private static boolean validateServiceName(String serviceName) throws ServiceValueInvalidException {
-        if (serviceName == null) {
-            throw new ServiceValueInvalidException(ErrorMessages.INVALID_SERVICE_NAME_NULL);
-        }
+	private static boolean validateServiceName(String serviceName) throws ServiceValueInvalidException {
+		if (serviceName == null) {
+			throw new ServiceValueInvalidException(ErrorMessages.INVALID_SERVICE_NAME_NULL);
+		}
 
-        String regex = "^[a-zA-Z]+$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(serviceName);
-        boolean isValid = matcher.matches();
+		String regex = "^[a-zA-Z]+$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(serviceName);
+		boolean isValid = matcher.matches();
 
-        if (!isValid) {
-            throw new ServiceValueInvalidException(ErrorMessages.INVALID_SERVICE_NAME_PATTERN);
-        }
-        return true;
-    }
+		if (!isValid) {
+			throw new ServiceValueInvalidException(ErrorMessages.INVALID_SERVICE_NAME_PATTERN);
+		}
+		return true;
+	}
 
-    private static boolean validatePrice(double price) throws IllegalArgumentException {
-        if (price < 0) {
-            throw new IllegalArgumentException(ErrorMessages.INVALID_SERVICE_PRICE_NULL);
-        }
-        return true;
-    }
+	private static boolean validatePrice(double price) throws IllegalArgumentException {
+		if (price < 0) {
+			throw new IllegalArgumentException(ErrorMessages.INVALID_SERVICE_PRICE_NULL);
+		}
+		return true;
+	}
 
-    private static boolean validateServiceImageUrl(String url) throws ServiceValueInvalidException {
-        if (url == null) {
-            throw new ServiceValueInvalidException(ErrorMessages.INVALID_SERVICE_URL_NULL);
-        }
+	private static boolean validateServiceImageUrl(String url) throws ServiceValueInvalidException {
+		if (url == null) {
+			throw new ServiceValueInvalidException(ErrorMessages.INVALID_SERVICE_URL_NULL);
+		}
 
-        ImageUrlValidations.validateImageUrl(url);
-        return true;
-    }
+		ImageUrlValidations.validateImageUrl(url);
+		return true;
+	}
 }

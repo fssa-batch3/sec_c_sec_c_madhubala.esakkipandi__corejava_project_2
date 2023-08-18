@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 
+import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.model.Schedule;
 import com.fssa.glossyblends.util.ConnectionUtil;
 /**
@@ -19,11 +20,12 @@ import com.fssa.glossyblends.util.ConnectionUtil;
 public class ScheduleDAO {
 
     private ScheduleDAO() {
+    	
         // Private constructor to prevent instantiation
     }
 
     // Add a new schedule to the database
-    public static boolean addSchedule(Schedule listOfSchedule) throws SQLException {
+    public static boolean addSchedule(Schedule listOfSchedule) throws SQLException, DatabaseConnectionException {
         String query = "INSERT INTO artist_schedule (artist_id, event_date, event_name, event_time) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = ConnectionUtil.getConnection()) {
@@ -57,7 +59,7 @@ public class ScheduleDAO {
     }
 
     // Delete a schedule by artist ID and schedule ID
-    public static boolean deleteSchedule(int artistId, int id) throws SQLException {
+    public static boolean deleteSchedule(int artistId, int id) throws SQLException, DatabaseConnectionException {
         String query = "DELETE FROM artist_schedule WHERE artist_id = ? AND id = ?";
 
         try (Connection connection = ConnectionUtil.getConnection()) {
@@ -78,7 +80,7 @@ public class ScheduleDAO {
     }
 
     // Get schedules by artist ID
-    public static List<Schedule> getSchedulesByArtistId(int artistId) {
+    public static List<Schedule> getSchedulesByArtistId(int artistId) throws DatabaseConnectionException {
         List<Schedule> schedulesList = new ArrayList<>();
 
         String query = "SELECT * FROM artist_schedule WHERE artist_id = ?";

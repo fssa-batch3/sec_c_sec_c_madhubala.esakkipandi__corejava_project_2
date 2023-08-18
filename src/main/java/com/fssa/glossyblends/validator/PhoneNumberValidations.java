@@ -10,35 +10,32 @@ import com.fssa.glossyblends.errormessages.ErrorMessages;
  */
 public class PhoneNumberValidations {
 
-    // Private constructor to prevent instantiation
-    private PhoneNumberValidations() {
-    }
+	// Private constructor to prevent instantiation
+	private PhoneNumberValidations() {
+	}
 
-    /**
-     * Validates a phone number using a regular expression pattern.
-     *
-     * @param number The phone number to validate
-     * @return True if the phone number is valid
-     * @throws IllegalArgumentException if the phone number format is invalid
-     */
-    public static boolean validateNumber(String number) throws IllegalArgumentException {
+	/**
+	 * Validates a phone number using a regular expression pattern.
+	 *
+	 */
+	public static boolean validateNumber(String number) throws IllegalArgumentException {
 
-        // Regular expression pattern for a valid phone number
-        String mobilePattern = "^\\d{7,15}$";
+		// Regular expression pattern for a valid phone number
+		String mobilePattern = "^\\d{7,15}$";
 
-        // Compile the pattern
-        Pattern pattern = Pattern.compile(mobilePattern);
+		// Compile the pattern
+		Pattern pattern = Pattern.compile(mobilePattern);
 
-        // Match the pattern against the given phone number
-        Matcher patternMatching = pattern.matcher(number);
+		// Match the pattern against the given phone number
+		Matcher patternMatching = pattern.matcher(number);
 
-        // Check if the phone number matches the pattern
-        boolean isValid = patternMatching.matches();
+		// Check if the phone number matches the pattern
+		boolean isValid = patternMatching.matches();
 
-        if (!isValid) {
-            // Throw an exception if the phone number format is invalid
-            throw new IllegalArgumentException(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT);
-        }
-        return true;
-    }
+		if (!isValid) {
+			// Throw an exception if the phone number format is invalid
+			throw new IllegalArgumentException(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT);
+		}
+		return true;
+	}
 }

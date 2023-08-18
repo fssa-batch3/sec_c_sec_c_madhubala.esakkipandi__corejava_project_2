@@ -1,5 +1,6 @@
 package com.fssa.glossyblends.dao;
 
+import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.util.ConnectionUtil;
@@ -21,7 +22,7 @@ public class ArtistDAO {
 		
 	}
     // Get artist ID by artist name
-    public static int getArtistByName(String artistName) {
+    public static int getArtistByName(String artistName) throws DatabaseConnectionException {
         int id = 0;
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection
@@ -41,11 +42,11 @@ public class ArtistDAO {
     }
 
     // Add an artist object to the database
-    public static boolean addArtist(Artist artist) {
+    public static boolean addArtist(Artist artist) throws DatabaseConnectionException {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
-                    "INSERT INTO artists (username, password, email, phone_number, years_of_experience, is_available, location, languages_spoken, genderOfArtist, averageRating) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                    "INSERT INTO artists (username, password, email, phone_number, years_of_experience, is_available, location, languages_spoken, genderOfArtist) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 
                 stmt.setString(1, artist.getUsername());
                 stmt.setString(2, artist.getPassword());
@@ -56,7 +57,6 @@ public class ArtistDAO {
                 stmt.setString(7, artist.getLocation());
                 stmt.setString(8, artist.getLanguagesSpoken());
                 stmt.setString(9, artist.getGenderOfArtist().name());
-                stmt.setDouble(10, artist.getAverageRating());
 
                 int rows;
                 rows = stmt.executeUpdate();
@@ -70,18 +70,15 @@ public class ArtistDAO {
     }
 
     // Delete an artist object from the database
-    public static boolean deleteArtist(Artist artist) {
+    public static boolean deleteArtist(Artist artist) throws DatabaseConnectionException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement("DELETE FROM artists WHERE artist_id = ?")) {
                 stmt.setInt(1, artist.getArtistId());
 
                 int rowsAffected;
-                try {
+                
                     rowsAffected = stmt.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    return false;
-                }
+              
 
                 return rowsAffected > 0; // Return true if artist deleted successfully
             }
@@ -92,10 +89,10 @@ public class ArtistDAO {
     }
 
     // Update an artist object in the database
-    public static boolean updateArtist(Artist artist) {
+    public static boolean updateArtist(Artist artist) throws DatabaseConnectionException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
-                    "UPDATE artists SET username = ?, password = ?, email = ?, phone_number = ?, years_of_experience = ?, is_available = ?, location = ?, languages_spoken = ?, genderOfArtist = ?, averageRating = ? WHERE artist_id = ?")) {
+                    "UPDATE artists SET username = ?, password = ?, email = ?, phone_number = ?, years_of_experience = ?, is_available = ?, location = ?, languages_spoken = ?, genderOfArtist = ? WHERE artist_id = ?")) {
                 stmt.setString(1, artist.getUsername());
                 stmt.setString(2, artist.getPassword());
                 stmt.setString(3, artist.getEmail());
@@ -105,9 +102,8 @@ public class ArtistDAO {
                 stmt.setString(7, artist.getLocation());
                 stmt.setString(8, artist.getLanguagesSpoken());
                 stmt.setString(9, artist.getGenderOfArtist().name());
-                stmt.setDouble(10, artist.getAverageRating());
 
-                stmt.setInt(11, artist.getArtistId());
+                stmt.setInt(10, artist.getArtistId());
 
                 int rows;
                 rows = stmt.executeUpdate();
@@ -121,7 +117,7 @@ public class ArtistDAO {
     }
 
     // Get an artist object by artist ID
-    public static Artist getArtistById(String artistId) {
+    public static Artist getArtistById(String artistId) throws DatabaseConnectionException {
         Artist artist = null;
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM artists WHERE artist_id = ?")) {
@@ -139,7 +135,6 @@ public class ArtistDAO {
                         artist.setLocation(rs.getString("location"));
                         artist.setLanguagesSpoken(rs.getString("languages_spoken"));
                         artist.setGenderOfArtist(Artist.gender.valueOf(rs.getString("genderOfArtist")));
-                        artist.setAverageRating(rs.getDouble("averageRating"));
                         artist.setArtistId(rs.getInt("artist_id"));
                     }
                 }
@@ -151,7 +146,7 @@ public class ArtistDAO {
     }
 
     // Get a list of all email addresses in the database
-    public static List<String> getAllEmails() {
+    public static List<String> getAllEmails() throws DatabaseConnectionException {
         List<String> emailList = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement("SELECT email FROM artists");
@@ -169,7 +164,7 @@ public class ArtistDAO {
     }
 
     // Get a list of posts by artist ID
-    public static List<Post> getPostsByArtistId(int artistId) throws SQLException {
+    public static List<Post> getPostsByArtistId(int artistId) throws SQLException, DatabaseConnectionException {
         List<Post> posts = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             try {

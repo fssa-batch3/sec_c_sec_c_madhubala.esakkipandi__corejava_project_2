@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.ScheduleServiceLayer;
+import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.model.Schedule;
 
@@ -19,12 +20,12 @@ class TestScheduleCrud {
 
     /**
      * Test adding a new schedule.
+     * @throws DatabaseConnectionException 
      *
-     * @throws SQLException             if a SQL error occurs
-     * @throws ScheduleValueInvalidException if the schedule value is invalid
      */
+	
     @Test
-    void testAddSchedule() throws  SQLException, ScheduleValueInvalidException {
+    void testAddSchedule() throws  SQLException, ScheduleValueInvalidException, DatabaseConnectionException {
 
         ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 
@@ -42,27 +43,26 @@ class TestScheduleCrud {
 
     /**
      * Test deleting a schedule.
+     * @throws DatabaseConnectionException 
      *
-     * @throws SQLException             if a SQL error occurs
-     * @throws ScheduleValueInvalidException if the schedule value is invalid
      */
     @Test
-    void testDeleteSchedule() throws SQLException, ScheduleValueInvalidException {
+    void testDeleteSchedule() throws SQLException, ScheduleValueInvalidException, DatabaseConnectionException {
 
         ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 
-        boolean deleted = serviceOfSchedule.deleteSchedule(7, 53);
+        boolean deleted = serviceOfSchedule.deleteSchedule(7, 54);
 
         Assertions.assertTrue(deleted);
     }
 
     /**
      * Test reading a list of schedules by artist ID.
+     * @throws DatabaseConnectionException 
      *
-     * @throws ScheduleValueInvalidException if the schedule value is invalid
      */
     @Test
-    void testReadingListOfScehdule() throws ScheduleValueInvalidException {
+    void testReadingListOfScehdule() throws ScheduleValueInvalidException, DatabaseConnectionException {
 
         ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 

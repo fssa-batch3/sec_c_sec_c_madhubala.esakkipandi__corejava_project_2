@@ -1,5 +1,6 @@
 package com.fssa.glossyblends.dao;
 
+import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.model.ServiceCategory;
 import com.fssa.glossyblends.model.Services;
 import com.fssa.glossyblends.util.ConnectionUtil;
@@ -22,7 +23,7 @@ public class ServiceProvidingDAO {
     }
 
     // Add a new service
-    public static boolean addService(Services service) throws SQLException {
+    public static boolean addService(Services service) throws SQLException, DatabaseConnectionException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             int artistId = service.getArtistId();
             String insertQuery = "INSERT INTO artist_services (artist_id, category, name, cost, sample_image) VALUES (?, ?, ?, ?, ?)";
@@ -44,8 +45,9 @@ public class ServiceProvidingDAO {
         }
     }
 
+    
     // Get services by artist ID
-    public static List<Services> getServicesByArtistId(int artistId) throws SQLException {
+    public static List<Services> getServicesByArtistId(int artistId) throws SQLException, DatabaseConnectionException {
         List<Services> servicesList = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM artist_services WHERE artist_id = ?";
@@ -75,7 +77,7 @@ public class ServiceProvidingDAO {
     }
 
     // Update an existing service
-    public static boolean updateService(Services service) throws SQLException {
+    public static boolean updateService(Services service) throws SQLException, DatabaseConnectionException {
         int artistId = service.getArtistId();
         int serviceId = service.getId();
         String updateQuery = "UPDATE artist_services SET category = ?, name = ?, cost = ?, sample_image = ? WHERE artist_id = ? AND id = ?";
@@ -99,7 +101,7 @@ public class ServiceProvidingDAO {
     }
 
     // Delete a service by artist ID and service ID
-    public static boolean deleteService(int artistId, int serviceId) throws SQLException {
+    public static boolean deleteService(int artistId, int serviceId) throws SQLException, DatabaseConnectionException {
         String deleteQuery = "DELETE FROM artist_services WHERE artist_id = ? AND id = ?";
 
         try (Connection connection = ConnectionUtil.getConnection()) {
@@ -117,7 +119,7 @@ public class ServiceProvidingDAO {
     }
 
     // Get a service by ID and artist ID
-    public static Services getServiceById(int id, int artistId) throws SQLException {
+    public static Services getServiceById(int id, int artistId) throws SQLException, DatabaseConnectionException {
         Services service = null;
         String selectQuery = "SELECT * FROM artist_services WHERE id = ? AND artist_id = ?";
 
@@ -137,7 +139,7 @@ public class ServiceProvidingDAO {
                     }
                 }
             } catch (SQLException e) {
-                // Handle SQLException
+e.printStackTrace();
             }
         }
 

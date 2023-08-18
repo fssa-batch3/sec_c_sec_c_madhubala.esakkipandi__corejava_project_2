@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.util.ConnectionUtil;
 /**
@@ -19,8 +20,9 @@ public class PostDAO {
 		
 		
 	}
+	
     // Add a new post to the database
-    public static boolean addPost(Post post) {
+    public static boolean addPost(Post post) throws DatabaseConnectionException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "INSERT INTO artist_posts (artist_id, title, description, post_url) VALUES (?, ?, ?, ?)")) {
@@ -41,7 +43,7 @@ public class PostDAO {
     }
 
     // Get posts by artist ID
-    public static List<Post> getPostsByArtistId(int artistId) {
+    public static List<Post> getPostsByArtistId(int artistId) throws DatabaseConnectionException {
         List<Post> postsList = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection
@@ -69,7 +71,7 @@ public class PostDAO {
     }
 
     // Delete a post by post ID and artist ID
-    public static boolean deletePost(int postId, int artistId) {
+    public static boolean deletePost(int postId, int artistId) throws DatabaseConnectionException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection
                     .prepareStatement("DELETE FROM artist_posts WHERE id = ? AND artist_id = ?")) {

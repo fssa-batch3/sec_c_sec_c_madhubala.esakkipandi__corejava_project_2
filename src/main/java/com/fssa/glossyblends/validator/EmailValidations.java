@@ -9,30 +9,28 @@ import java.util.regex.Matcher;
  */
 public class EmailValidations {
 
-    // Private constructor to prevent instantiation
-    private EmailValidations() {
-    }
+	// Private constructor to prevent instantiation
+	private EmailValidations() {
+	}
 
-    /**
-     * Validates the format of an email address.
-     *
-     * @param email The email address to be validated
-     * @throws IllegalArgumentException If the email address is invalid
-     */
-    public static void validateEmail(String email) throws IllegalArgumentException {
+	/**
+	 * Validates the format of an email address.
+	 *
+	 */
+	public static void validateEmail(String email) throws IllegalArgumentException {
 
-        if (email == null) {
-            throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_NULL);
-        }
+		if (email == null) {
+			throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_NULL);
+		}
 
-        // Regular expression pattern to match valid email addresses
-        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        
-        // Check if the email matches the pattern
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_FORMAT);
-        }
-    }
+		// Regular expression pattern to match valid email addresses
+		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(email);
+
+		// Check if the email matches the pattern
+		if (!matcher.matches()) {
+			throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_FORMAT);
+		}
+	}
 }
