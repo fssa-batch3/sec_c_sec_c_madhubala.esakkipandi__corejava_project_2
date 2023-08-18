@@ -32,7 +32,7 @@ public class ConnectionUtil {
             con = DriverManager.getConnection(url, userName, passWord);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new DatabaseConnectionException("Unable to connect to the database"+e.getMessage());
+            throw new DatabaseConnectionException("Unable to connect to the database "+ e.getMessage());
         }
         return con;
     }
