@@ -55,7 +55,7 @@ class TestPostCrud {
     void testDeletePostByID() throws SQLException, DatabaseConnectionException {
         PostServiceLayer serviceLayer = new PostServiceLayer();
         
-        int postIdToDelete = 66;
+        int postIdToDelete = 69;
         int artistId = 9;
 
         boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);

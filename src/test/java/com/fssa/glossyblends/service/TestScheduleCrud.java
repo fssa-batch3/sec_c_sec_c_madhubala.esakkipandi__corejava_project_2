@@ -46,12 +46,13 @@ class TestScheduleCrud {
      * @throws DatabaseConnectionException 
      *
      */
+    
     @Test
     void testDeleteSchedule() throws SQLException, ScheduleValueInvalidException, DatabaseConnectionException {
 
         ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 
-        boolean deleted = serviceOfSchedule.deleteSchedule(7, 55);
+        boolean deleted = serviceOfSchedule.deleteSchedule(7, 58);
 
         Assertions.assertTrue(deleted);
     }
