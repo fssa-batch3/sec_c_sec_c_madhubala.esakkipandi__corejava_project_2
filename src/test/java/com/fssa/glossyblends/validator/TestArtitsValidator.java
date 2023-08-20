@@ -20,7 +20,7 @@ import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 
 import com.fssa.glossyblends.errormessages.ErrorMessages;
-import com.fssa.glossyblends.errormessages.SchduleErrorMessages;
+import com.fssa.glossyblends.errormessages.ScheduleErrorMessages;
 import com.fssa.glossyblends.errormessages.ServiceErrorMessges;
 import com.fssa.glossyblends.errormessages.PostErrorMessages;
 
@@ -341,7 +341,7 @@ class TestArtitsValidator {
 		try {
 			// Create a Post object with an invalid title format
 			Post invalidPost = new Post();
-			invalidPost.setTitle("Invalid#$%Title");
+			invalidPost.setTitle("Invalid%Title");
 
 			// Validate the invalid title, expect an exception to be thrown
 			PostValidations.validateTitle(invalidPost.getTitle());
@@ -688,19 +688,17 @@ class TestArtitsValidator {
 	void testValidateScheduleNullEventName() throws ScheduleValueInvalidException {
 		try {
 			Schedule invalidSchedule = new Schedule();
-			invalidSchedule.setArtistId(3);
-			invalidSchedule.setSchduleId(3);
+			
 			invalidSchedule.setEventName(null);
-			invalidSchedule.setDate(LocalDate.now());
-			invalidSchedule.setTimeOfEvent(LocalDateTime.now());
-
+			
 			// Validate the schedule with null event name, expect an exception to be thrown
-			ScheduleValidations.validateSchedule(invalidSchedule);
+			ScheduleValidations.validateName(invalidSchedule.getEventName());
 
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
+			e.printStackTrace();
 			// Check if the correct error message is provided
-			Assertions.assertEquals(SchduleErrorMessages.INVALID_EVENT_NAME_NULL, e.getMessage());
+			Assertions.assertEquals(ScheduleErrorMessages.INVALID_EVENT_NAME_NULL, e.getMessage());
 		}
 	}
 
@@ -708,16 +706,17 @@ class TestArtitsValidator {
 	@Test
 	void testValidateSchedulePastDate() throws ScheduleValueInvalidException {
 		try {
-			Schedule invalidSchedule = new Schedule(1, "EventName", LocalDate.of(2021, 1, 1), LocalDateTime.now());
+			Schedule invalidSchedule = new Schedule( );
+			invalidSchedule.setDate(LocalDate.of(2021, 1, 1));
 			invalidSchedule.setArtistId(3);
 
 			// Validate the schedule with a past date, expect an exception to be thrown
-			ScheduleValidations.validateSchedule(invalidSchedule);
+			ScheduleValidations.validateDate(invalidSchedule.getDate());
 
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(SchduleErrorMessages.INVALID_DATE_EVENT_PASSED, e.getMessage());
+			Assertions.assertEquals(ScheduleErrorMessages.INVALID_DATE_EVENT_PASSED, e.getMessage());
 		}
 	}
 
@@ -725,17 +724,17 @@ class TestArtitsValidator {
 	@Test
 	void testValidateScheduleNullTimeOfEvent() throws ScheduleValueInvalidException {
 		try {
-			Schedule invalidSchedule = new Schedule(1, "EventName", LocalDate.now(), null);
+			Schedule invalidSchedule = new Schedule();
+			invalidSchedule.setTimeOfEvent(null);
 			invalidSchedule.setArtistId(3);
 
 			// Validate the schedule with null time of event, expect an exception to be
 			// thrown
-			ScheduleValidations.validateSchedule(invalidSchedule);
+			ScheduleValidations.validateTimeOfEvent(invalidSchedule.getTimeOfEvent());
 
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
-			// Check if the correct error message is provided
-			Assertions.assertEquals(SchduleErrorMessages.INVALID_TIME_OF_EVENT_NULL, e.getMessage());
+			Assertions.assertEquals(ScheduleErrorMessages.INVALID_TIME_OF_EVENT_NULL, e.getMessage());
 		}
 	}
 
@@ -743,17 +742,19 @@ class TestArtitsValidator {
 	@Test
 	void testValidateScheduleNullDate() throws ScheduleValueInvalidException {
 		try {
-			Schedule invalidSchedule = new Schedule(1, "EventName", null, LocalDateTime.now());
+			Schedule invalidSchedule = new Schedule();
+			invalidSchedule.setDate(null);
 			invalidSchedule.setArtistId(3);
 
 			// Validate the schedule with null date, expect an exception to be thrown
-			ScheduleValidations.validateSchedule(invalidSchedule);
+			ScheduleValidations.validateDate(invalidSchedule.getDate());
 
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(SchduleErrorMessages.INVALID_DATE_NULL, e.getMessage());
+			Assertions.assertEquals(ScheduleErrorMessages.INVALID_DATE_NULL, e.getMessage());
 		}
+		
 	}
 
 	// Test case for validating a valid gender

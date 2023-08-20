@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.errormessages.ErrorMessages;
-import com.fssa.glossyblends.errormessages.SchduleErrorMessages;
+import com.fssa.glossyblends.errormessages.ScheduleErrorMessages;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 import com.fssa.glossyblends.model.Schedule;
@@ -56,7 +56,7 @@ public class ArtitsValidator {
 	// Validations for a list of schedules
 	public static boolean validateschedule(List<Schedule> scheduleList) throws ScheduleValueInvalidException {
 		if (scheduleList == null || scheduleList.isEmpty()) {
-			throw new ScheduleValueInvalidException(SchduleErrorMessages.SCHEDULE_NULL_INVALID);
+			throw new ScheduleValueInvalidException(ScheduleErrorMessages.SCHEDULE_NULL_INVALID);
 		}
 
 		for (Schedule sch : scheduleList) {

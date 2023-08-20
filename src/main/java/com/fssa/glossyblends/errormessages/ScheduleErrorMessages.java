@@ -7,11 +7,14 @@ package com.fssa.glossyblends.errormessages;
  * and handling of events. The class is designed to provide constant error message strings
  * that can be used throughout the application's codebase.
  */
-public class SchduleErrorMessages {
+public class ScheduleErrorMessages {
 
     /**
      * Error message indicating that an event name cannot be null.
      */
+	
+	
+	
     public static final String INVALID_EVENT_NAME_NULL = "Event name is null";
 
     /**

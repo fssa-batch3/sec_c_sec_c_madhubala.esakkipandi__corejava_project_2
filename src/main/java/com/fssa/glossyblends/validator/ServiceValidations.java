@@ -57,7 +57,7 @@ public class ServiceValidations {
 		return true;
 	}
 
-	private static boolean validatePrice(double price) throws IllegalArgumentException {
+	private static boolean validatePrice(double price) throws ServiceValueInvalidException {
 		if (price < 0) {
 			throw new IllegalArgumentException(ServiceErrorMessges.INVALID_SERVICE_PRICE_NULL);
 		}
