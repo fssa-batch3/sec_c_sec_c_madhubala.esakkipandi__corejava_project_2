@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fssa.glossyblends.errormessages.ErrorMessages;
+import com.fssa.glossyblends.errormessages.ServiceErrorMessges;
 
 public class ArtistNameValidations {
 	private ArtistNameValidations() {// default constructor for namevalidation with private access modifier
@@ -21,7 +22,7 @@ public class ArtistNameValidations {
 
 		if (!isValid) {// if not valid it will throw exception
 
-			throw new IllegalArgumentException(ErrorMessages.INVALID_SERVICE_NAME_PATTERN);
+			throw new IllegalArgumentException(ServiceErrorMessges.INVALID_SERVICE_NAME_PATTERN);
 
 		}
 		return true;// otherwise return true

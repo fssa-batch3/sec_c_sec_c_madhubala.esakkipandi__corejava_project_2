@@ -26,4 +26,5 @@ public class ArtistLogin {
             return LoginStatus.USER_NOT_FOUND; // User not found
         }
     }
+    
 }

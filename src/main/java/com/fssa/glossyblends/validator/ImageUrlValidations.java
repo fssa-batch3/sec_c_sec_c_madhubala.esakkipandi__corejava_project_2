@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 import com.fssa.glossyblends.errormessages.ErrorMessages;
+import com.fssa.glossyblends.errormessages.PostErrorMessages;
 
 /**
  * Validation utility class for image URL validation.
@@ -20,9 +21,11 @@ public class ImageUrlValidations {
 	 */
 	public static boolean validateImageUrl(String imageUrl) throws IllegalArgumentException {
 		if (imageUrl == null) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_IMAGE_URL);
+			throw new IllegalArgumentException(PostErrorMessages.INVALID_IMAGE_URL_NULL);
 		}
 
+		
+		
 		// Regular expression pattern to match valid image URLs
 		String imagePattern = "\\b(?:https?|ftp)://\\S+\\.(?:jpg|jpeg|png|gif|bmp)\\b";
 		Pattern pattern = Pattern.compile(imagePattern);
@@ -30,7 +33,7 @@ public class ImageUrlValidations {
 		boolean isValid = urlMatcher.matches();
 
 		if (!isValid) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_SERVICE_IMAGE_URL_FORMAT_PATTERN);
+			throw new IllegalArgumentException(PostErrorMessages.INVALID_IMAGE_URL_FORMAT);
 		}
 
 		return true;

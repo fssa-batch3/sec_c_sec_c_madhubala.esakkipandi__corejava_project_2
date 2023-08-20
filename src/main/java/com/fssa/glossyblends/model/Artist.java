@@ -15,7 +15,17 @@ public class Artist {
 	private List<String> socialMediaLinks;
 	private String languagesSpoken;
 	private String location;
+	private List<Post> posts;
+	private List<Services> service;
+	private List<Schedule> schedule;
+	public List<Post> getPosts() {
+		return posts;
+	}
 
+	// Setter method for posts
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 	// ENUM for gender
 
 	public enum gender {
@@ -108,14 +118,10 @@ public class Artist {
 
 	// getter method for average rating for artist
 
-
-
 	// getter method social media link
 	public List<String> getSocialMediaLinks() {
 		return socialMediaLinks;
 	}
-	
-	
 
 	// setter method for socialmedialink
 	public void setSocialMediaLinks(List<String> socialMediaLinks) {
@@ -142,6 +148,22 @@ public class Artist {
 	// setter method for gender
 	public void setGenderOfArtist(gender genderOfArtist) {
 		this.genderOfArtist = genderOfArtist;
+	}
+
+	public List<Services> getService() {
+		return service;
+	}
+
+	public void setService(List<Services> service) {
+		this.service = service;
+	}
+
+	public List<Schedule> getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(List<Schedule> schedule) {
+		this.schedule = schedule;
 	}
 
 }

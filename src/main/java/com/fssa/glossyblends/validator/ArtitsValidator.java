@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.errormessages.ErrorMessages;
+import com.fssa.glossyblends.errormessages.SchduleErrorMessages;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 import com.fssa.glossyblends.model.Schedule;
@@ -16,6 +17,7 @@ import com.fssa.glossyblends.model.Services;
  */
 public class ArtitsValidator {
 
+	
 	// Private constructor to prevent instantiation
 	private ArtitsValidator() {
 	}
@@ -54,7 +56,7 @@ public class ArtitsValidator {
 	// Validations for a list of schedules
 	public static boolean validateschedule(List<Schedule> scheduleList) throws ScheduleValueInvalidException {
 		if (scheduleList == null || scheduleList.isEmpty()) {
-			throw new ScheduleValueInvalidException(ErrorMessages.SCHEDULE_NULL_INVALID);
+			throw new ScheduleValueInvalidException(SchduleErrorMessages.SCHEDULE_NULL_INVALID);
 		}
 
 		for (Schedule sch : scheduleList) {
@@ -117,7 +119,7 @@ public class ArtitsValidator {
 	// Validation for languagesSpoken
 	public static boolean validateLanguagesSpoken(String languageSpoken) throws IllegalArgumentException {
 		if (languageSpoken == null || languageSpoken.isEmpty()) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_LANGUAGE_NULL);
+			throw new IllegalArgumentException(ErrorMessages.INVALID_LANGUAGE);
 		}
 		return true;
 	}
@@ -165,5 +167,7 @@ public class ArtitsValidator {
 			throw new IllegalArgumentException("Gender of artist is required");
 		}
 		return true;
+		
 	}
+	
 }

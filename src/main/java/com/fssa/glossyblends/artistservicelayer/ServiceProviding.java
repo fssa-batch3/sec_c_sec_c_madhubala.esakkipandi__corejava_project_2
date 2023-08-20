@@ -62,6 +62,9 @@ public class ServiceProviding {
         }
     }
 
+    
+    
+    
     // Delete a service by ID and artist ID
     public boolean deleteServiceById(int artistId, int serviceId) throws DatabaseConnectionException {
         try {

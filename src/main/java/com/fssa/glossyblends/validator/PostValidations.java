@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import com.fssa.glossyblends.customexception.PostValueInvalidException;
 //import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.errormessages.ErrorMessages;
+import com.fssa.glossyblends.errormessages.PostErrorMessages;
 import com.fssa.glossyblends.model.Post;
 
 public class PostValidations {
@@ -31,11 +32,11 @@ public class PostValidations {
 
 	public static boolean validateTitle(String title) throws PostValueInvalidException {
 		if (title == null || title.trim().isEmpty()) {
-			throw new PostValueInvalidException(ErrorMessages.INVALID_POST_TITLE_NULL);
+			throw new PostValueInvalidException(PostErrorMessages.INVALID_POST_TITLE_NULL);
 		}
 
 		if (!Pattern.matches(TITLE_REGEX, title)) {
-			throw new PostValueInvalidException(ErrorMessages.INVALID_POST_TITLE_NULL);
+			throw new PostValueInvalidException(PostErrorMessages.INVALID_POST_TITLE_NULL);
 		}
 
 		return true;
@@ -43,11 +44,11 @@ public class PostValidations {
 
 	public static boolean validateDescription(String description) throws PostValueInvalidException {
 		if (description == null || description.trim().isEmpty()) {
-			throw new PostValueInvalidException(ErrorMessages.INVALID_POST_DESCRIPTION_NULL);
+			throw new PostValueInvalidException(PostErrorMessages.INVALID_POST_DESCRIPTION_NULL);
 		}
 
 		if (!Pattern.matches(DESCRIPTION_REGEX, description)) {
-			throw new PostValueInvalidException(ErrorMessages.DESCRIPTION_LENGTH_FORMAT);
+			throw new PostValueInvalidException(PostErrorMessages.DESCRIPTION_LENGTH_FORMAT);
 		}
 
 		return true;
@@ -55,11 +56,11 @@ public class PostValidations {
 
 	public static boolean validateImageUrl(String imageUrl) throws PostValueInvalidException {
 		if (imageUrl == null || imageUrl.trim().isEmpty()) {
-			throw new PostValueInvalidException(ErrorMessages.INVALID_IMAGE_URL);
+			throw new PostValueInvalidException(PostErrorMessages.INVALID_IMAGE_URL_NULL);
 		}
 
 		if (!Pattern.matches(IMAGE_URL_REGEX, imageUrl)) {
-			throw new PostValueInvalidException(ErrorMessages.INVALID_SERVICE_IMAGE_URL_FORMAT_PATTERN);
+			throw new PostValueInvalidException(PostErrorMessages.INVALID_IMAGE_URL_FORMAT);
 		}
 
 		return true;

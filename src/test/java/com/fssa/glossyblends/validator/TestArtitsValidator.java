@@ -20,6 +20,13 @@ import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 
 import com.fssa.glossyblends.errormessages.ErrorMessages;
+import com.fssa.glossyblends.errormessages.SchduleErrorMessages;
+import com.fssa.glossyblends.errormessages.ServiceErrorMessges;
+import com.fssa.glossyblends.errormessages.PostErrorMessages;
+
+
+
+
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.model.ServiceCategory;
 import com.fssa.glossyblends.model.Services;
@@ -187,7 +194,7 @@ class TestArtitsValidator {
 
 		} catch (IllegalArgumentException ex) {
 			// Assert that the correct error message is returned in the exception
-			Assertions.assertEquals(ErrorMessages.INVALID_SERVICE_NAME_PATTERN, ex.getMessage());
+			Assertions.assertEquals(ServiceErrorMessges.INVALID_SERVICE_NAME_PATTERN, ex.getMessage());
 		}
 	}
 
@@ -324,7 +331,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
+			Assertions.assertEquals(PostErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
 		}
 	}
 
@@ -343,7 +350,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
+			Assertions.assertEquals(PostErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
 		}
 	}
 
@@ -362,7 +369,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_POST_DESCRIPTION_NULL, e.getMessage());
+			Assertions.assertEquals(PostErrorMessages.INVALID_POST_DESCRIPTION_NULL, e.getMessage());
 		}
 	}
 
@@ -403,7 +410,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.DESCRIPTION_LENGTH_FORMAT, e.getMessage());
+			Assertions.assertEquals(PostErrorMessages.DESCRIPTION_LENGTH_FORMAT, e.getMessage());
 		}
 	}
 
@@ -433,7 +440,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_IMAGE_URL, e.getMessage());
+			Assertions.assertEquals(PostErrorMessages.INVALID_IMAGE_URL_NULL, e.getMessage());
 		}
 	}
 
@@ -452,7 +459,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_SERVICE_IMAGE_URL_FORMAT_PATTERN, e.getMessage());
+			Assertions.assertEquals(PostErrorMessages.INVALID_IMAGE_URL_FORMAT, e.getMessage());
 		}
 	}
 
@@ -579,7 +586,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected error message was not encountered. Test case failed");
 		} catch (IllegalArgumentException ex) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_LANGUAGE_NULL, ex.getMessage());
+			Assertions.assertEquals(ErrorMessages.INVALID_LANGUAGE, ex.getMessage());
 		}
 	}
 
@@ -693,7 +700,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_EVENT_NAME_NULL, e.getMessage());
+			Assertions.assertEquals(SchduleErrorMessages.INVALID_EVENT_NAME_NULL, e.getMessage());
 		}
 	}
 
@@ -710,7 +717,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_DATE_EVENT_PASSED, e.getMessage());
+			Assertions.assertEquals(SchduleErrorMessages.INVALID_DATE_EVENT_PASSED, e.getMessage());
 		}
 	}
 
@@ -728,7 +735,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_TIME_OF_EVENT_NULL, e.getMessage());
+			Assertions.assertEquals(SchduleErrorMessages.INVALID_TIME_OF_EVENT_NULL, e.getMessage());
 		}
 	}
 
@@ -745,7 +752,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_DATE_NULL, e.getMessage());
+			Assertions.assertEquals(SchduleErrorMessages.INVALID_DATE_NULL, e.getMessage());
 		}
 	}
 
