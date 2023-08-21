@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.ScheduleServiceLayer;
+import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
 import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.model.Schedule;
@@ -21,11 +22,12 @@ class TestScheduleCrud {
     /**
      * Test adding a new schedule.
      * @throws DatabaseConnectionException 
+     * @throws ArtistDetailsInvalidExceptions 
      *
      */
 	
     @Test
-    void testAddSchedule() throws  SQLException, ScheduleValueInvalidException, DatabaseConnectionException {
+    void testAddSchedule() throws  SQLException, ScheduleValueInvalidException, DatabaseConnectionException, ArtistDetailsInvalidExceptions {
 
         ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 
@@ -52,7 +54,7 @@ class TestScheduleCrud {
 
         ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 
-        boolean deleted = serviceOfSchedule.deleteSchedule(7, 74);
+        boolean deleted = serviceOfSchedule.deleteSchedule(7, 75);
 
         Assertions.assertTrue(deleted);
     }

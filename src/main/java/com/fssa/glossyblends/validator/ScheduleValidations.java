@@ -3,6 +3,7 @@ package com.fssa.glossyblends.validator;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.errormessages.ScheduleErrorMessages;
 import com.fssa.glossyblends.model.Schedule;
@@ -13,7 +14,7 @@ public class ScheduleValidations {
 		
 	}
 
-	public static boolean validateSchedule(Schedule listOfSchedule) throws ScheduleValueInvalidException {
+	public static boolean validateSchedule(Schedule listOfSchedule) throws ScheduleValueInvalidException, ArtistDetailsInvalidExceptions {
 		try {
 			validateName(listOfSchedule.getEventName());
 			validateDate(listOfSchedule.getDate());
@@ -25,7 +26,7 @@ public class ScheduleValidations {
 		return false;
 	}
 
-	public static boolean validateName(String eventname) throws ScheduleValueInvalidException {
+	public static boolean validateName(String eventname) throws ScheduleValueInvalidException, ArtistDetailsInvalidExceptions {
 		if (eventname == null) {
 			throw new ScheduleValueInvalidException(ScheduleErrorMessages.INVALID_EVENT_NAME_NULL);
 			

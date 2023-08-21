@@ -30,7 +30,7 @@ class TestArtistCrud {
 		artist.setPassword("TestPassword123");
 
 
-		artist.setEmail("MadhubalaS@gmail.com");
+		artist.setEmail("esakipandi@gmail.com");
 		artist.setPhonenNumber("1234567890");
 		artist.setYearsOfExperience(5);
 		artist.setAvailable(true);
@@ -84,10 +84,11 @@ class TestArtistCrud {
 			throws ArtistDetailsInvalidExceptions, PostValueInvalidException, ServiceValueInvalidException, DatabaseConnectionException {
 
 		ArtistService artistservice = new ArtistService();
-		int artistIdToDelete = 73;
+		int artistIdToDelete = 74;
 		Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 
 		if (artistToDelete != null) {
+			
 			// Delete the artist
 			boolean isDeleted = artistservice.deleteArtist(artistToDelete);
 			Assertions.assertTrue(isDeleted);

@@ -1,6 +1,8 @@
 package com.fssa.glossyblends.validator;
 
 import java.util.regex.Pattern;
+
+import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
 import com.fssa.glossyblends.errormessages.ErrorMessages;
 import java.util.regex.Matcher;
 
@@ -17,10 +19,10 @@ public class EmailValidations {
 	 * Validates the format of an email address.
 	 *
 	 */
-	public static void validateEmail(String email) throws IllegalArgumentException {
+	public static void validateEmail(String email) throws ArtistDetailsInvalidExceptions {
 
 		if (email == null) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_NULL);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_EMAIL_NULL);
 		}
 
 		// Regular expression pattern to match valid email addresses
@@ -30,7 +32,7 @@ public class EmailValidations {
 
 		// Check if the email matches the pattern
 		if (!matcher.matches()) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_FORMAT);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_EMAIL_FORMAT);
 		}
 	}
 }

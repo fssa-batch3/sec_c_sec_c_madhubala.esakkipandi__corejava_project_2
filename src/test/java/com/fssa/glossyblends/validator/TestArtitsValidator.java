@@ -82,7 +82,7 @@ class TestArtitsValidator {
 	}
 
 	@Test
-	void testValidationEmailInValid() {
+	void testValidationEmailInValid()throws ArtistDetailsInvalidExceptions {
 		// Create an Artist object
 		Artist ar = new Artist();
 
@@ -128,15 +128,14 @@ class TestArtitsValidator {
 			Artist artist = null;
 			ArtitsValidator.validateArtist(artist);
 			Assertions.fail("Expected IllegalArgumentException was not thrown");
-		} catch (IllegalArgumentException ex) {
+		} catch (ArtistDetailsInvalidExceptions ex) {
 			// Assert that the correct error message is returned in the exception
 			Assertions.assertEquals("Artist object is null", ex.getMessage());
 		}
 	}
 
 	@Test
-	void testValidateArtist_InvalidUsername_ThrowsIllegalArgumentException()
-			throws PostValueInvalidException, ServiceValueInvalidException {
+	void testValidateArtist_InvalidUsername_ThrowsIllegalArgumentException()throws ArtistDetailsInvalidExceptions{
 		try {
 			Artist artist = new Artist();
 			artist.setUsername(null); // Invalid username
@@ -256,7 +255,7 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("Expected exception was not thrown.");
-		} catch (IllegalArgumentException e) {
+		} catch (ArtistDetailsInvalidExceptions e) {
 			// Check if the correct error message is provided
 			Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT, e.getMessage());
 		}
@@ -264,7 +263,7 @@ class TestArtitsValidator {
 
 	// Test case for null mobile number
 	@Test
-	void testValidatePhoneNumberNull() throws ArtistDetailsInvalidExceptions {
+	void testValidatePhoneNumberNull() {
 		// Create an Artist object with a null phone number
 		Artist artist = new Artist();
 		artist.setPhonenNumber(null);
@@ -275,7 +274,7 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("Expected exception was not thrown.");
-		} catch (IllegalArgumentException e) {
+		} catch (ArtistDetailsInvalidExceptions e) {
 			// Check if the correct error message is provided
 			Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_NULL, e.getMessage());
 		}
@@ -294,7 +293,7 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("Expected exception was not thrown.");
-		} catch (IllegalArgumentException e) {
+		} catch (ArtistDetailsInvalidExceptions e) {
 			// Check if the correct error message is provided
 			Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_NULL, e.getMessage());
 		}
@@ -683,7 +682,7 @@ class TestArtitsValidator {
 
 	// Test case for validating a schedule with null event name
 	@Test
-	void testValidateScheduleNullEventName() throws ScheduleValueInvalidException {
+	void testValidateScheduleNullEventName() throws ScheduleValueInvalidException, ArtistDetailsInvalidExceptions {
 		try {
 			Schedule invalidSchedule = new Schedule();
 

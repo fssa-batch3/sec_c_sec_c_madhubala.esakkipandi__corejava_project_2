@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
 import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.dao.ScheduleDAO;
@@ -14,7 +15,7 @@ import com.fssa.glossyblends.validator.ScheduleValidations;
 
 public class ScheduleServiceLayer {
 
-	public boolean addSchedule(Schedule listOfSchedule) throws SQLException, ScheduleValueInvalidException, DatabaseConnectionException {
+	public boolean addSchedule(Schedule listOfSchedule) throws SQLException, ScheduleValueInvalidException, DatabaseConnectionException, ArtistDetailsInvalidExceptions {
 		// Validate the schedule before adding
 		if (ScheduleValidations.validateSchedule(listOfSchedule)) {
 			LocalDateTime timeOfEvent = listOfSchedule.getTimeOfEvent();

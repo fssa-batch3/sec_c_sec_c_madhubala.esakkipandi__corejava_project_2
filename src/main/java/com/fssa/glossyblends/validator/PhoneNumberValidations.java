@@ -3,6 +3,7 @@ package com.fssa.glossyblends.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
 import com.fssa.glossyblends.errormessages.ErrorMessages;
 
 /**
@@ -18,7 +19,7 @@ public class PhoneNumberValidations {
 	 * Validates a phone number using a regular expression pattern.
 	 *
 	 */
-	public static boolean validateNumber(String number) throws IllegalArgumentException {
+	public static boolean validateNumber(String number) throws ArtistDetailsInvalidExceptions {
 
 		// Regular expression pattern for a valid phone number
 		String mobilePattern = "^\\d{7,15}$";
@@ -34,7 +35,7 @@ public class PhoneNumberValidations {
 
 		if (!isValid) {
 			// Throw an exception if the phone number format is invalid
-			throw new IllegalArgumentException(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT);
 		}
 		return true;
 	}

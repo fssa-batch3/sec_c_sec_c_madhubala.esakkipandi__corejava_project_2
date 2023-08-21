@@ -55,7 +55,7 @@ public class ArtitsValidator {
 	}
 
 	// Validations for a list of schedules
-	public static boolean validateschedule(List<Schedule> scheduleList) throws ScheduleValueInvalidException {
+	public static boolean validateschedule(List<Schedule> scheduleList) throws ScheduleValueInvalidException, ArtistDetailsInvalidExceptions {
 		if (scheduleList == null || scheduleList.isEmpty()) {
 			throw new ScheduleValueInvalidException(ScheduleErrorMessages.SCHEDULE_NULL_INVALID);
 		}
@@ -69,7 +69,7 @@ public class ArtitsValidator {
 	// Validation for userName
 	public static boolean validateUsername(String username) throws ArtistDetailsInvalidExceptions {
 		if (username == null) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_USERNAME_NULL);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_USERNAME_NULL);
 		}
 
 		ArtistNameValidations.validateName(username);
@@ -154,7 +154,7 @@ public class ArtitsValidator {
 	}
 
 	// Validate social media link
-	private static boolean isValidSocialMediaLink(String link) throws ArtistDetailsInvalidExceptions {
+	private static boolean isValidSocialMediaLink(String link) {
 		if (link == null || link.trim().isEmpty()) {
 			return false;
 		}
@@ -165,7 +165,7 @@ public class ArtitsValidator {
 	// Validate gender
 	public static boolean validateGender(gender genderOfArtist) throws ArtistDetailsInvalidExceptions {
 		if (genderOfArtist == null) {
-			throw new IllegalArgumentException("Gender of artist is required");
+			throw new ArtistDetailsInvalidExceptions("Gender of artist is required");
 		}
 		return true;
 		
