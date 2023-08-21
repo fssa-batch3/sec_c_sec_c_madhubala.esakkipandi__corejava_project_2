@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.ArtistService;
+import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
 import com.fssa.glossyblends.customexception.DatabaseConnectionException;
 import com.fssa.glossyblends.customexception.PostValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
@@ -21,7 +22,7 @@ import com.fssa.glossyblends.model.Post;
 class TestArtistCrud {
 
 	@Test
-	void testAddArtist_ValidInput() throws IllegalArgumentException, DatabaseConnectionException {
+	void testAddArtist_ValidInput() throws ArtistDetailsInvalidExceptions, DatabaseConnectionException {
 		ArtistService artistservice = new ArtistService();
 
 		Artist artist = new Artist();
@@ -29,7 +30,7 @@ class TestArtistCrud {
 		artist.setPassword("TestPassword123");
 
 
-		artist.setEmail("Madg@gmail.com");
+		artist.setEmail("MadhubalaS@gmail.com");
 		artist.setPhonenNumber("1234567890");
 		artist.setYearsOfExperience(5);
 		artist.setAvailable(true);
@@ -44,7 +45,7 @@ class TestArtistCrud {
 
 	@Test
 	void UpdateArtistTestService()
-			throws SQLException, IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException, DatabaseConnectionException {
+			throws SQLException, ArtistDetailsInvalidExceptions, PostValueInvalidException, ServiceValueInvalidException, DatabaseConnectionException {
 
 		ArtistService artistService = new ArtistService();
 
@@ -80,10 +81,10 @@ class TestArtistCrud {
 
 	@Test
 	void deleteArtistTestCase()
-			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException, DatabaseConnectionException {
+			throws ArtistDetailsInvalidExceptions, PostValueInvalidException, ServiceValueInvalidException, DatabaseConnectionException {
 
 		ArtistService artistservice = new ArtistService();
-		int artistIdToDelete = 72;
+		int artistIdToDelete = 73;
 		Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 
 		if (artistToDelete != null) {

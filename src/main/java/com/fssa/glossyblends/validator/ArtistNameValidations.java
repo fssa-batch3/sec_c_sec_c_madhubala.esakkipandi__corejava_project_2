@@ -3,7 +3,6 @@ package com.fssa.glossyblends.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.glossyblends.errormessages.ErrorMessages;
 import com.fssa.glossyblends.errormessages.ServiceErrorMessges;
 
 public class ArtistNameValidations {

@@ -3,6 +3,7 @@ package com.fssa.glossyblends.validator;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.errormessages.ErrorMessages;
@@ -26,9 +27,9 @@ public class ArtitsValidator {
 	 * Validates an Artist object.
 	 *
 	 */
-	public static boolean validateArtist(Artist artist) throws IllegalArgumentException {
+	public static boolean validateArtist(Artist artist) throws ArtistDetailsInvalidExceptions {
 		if (artist == null) {
-			throw new IllegalArgumentException("Artist object is null");
+			throw new ArtistDetailsInvalidExceptions("Artist object is null");
 		}
 
 		validateUsername(artist.getUsername());
@@ -66,7 +67,7 @@ public class ArtitsValidator {
 	}
 
 	// Validation for userName
-	public static boolean validateUsername(String username) throws IllegalArgumentException {
+	public static boolean validateUsername(String username) throws ArtistDetailsInvalidExceptions {
 		if (username == null) {
 			throw new IllegalArgumentException(ErrorMessages.INVALID_USERNAME_NULL);
 		}
@@ -77,39 +78,39 @@ public class ArtitsValidator {
 	}
 
 	// Validation for password
-	public static boolean validatePassword(String password) throws IllegalArgumentException {
+	public static boolean validatePassword(String password) throws ArtistDetailsInvalidExceptions {
 		PasswordValidations.validatePassword(password);
 		return true;
 	}
 
 	// Validation for email
-	public static boolean validateEmail(String email) throws IllegalArgumentException {
+	public static boolean validateEmail(String email) throws ArtistDetailsInvalidExceptions {
 		if (email == null || email.trim().isEmpty()) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_EMAIL_NULL);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_EMAIL_NULL);
 		}
 		EmailValidations.validateEmail(email);
 		return true;
 	}
 
 	// Validation for phoneNumber
-	public static boolean validatePhoneNumber(String phoneNumber) throws IllegalArgumentException {
+	public static boolean validatePhoneNumber(String phoneNumber) throws ArtistDetailsInvalidExceptions {
 		if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_PHONE_NUMBER_NULL);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_PHONE_NUMBER_NULL);
 		}
 		PhoneNumberValidations.validateNumber(phoneNumber);
 		return true;
 	}
 
 	// Validation of years of experience
-	public static boolean validateYearsOfExperience(int yearsOfExperience) throws IllegalArgumentException {
+	public static boolean validateYearsOfExperience(int yearsOfExperience) throws ArtistDetailsInvalidExceptions {
 		if (yearsOfExperience <= 0) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_YEARS_OF_EXPERIENCE_NEGATIVE);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_YEARS_OF_EXPERIENCE_NEGATIVE);
 		}
 		return true;
 	}
 
 	// Validation for availability
-	public static boolean validateIsAvailable(boolean isAvailable) throws IllegalArgumentException {
+	public static boolean validateIsAvailable(boolean isAvailable) throws ArtistDetailsInvalidExceptions {
 		
 	
 	
@@ -117,43 +118,43 @@ public class ArtitsValidator {
 	}
 
 	// Validation for languagesSpoken
-	public static boolean validateLanguagesSpoken(String languageSpoken) throws IllegalArgumentException {
+	public static boolean validateLanguagesSpoken(String languageSpoken) throws ArtistDetailsInvalidExceptions {
 		if (languageSpoken == null || languageSpoken.isEmpty()) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_LANGUAGE);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_LANGUAGE);
 		}
 		return true;
 	}
 
 	
 	// Validation for location
-	public static boolean validateLocation(String location) throws IllegalArgumentException {
+	public static boolean validateLocation(String location) throws ArtistDetailsInvalidExceptions {
 		if (location == null) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_LOCATION_NULL);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_LOCATION_NULL);
 		}
 
 		List<String> allowedLocations = LocationValidator.getAllowedLocations();
 		if (!allowedLocations.contains(location)) {
-			throw new IllegalArgumentException(ErrorMessages.INVALID_LOCATION);
+			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_LOCATION);
 		}
 		return true;
 	}
 
 	// Validation for social media links
-	public static boolean validateSocialMediaLinks(List<String> socialMediaLinks) throws IllegalArgumentException {
+	public static boolean validateSocialMediaLinks(List<String> socialMediaLinks) throws ArtistDetailsInvalidExceptions {
 		if (socialMediaLinks == null || socialMediaLinks.isEmpty()) {
-			throw new IllegalArgumentException("Social media links cannot be empty or null.");
+			throw new ArtistDetailsInvalidExceptions("Social media links cannot be empty or null.");
 		}
 
 		for (String link : socialMediaLinks) {
 			if (!isValidSocialMediaLink(link)) {
-				throw new IllegalArgumentException("Invalid social media link: " + link);
+				throw new ArtistDetailsInvalidExceptions("Invalid social media link: " + link);
 			}
 		}
 		return true;
 	}
 
 	// Validate social media link
-	private static boolean isValidSocialMediaLink(String link) throws IllegalArgumentException {
+	private static boolean isValidSocialMediaLink(String link) throws ArtistDetailsInvalidExceptions {
 		if (link == null || link.trim().isEmpty()) {
 			return false;
 		}
@@ -162,7 +163,7 @@ public class ArtitsValidator {
 	}
 
 	// Validate gender
-	public static boolean validateGender(gender genderOfArtist) throws IllegalArgumentException {
+	public static boolean validateGender(gender genderOfArtist) throws ArtistDetailsInvalidExceptions {
 		if (genderOfArtist == null) {
 			throw new IllegalArgumentException("Gender of artist is required");
 		}

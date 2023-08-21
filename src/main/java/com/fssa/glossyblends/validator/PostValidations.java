@@ -3,8 +3,6 @@ package com.fssa.glossyblends.validator;
 import java.util.regex.Pattern;
 
 import com.fssa.glossyblends.customexception.PostValueInvalidException;
-//import com.fssa.glossyblends.model.Artist;
-import com.fssa.glossyblends.errormessages.ErrorMessages;
 import com.fssa.glossyblends.errormessages.PostErrorMessages;
 import com.fssa.glossyblends.model.Post;
 
