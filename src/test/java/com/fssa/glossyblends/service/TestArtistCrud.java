@@ -29,7 +29,7 @@ class TestArtistCrud {
 		artist.setPassword("TestPassword123");
 
 
-		artist.setEmail("Maaai@gmail.com");
+		artist.setEmail("Madg@gmail.com");
 		artist.setPhonenNumber("1234567890");
 		artist.setYearsOfExperience(5);
 		artist.setAvailable(true);
@@ -83,7 +83,7 @@ class TestArtistCrud {
 			throws IllegalArgumentException, PostValueInvalidException, ServiceValueInvalidException, DatabaseConnectionException {
 
 		ArtistService artistservice = new ArtistService();
-		int artistIdToDelete = 70;
+		int artistIdToDelete = 72;
 		Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 
 		if (artistToDelete != null) {
