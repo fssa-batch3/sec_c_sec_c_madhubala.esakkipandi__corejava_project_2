@@ -26,7 +26,7 @@ class TestArtistCrud {
 		Artist artist = new Artist();
 		artist.setUsername("jallelaa");
 		artist.setPassword("TestPassword123");
-		artist.setEmail("jooithi.com");
+		artist.setEmail("lisfhsdfhjjb@gamil.com");
 		artist.setPhonenNumber("1234567890");
 		artist.setYearsOfExperience(5);
 		artist.setAvailable(true);
@@ -38,6 +38,8 @@ class TestArtistCrud {
 		Assertions.assertTrue(isAdded);
 	}
 
+	
+	
 	@Test
 	void UpdateArtistTestService() throws SQLException, ArtistDetailsExceptions, DAOException {
 
@@ -77,7 +79,7 @@ class TestArtistCrud {
 	void deleteArtistTestCase() throws ArtistDetailsExceptions, DAOException, SQLException {
 
 		ArtistService artistservice = new ArtistService();
-		int artistIdToDelete = 79;
+		int artistIdToDelete = 80;
 		Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 
 		if (artistToDelete != null) {
