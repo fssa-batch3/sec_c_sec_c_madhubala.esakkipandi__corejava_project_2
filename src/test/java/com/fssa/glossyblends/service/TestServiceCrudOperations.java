@@ -96,7 +96,7 @@ class TestServiceCrudOperations {
 	void testDeleteService() throws ServiceValueInvalidException, DAOException {
 		ServiceProviding serviceProviding = new ServiceProviding();
 
-		boolean deleted = serviceProviding.deleteServiceById(9, 71);
+		boolean deleted = serviceProviding.deleteServiceById(9, 70);
 
 		Assertions.assertTrue(deleted);
 	}

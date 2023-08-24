@@ -54,7 +54,7 @@ class TestPostCrud {
     void testDeletePostByID() throws SQLException, DAOException,PostValueInvalidException {
         PostServiceLayer serviceLayer = new PostServiceLayer();
         
-        int postIdToDelete = 80;
+        int postIdToDelete = 73;
         int artistId = 9;
 
         boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);
