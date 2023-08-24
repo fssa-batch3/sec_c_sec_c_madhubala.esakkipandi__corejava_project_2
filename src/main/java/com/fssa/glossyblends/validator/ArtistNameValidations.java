@@ -3,15 +3,15 @@ package com.fssa.glossyblends.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
-import com.fssa.glossyblends.errormessages.ServiceErrorMessges;
+import com.fssa.glossyblends.customexception.ArtistDetailsExceptions;
+import com.fssa.glossyblends.errormessages.ServiceErrors;
 
 public class ArtistNameValidations {
 	private ArtistNameValidations() {// default constructor for namevalidation with private access modifier
 
 	}
 
-	public static boolean validateName(String name) throws ArtistDetailsInvalidExceptions {
+	public static boolean validateName(String name) throws ArtistDetailsExceptions {
 
 		String serviceNameValidationPattern = "^[a-zA-Z\\s]+$";// pattern for name using regex
 
@@ -22,7 +22,7 @@ public class ArtistNameValidations {
 
 		if (!isValid) {// if not valid it will throw exception
 
-			throw new ArtistDetailsInvalidExceptions(ServiceErrorMessges.INVALID_SERVICE_NAME_PATTERN);
+			throw new ArtistDetailsExceptions(ServiceErrors.INVALID_SERVICE_NAME_PATTERN);
 
 		}
 		return true;// otherwise return true

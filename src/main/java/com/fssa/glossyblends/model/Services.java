@@ -16,6 +16,7 @@ public class Services {
 		this.id = id;
 	}
 
+	
 	public Services(int artistId, ServiceCategory category, String name, double cost, String sampleImage) {
 		this.category = category;
 		this.name = name;
@@ -68,4 +69,5 @@ public class Services {
 		this.artistId = artistId;
 	}
 
+	
 }

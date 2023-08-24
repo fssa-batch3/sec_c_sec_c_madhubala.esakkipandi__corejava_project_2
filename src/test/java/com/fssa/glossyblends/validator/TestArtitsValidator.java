@@ -13,17 +13,17 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
+import com.fssa.glossyblends.customexception.ArtistDetailsExceptions;
 import com.fssa.glossyblends.customexception.PostValueInvalidException;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 
-import com.fssa.glossyblends.errormessages.ErrorMessages;
-import com.fssa.glossyblends.errormessages.ScheduleErrorMessages;
-import com.fssa.glossyblends.errormessages.ServiceErrorMessges;
-import com.fssa.glossyblends.errormessages.PostErrorMessages;
+import com.fssa.glossyblends.errormessages.ArtistErrors;
+import com.fssa.glossyblends.errormessages.ScheduleErrors;
+import com.fssa.glossyblends.errormessages.ServiceErrors;
+import com.fssa.glossyblends.errormessages.PostErrors;
 
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.model.ServiceCategory;
@@ -36,9 +36,10 @@ import com.fssa.glossyblends.model.Schedule;
 
 class TestArtitsValidator {
 
+	
 //validTestcase for username
 	@Test
-	void testValidationOfUserNameValid() throws ArtistDetailsInvalidExceptions {
+	void testValidationOfUserNameValid() throws ArtistDetailsExceptions {
 		// Create an Artist object
 		Artist artist = new Artist();
 
@@ -51,7 +52,7 @@ class TestArtitsValidator {
 	}
 
 	@Test
-	void testValidationEmailValid() throws ArtistDetailsInvalidExceptions {
+	void testValidationEmailValid() throws ArtistDetailsExceptions {
 		// Create an Artist object
 		Artist ar = new Artist();
 
@@ -75,14 +76,14 @@ class TestArtitsValidator {
 			Assertions.assertTrue(ArtitsValidator.validateEmail(ar.getEmail()));
 			// If no exception is thrown, fail the test with an error message
 			Assertions.fail("It should throw an exception");
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Assert that the correct error message is returned in the exception
-			Assertions.assertEquals(ErrorMessages.INVALID_EMAIL_NULL, ex.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_EMAIL_NULL, ex.getMessage());
 		}
 	}
 
 	@Test
-	void testValidationEmailInValid()throws ArtistDetailsInvalidExceptions {
+	void testValidationEmailInValid() throws ArtistDetailsExceptions {
 		// Create an Artist object
 		Artist ar = new Artist();
 
@@ -94,15 +95,14 @@ class TestArtitsValidator {
 			ArtitsValidator.validateEmail(ar.getEmail());
 			// If no exception is thrown, fail the test with an error message
 			Assertions.fail("It should throw an exception");
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Assert that the correct error message is returned in the exception
-			Assertions.assertEquals(ErrorMessages.INVALID_EMAIL_FORMAT, ex.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_EMAIL_FORMAT, ex.getMessage());
 		}
 	}
 
 	@Test
-	void testValidateArtist_ValidArtist_ReturnsTrue()
-			throws ArtistDetailsInvalidExceptions {
+	void testValidateArtist_ValidArtist_ReturnsTrue() throws ArtistDetailsExceptions {
 		// Create an Artist object
 		Artist artist = new Artist();
 		// Set valid properties for the artist
@@ -122,20 +122,19 @@ class TestArtitsValidator {
 	}
 
 	@Test
-	void testValidateArtistWithNull()
-			throws ArtistDetailsInvalidExceptions {
+	void testValidateArtistWithNull() throws ArtistDetailsExceptions {
 		try {
 			Artist artist = null;
 			ArtitsValidator.validateArtist(artist);
 			Assertions.fail("Expected IllegalArgumentException was not thrown");
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Assert that the correct error message is returned in the exception
 			Assertions.assertEquals("Artist object is null", ex.getMessage());
 		}
 	}
 
 	@Test
-	void testValidateArtist_InvalidUsername_ThrowsIllegalArgumentException()throws ArtistDetailsInvalidExceptions{
+	void testValidateArtist_InvalidUsername_ThrowsIllegalArgumentException() throws ArtistDetailsExceptions {
 		try {
 			Artist artist = new Artist();
 			artist.setUsername(null); // Invalid username
@@ -143,15 +142,15 @@ class TestArtitsValidator {
 			// Attempt to validate the invalid username (should throw an exception)
 			ArtitsValidator.validateUsername(artist.getUsername());
 			Assertions.fail("IllegalArgumentException should be thrown for invalid username.");
-		} catch (ArtistDetailsInvalidExceptions e) {
+		} catch (ArtistDetailsExceptions e) {
 			// Assert that the correct error message is returned in the exception
-			Assertions.assertEquals(ErrorMessages.INVALID_USERNAME_NULL, e.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_USERNAME_NULL, e.getMessage());
 
 		}
 	}
 
 	@Test
-	void validUsername() throws ArtistDetailsInvalidExceptions {
+	void validUsername() throws ArtistDetailsExceptions {
 		Artist artist = new Artist();
 		artist.setUsername("Madhubala"); // Valid username
 
@@ -162,8 +161,7 @@ class TestArtitsValidator {
 	}
 
 	@Test
-	void testValidateArtist_InvalidPassword_ThrowsIllegalArgumentException()
-			 {
+	void testValidateArtist_InvalidPassword_ThrowsIllegalArgumentException() {
 		try {
 			Artist artist = new Artist();
 
@@ -172,9 +170,9 @@ class TestArtitsValidator {
 			// Attempt to validate the invalid password (should throw an exception)
 			ArtitsValidator.validatePassword(artist.getPassword());
 			Assertions.fail("IllegalArgumentException should be thrown for invalid password.");
-		} catch (ArtistDetailsInvalidExceptions e) {
+		} catch (ArtistDetailsExceptions e) {
 			// Assert that the correct error message is returned in the exception
-			Assertions.assertEquals(ErrorMessages.PASSWORD_NULL, e.getMessage());
+			Assertions.assertEquals(ArtistErrors.PASSWORD_NULL, e.getMessage());
 		}
 	}
 
@@ -189,15 +187,15 @@ class TestArtitsValidator {
 			ArtitsValidator.validateUsername(artist.getUsername());
 			Assertions.fail("The testcase failed for name validations");
 
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Assert that the correct error message is returned in the exception
-			Assertions.assertEquals(ServiceErrorMessges.INVALID_SERVICE_NAME_PATTERN, ex.getMessage());
+			Assertions.assertEquals(ServiceErrors.INVALID_SERVICE_NAME_PATTERN, ex.getMessage());
 		}
 	}
 
 	@Test
 	// Valid testcases for years of experience
-	void testValidateYearsOfExperienceValid() throws ArtistDetailsInvalidExceptions {
+	void testValidateYearsOfExperienceValid() throws ArtistDetailsExceptions {
 		Artist artist = new Artist();
 
 		int yearsOfExperience = 5;
@@ -225,15 +223,15 @@ class TestArtitsValidator {
 			ArtitsValidator.validateYearsOfExperience(artist.getYearsOfExperience());
 			Assertions.fail("Expected exception was not thrown.");
 
-		} catch (ArtistDetailsInvalidExceptions e) {
+		} catch (ArtistDetailsExceptions e) {
 			// Assert that the correct error message is returned in the exception
-			Assertions.assertEquals(ErrorMessages.INVALID_YEARS_OF_EXPERIENCE_NEGATIVE, e.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_YEARS_OF_EXPERIENCE_NEGATIVE, e.getMessage());
 		}
 	}
 
 	// Test case for valid phone number
 	@Test
-	void testValidatePhoneNumberValid() throws ArtistDetailsInvalidExceptions {
+	void testValidatePhoneNumberValid() throws ArtistDetailsExceptions {
 		// Create an Artist object with a valid phone number
 		Artist artist = new Artist();
 		artist.setPhonenNumber("12345678");
@@ -244,7 +242,7 @@ class TestArtitsValidator {
 
 	// Test case for invalid phone number format
 	@Test
-	void testValidatePhoneNumberInValid() throws ArtistDetailsInvalidExceptions {
+	void testValidatePhoneNumberInValid() throws ArtistDetailsExceptions {
 		try {
 			// Create an Artist object with an invalid phone number
 			Artist artist = new Artist();
@@ -255,9 +253,9 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("Expected exception was not thrown.");
-		} catch (ArtistDetailsInvalidExceptions e) {
+		} catch (ArtistDetailsExceptions e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_FORMAT, e.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_PHONE_NUMBER_FORMAT, e.getMessage());
 		}
 	}
 
@@ -274,15 +272,15 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("Expected exception was not thrown.");
-		} catch (ArtistDetailsInvalidExceptions e) {
+		} catch (ArtistDetailsExceptions e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_NULL, e.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_PHONE_NUMBER_NULL, e.getMessage());
 		}
 	}
 
 	// Test case for empty mobile number
 	@Test
-	void testValidatePhoneNumberEmpty() throws ArtistDetailsInvalidExceptions {
+	void testValidatePhoneNumberEmpty() throws ArtistDetailsExceptions {
 		// Create an Artist object with an empty phone number
 		Artist artist = new Artist();
 		artist.setPhonenNumber(" ");
@@ -293,9 +291,9 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("Expected exception was not thrown.");
-		} catch (ArtistDetailsInvalidExceptions e) {
+		} catch (ArtistDetailsExceptions e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_PHONE_NUMBER_NULL, e.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_PHONE_NUMBER_NULL, e.getMessage());
 		}
 	}
 
@@ -328,7 +326,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(PostErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
+			Assertions.assertEquals(PostErrors.INVALID_POST_TITLE_NULL, e.getMessage());
 		}
 	}
 
@@ -347,7 +345,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(PostErrorMessages.INVALID_POST_TITLE_NULL, e.getMessage());
+			Assertions.assertEquals(PostErrors.INVALID_POST_TITLE_NULL, e.getMessage());
 		}
 	}
 
@@ -366,7 +364,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(PostErrorMessages.INVALID_POST_DESCRIPTION_NULL, e.getMessage());
+			Assertions.assertEquals(PostErrors.INVALID_POST_DESCRIPTION_NULL, e.getMessage());
 		}
 	}
 
@@ -407,7 +405,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(PostErrorMessages.DESCRIPTION_LENGTH_FORMAT, e.getMessage());
+			Assertions.assertEquals(PostErrors.DESCRIPTION_LENGTH_FORMAT, e.getMessage());
 		}
 	}
 
@@ -437,7 +435,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(PostErrorMessages.INVALID_IMAGE_URL_NULL, e.getMessage());
+			Assertions.assertEquals(PostErrors.INVALID_IMAGE_URL_NULL, e.getMessage());
 		}
 	}
 
@@ -456,7 +454,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (PostValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(PostErrorMessages.INVALID_IMAGE_URL_FORMAT, e.getMessage());
+			Assertions.assertEquals(PostErrors.INVALID_IMAGE_URL_FORMAT, e.getMessage());
 		}
 	}
 
@@ -475,7 +473,7 @@ class TestArtitsValidator {
 
 	// Test case for validating a valid password
 	@Test
-	void testValidationOfPasswordValid() throws ArtistDetailsInvalidExceptions {
+	void testValidationOfPasswordValid() throws ArtistDetailsExceptions {
 		// Create an Artist object with a valid password
 		Artist artist = new Artist();
 		artist.setPassword("StrongPass123");
@@ -497,9 +495,9 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("The testcase failed for Password validations");
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.PASSWORD_NULL, ex.getMessage());
+			Assertions.assertEquals(ArtistErrors.PASSWORD_NULL, ex.getMessage());
 		}
 	}
 
@@ -516,15 +514,15 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("The testcase failed for Password validations");
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_PASSWORD_PATTERN, ex.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_PASSWORD_PATTERN, ex.getMessage());
 		}
 	}
 
 	// Test case for validating a valid location
 	@Test
-	void testValidationOfLocationValid() throws ArtistDetailsInvalidExceptions {
+	void testValidationOfLocationValid() throws ArtistDetailsExceptions {
 		// Create an Artist object with a valid location
 		Artist artist = new Artist();
 		artist.setLocation("chennai");
@@ -544,9 +542,9 @@ class TestArtitsValidator {
 		try {
 			// Validate the null location, expect an exception to be thrown
 			ArtitsValidator.validateLocation(artist.getLocation());
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_LOCATION_NULL, ex.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_LOCATION_NULL, ex.getMessage());
 		}
 	}
 
@@ -563,9 +561,9 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("The testcase failed for Location validations");
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_LOCATION, ex.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_LOCATION, ex.getMessage());
 		}
 	}
 
@@ -581,15 +579,15 @@ class TestArtitsValidator {
 
 			// If no exception is thrown, the test fails
 			Assertions.fail("Expected error message was not encountered. Test case failed");
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_LANGUAGE, ex.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_LANGUAGE, ex.getMessage());
 		}
 	}
 
 	// Test case for validating valid languages spoken
 	@Test
-	void ValidationOflanguageValid() throws ArtistDetailsInvalidExceptions {
+	void ValidationOflanguageValid() throws ArtistDetailsExceptions {
 		String language = "Tamil";
 		// Create an Artist object with a valid language
 		Artist artist = new Artist();
@@ -597,64 +595,6 @@ class TestArtitsValidator {
 
 		// Validate the language, expect a valid result
 		Assertions.assertTrue(ArtitsValidator.validateLanguagesSpoken(artist.getLanguagesSpoken()));
-	}
-
-	// Test case for validating valid social media links
-	@Test
-	void testValidSocialMediaLinks() throws ArtistDetailsInvalidExceptions {
-		Artist artist = new Artist();
-		// Create a list of valid social media links
-		List<String> validLinks = Arrays.asList("https://www.example.com", "http://www.example.com",
-				"https://twitter.com/user123", "http://facebook.com/page456");
-		artist.setSocialMediaLinks(validLinks);
-
-		// Validate the social media links, expect a valid result
-		Assertions.assertTrue((ArtitsValidator.validateSocialMediaLinks(artist.getSocialMediaLinks())));
-	}
-
-	// Test case for validating an empty list of social media links
-	@Test
-	void testEmptyList() {
-		List<String> emptyList = new ArrayList<String>();
-		try {
-			// Validate an empty list of social media links, expect an exception to be
-			// thrown
-			ArtitsValidator.validateSocialMediaLinks(emptyList);
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (ArtistDetailsInvalidExceptions e) {
-			// Check if the correct error message is provided
-			Assertions.assertEquals("Social media links cannot be empty or null.", e.getMessage());
-		}
-	}
-
-	// Test case for validating a null list of social media links
-	@Test
-	void testNullList() {
-		try {
-			Artist artist = new Artist();
-			artist.setSocialMediaLinks(null);
-			// Validate a null list of social media links, expect an exception to be thrown
-			ArtitsValidator.validateSocialMediaLinks(artist.getSocialMediaLinks());
-			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (ArtistDetailsInvalidExceptions e) {
-			// Check if the correct error message is provided
-			Assertions.assertEquals("Social media links cannot be empty or null.", e.getMessage());
-		}
-	}
-
-	// Test case for validating invalid social media links
-	@Test
-	void testInvalidLink() {
-		List<String> invalidLinks = Arrays.asList("www.example.com", "ftp://example.com", "https:/twitter.com/user123",
-				"http://facebook .com/page456");
-
-		try {
-			// Validate invalid social media links, expect an exception to be thrown
-			ArtitsValidator.validateSocialMediaLinks(invalidLinks);
-		} catch (ArtistDetailsInvalidExceptions e) {
-			// Check if the correct error message is provided
-			Assertions.assertEquals("Invalid social media link: www.example.com", e.getMessage());
-		}
 	}
 
 	// Test case for validating valid schedules
@@ -682,7 +622,7 @@ class TestArtitsValidator {
 
 	// Test case for validating a schedule with null event name
 	@Test
-	void testValidateScheduleNullEventName() throws ScheduleValueInvalidException, ArtistDetailsInvalidExceptions {
+	void testValidateScheduleNullEventName() throws ScheduleValueInvalidException, ArtistDetailsExceptions {
 		try {
 			Schedule invalidSchedule = new Schedule();
 
@@ -695,7 +635,7 @@ class TestArtitsValidator {
 		} catch (ScheduleValueInvalidException e) {
 			e.printStackTrace();
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ScheduleErrorMessages.INVALID_EVENT_NAME_NULL, e.getMessage());
+			Assertions.assertEquals(ScheduleErrors.INVALID_EVENT_NAME_NULL, e.getMessage());
 		}
 	}
 
@@ -713,7 +653,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ScheduleErrorMessages.INVALID_DATE_EVENT_PASSED, e.getMessage());
+			Assertions.assertEquals(ScheduleErrors.INVALID_DATE_EVENT_PASSED, e.getMessage());
 		}
 	}
 
@@ -731,7 +671,7 @@ class TestArtitsValidator {
 
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
-			Assertions.assertEquals(ScheduleErrorMessages.INVALID_TIME_OF_EVENT_NULL, e.getMessage());
+			Assertions.assertEquals(ScheduleErrors.INVALID_TIME_OF_EVENT_NULL, e.getMessage());
 		}
 	}
 
@@ -749,7 +689,7 @@ class TestArtitsValidator {
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
 		} catch (ScheduleValueInvalidException e) {
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ScheduleErrorMessages.INVALID_DATE_NULL, e.getMessage());
+			Assertions.assertEquals(ScheduleErrors.INVALID_DATE_NULL, e.getMessage());
 		}
 
 	}
@@ -764,7 +704,7 @@ class TestArtitsValidator {
 
 			// Validate the gender, expect no exception to be thrown
 			ArtitsValidator.validateGender(artist.getGenderOfArtist());
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// If an exception is unexpectedly thrown, the test fails
 			Assertions.fail("Unexpected IllegalArgumentException thrown: " + ex.getMessage());
 		}
@@ -781,7 +721,7 @@ class TestArtitsValidator {
 
 			// If the exception is not thrown, the test fails
 			Assertions.fail("Expected IllegalArgumentException was not thrown");
-		} catch (ArtistDetailsInvalidExceptions ex) {
+		} catch (ArtistDetailsExceptions ex) {
 			// Check if the correct error message is provided
 			Assertions.assertEquals("Gender of artist is required", ex.getMessage());
 		}
@@ -796,7 +736,7 @@ class TestArtitsValidator {
 
 			// If the exception is not thrown, the test fails
 			fail("Expected IllegalArgumentException was not thrown.");
-		} catch (ArtistDetailsInvalidExceptions e) {
+		} catch (ArtistDetailsExceptions e) {
 			// Check if the correct error message is provided
 			assertEquals("Artist object is null", e.getMessage());
 		}
@@ -809,7 +749,7 @@ class TestArtitsValidator {
 
 		try {
 			ArtitsValidator.validateGender(artist.getGenderOfArtist());
-		} catch (ArtistDetailsInvalidExceptions e) {
+		} catch (ArtistDetailsExceptions e) {
 			assertEquals("Gender of artist is required", e.getMessage());
 			return;
 		}
@@ -843,22 +783,9 @@ class TestArtitsValidator {
 		Assertions.assertTrue(result);
 	}
 
-	// Test cases for validateSocialMediaLinks
-	@Test
-	void testValidateSocialMediaLinks_ValidLinks_ReturnsTrue() throws ArtistDetailsInvalidExceptions {
-		// Create a list of valid social media links
-		List<String> validLinks = Arrays.asList("https://www.example.com", "http://www.example.com");
-
-		// Validate the list of social media links, expect a valid result
-		boolean result = ArtitsValidator.validateSocialMediaLinks(validLinks);
-
-		// Assert that the result is true
-		Assertions.assertTrue(result);
-	}
-
 	// Test cases for validateLocation
 	@Test
-	void testValidateLocation_ValidLocation_ReturnsTrue() throws ArtistDetailsInvalidExceptions {
+	void testValidateLocation_ValidLocation_ReturnsTrue() throws ArtistDetailsExceptions {
 		// Set a valid location
 		String validLocation = "chennai";
 
@@ -880,10 +807,12 @@ class TestArtitsValidator {
 
 			// If the exception is not thrown, the test fails
 			Assertions.fail("Expected IllegalArgumentException was not thrown.");
-		} catch (ArtistDetailsInvalidExceptions e) {
+		} catch (ArtistDetailsExceptions e) {
+
 			// Check if the correct error message is provided
-			Assertions.assertEquals(ErrorMessages.INVALID_LOCATION, e.getMessage());
+			Assertions.assertEquals(ArtistErrors.INVALID_LOCATION, e.getMessage());
 		}
+
 	}
 
 }

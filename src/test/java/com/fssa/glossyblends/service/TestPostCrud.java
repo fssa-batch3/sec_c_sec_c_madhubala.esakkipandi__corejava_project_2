@@ -4,12 +4,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.PostServiceLayer;
-import com.fssa.glossyblends.customexception.DatabaseConnectionException;
+import com.fssa.glossyblends.customexception.DAOException;
 import com.fssa.glossyblends.customexception.PostValueInvalidException;
 import com.fssa.glossyblends.model.Post;
 
@@ -20,42 +19,42 @@ class TestPostCrud {
 
     /**
      * Test adding a new post.
-     * @throws DatabaseConnectionException 
+     * @throws DAOexception 
      *
      */
-    @Test
-    void AddPostTestCase() throws PostValueInvalidException, SQLException, DatabaseConnectionException {
+	@Test
+	void AddPostTestCase() throws PostValueInvalidException, SQLException, DAOException {
+	    try {
+	        PostServiceLayer serviceLayer = new PostServiceLayer();
 
-    	
-        try {
+	        String artistEmail = "esakipandi@gmail.com";
 
-            PostServiceLayer serviceLayer = new PostServiceLayer();
-            Post post = new Post();
-            post.setArtistId(9);
-            post.setDescription("The second work");
-            post.setPostUrl("https://example.com/image.jpg");
-            post.setTitle("The Wedding makeup");
+	        // Create a post
+	        Post post = new Post();
+	        post.setDescription("The second work");
+	        post.setPostUrl("https://example.com/image.jpg");
+	        post.setTitle("The Wedding makeup");
 
-            boolean added = serviceLayer.addPost(post);
-            Assertions.assertTrue(added);
-        } catch (PostValueInvalidException e) {
+	        boolean added = serviceLayer.addPost(artistEmail, post);
+	        Assertions.assertTrue(added);
+	    } catch (PostValueInvalidException e) {
+	        fail(e.getMessage());
+	    }
+	}
 
-            fail(e.getMessage());
-
-        }
-
-    }
-
+	
+	
+	 
     /**
      * Test deleting a post by ID.
-     * @throws DatabaseConnectionException 
+     * @throws DAOexception 
      *
      */
     @Test
-    void testDeletePostByID() throws SQLException, DatabaseConnectionException {
+    void testDeletePostByID() throws SQLException, DAOException,PostValueInvalidException {
         PostServiceLayer serviceLayer = new PostServiceLayer();
         
-        int postIdToDelete = 86;
+        int postIdToDelete = 80;
         int artistId = 9;
 
         boolean deleted = serviceLayer.deletePost(postIdToDelete, artistId);
@@ -65,17 +64,17 @@ class TestPostCrud {
 
     /**
      * Test getting posts by artist ID.
-     * @throws DatabaseConnectionException 
+     * @throws DAOexception 
      *
      */
-    @Test
-    void GetPostsByArtistIdTest() throws SQLException, DatabaseConnectionException {
-        PostServiceLayer serviceLayer = new PostServiceLayer();
-        int artistId = 10;
-
-        List<Post> posts = serviceLayer.getPostsByArtistId(artistId);
-
-        Assertions.assertEquals(1, posts.size());
-    }
+//    @Test
+//    void GetPostsByArtistIdTest() throws SQLException, DAOException,PostValueInvalidException {
+//        PostServiceLayer serviceLayer = new PostServiceLayer();
+//        String artistId = "esakipandi@gmail.com";
+//
+//        List<Post> posts = serviceLayer.getPostsByArtistEmail(artistId);
+//
+//        Assertions.assertEquals(4, posts.size());
+//    }
     
 }

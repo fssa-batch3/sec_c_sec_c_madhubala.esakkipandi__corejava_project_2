@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.fssa.glossyblends.customexception.DatabaseConnectionException;
+import com.fssa.glossyblends.customexception.DAOException;
 import com.fssa.glossyblends.util.ConnectionUtil;
 /**
  * Data Access Object (DAO) for managing login data in the database.
@@ -19,7 +19,7 @@ public class ArtistLoginDAO {
     }
     
     // Validate login using email and password
-    public static boolean validateLogin(String email, String password) throws DatabaseConnectionException {
+    public static boolean validateLogin(String email, String password) throws DAOException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "SELECT COUNT(*) as count FROM artists WHERE email = ? AND password = ?")) {
@@ -41,7 +41,7 @@ public class ArtistLoginDAO {
     }
 
     // Validate if a user with the given email exists
-    public static boolean validateUserExists(String email) throws SQLException, DatabaseConnectionException {
+    public static boolean validateUserExists(String email) throws SQLException, DAOException {
         try (Connection connection = ConnectionUtil.getConnection()) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "SELECT COUNT(*) as count FROM artists WHERE email = ? ")) {

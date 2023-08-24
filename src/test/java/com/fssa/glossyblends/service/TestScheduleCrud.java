@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.ScheduleServiceLayer;
-import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
-import com.fssa.glossyblends.customexception.DatabaseConnectionException;
+import com.fssa.glossyblends.customexception.ArtistDetailsExceptions;
+import com.fssa.glossyblends.customexception.DAOException;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.model.Schedule;
 
@@ -21,51 +21,54 @@ class TestScheduleCrud {
 
     /**
      * Test adding a new schedule.
-     * @throws DatabaseConnectionException 
+     * @throws DAOexception 
      * @throws ArtistDetailsInvalidExceptions 
      *
      */
 	
-    @Test
-    void testAddSchedule() throws  SQLException, ScheduleValueInvalidException, DatabaseConnectionException, ArtistDetailsInvalidExceptions {
+	  @Test
+	    void testAddSchedule() throws SQLException, DAOException, ScheduleValueInvalidException, ArtistDetailsExceptions {
+	        Schedule schedule = new Schedule();
+	        schedule.setDate(LocalDate.of(2023, 8, 25)); 
+	        schedule.setTimeOfEvent(LocalDateTime.of(2023, 8, 25, 15, 30)); 
+	        schedule.setEventName("Sample Event");
 
-        ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
+	        String artistEmail = "esakipandi@gmail.com"; 
+	        
+	        ScheduleServiceLayer service = new ScheduleServiceLayer();
 
-        Schedule schedule = new Schedule();
-        schedule.setArtistId(7);
-        schedule.setDate(LocalDate.now());
-        schedule.setEventName("Event in Chennai");
-        schedule.setTimeOfEvent(LocalDateTime.now());
+	        boolean added = service.addSchedule(artistEmail, schedule);
 
-        boolean added = serviceOfSchedule.addSchedule(schedule);
-
-        System.out.println(added);
-        Assertions.assertTrue(added);
-    }
+	        Assertions.assertTrue(added);
+	    }
 
     /**
      * Test deleting a schedule.
-     * @throws DatabaseConnectionException 
+     * @throws DAOException 
      *
      */
     
     @Test
-    void testDeleteSchedule() throws SQLException, ScheduleValueInvalidException, DatabaseConnectionException {
+    void testDeleteSchedule() throws SQLException, ScheduleValueInvalidException, DAOException {
 
         ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 
-        boolean deleted = serviceOfSchedule.deleteSchedule(7, 75);
+        boolean deleted = serviceOfSchedule.deleteSchedule(9, 78);
 
         Assertions.assertTrue(deleted);
     }
 
+    
+    
+    
+    
     /**
      * Test reading a list of schedules by artist ID.
-     * @throws DatabaseConnectionException 
+     * @throws DAOexception 
      *
      */
     @Test
-    void testReadingListOfScehdule() throws ScheduleValueInvalidException, DatabaseConnectionException {
+    void testReadingListOfScehdule() throws ScheduleValueInvalidException, DAOException {
 
         ScheduleServiceLayer serviceOfSchedule = new ScheduleServiceLayer();
 

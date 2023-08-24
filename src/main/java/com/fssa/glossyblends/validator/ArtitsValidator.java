@@ -3,11 +3,11 @@ package com.fssa.glossyblends.validator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
+import com.fssa.glossyblends.customexception.ArtistDetailsExceptions;
 import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
-import com.fssa.glossyblends.errormessages.ErrorMessages;
-import com.fssa.glossyblends.errormessages.ScheduleErrorMessages;
+import com.fssa.glossyblends.errormessages.ArtistErrors;
+import com.fssa.glossyblends.errormessages.ScheduleErrors;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 import com.fssa.glossyblends.model.Schedule;
@@ -27,9 +27,9 @@ public class ArtitsValidator {
 	 * Validates an Artist object.
 	 *
 	 */
-	public static boolean validateArtist(Artist artist) throws ArtistDetailsInvalidExceptions {
+	public static boolean validateArtist(Artist artist) throws ArtistDetailsExceptions {
 		if (artist == null) {
-			throw new ArtistDetailsInvalidExceptions("Artist object is null");
+			throw new ArtistDetailsExceptions("Artist object is null");
 		}
 
 		validateUsername(artist.getUsername());
@@ -55,9 +55,9 @@ public class ArtitsValidator {
 	}
 
 	// Validations for a list of schedules
-	public static boolean validateschedule(List<Schedule> scheduleList) throws ScheduleValueInvalidException, ArtistDetailsInvalidExceptions {
+	public static boolean validateschedule(List<Schedule> scheduleList) throws ScheduleValueInvalidException, ArtistDetailsExceptions {
 		if (scheduleList == null || scheduleList.isEmpty()) {
-			throw new ScheduleValueInvalidException(ScheduleErrorMessages.SCHEDULE_NULL_INVALID);
+			throw new ScheduleValueInvalidException(ScheduleErrors.SCHEDULE_NULL_INVALID);
 		}
 
 		for (Schedule sch : scheduleList) {
@@ -67,9 +67,9 @@ public class ArtitsValidator {
 	}
 
 	// Validation for userName
-	public static boolean validateUsername(String username) throws ArtistDetailsInvalidExceptions {
+	public static boolean validateUsername(String username) throws ArtistDetailsExceptions {
 		if (username == null) {
-			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_USERNAME_NULL);
+			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_USERNAME_NULL);
 		}
 
 		ArtistNameValidations.validateName(username);
@@ -78,39 +78,39 @@ public class ArtitsValidator {
 	}
 
 	// Validation for password
-	public static boolean validatePassword(String password) throws ArtistDetailsInvalidExceptions {
+	public static boolean validatePassword(String password) throws ArtistDetailsExceptions {
 		PasswordValidations.validatePassword(password);
 		return true;
 	}
 
 	// Validation for email
-	public static boolean validateEmail(String email) throws ArtistDetailsInvalidExceptions {
+	public static boolean validateEmail(String email) throws ArtistDetailsExceptions {
 		if (email == null || email.trim().isEmpty()) {
-			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_EMAIL_NULL);
+			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_EMAIL_NULL);
 		}
 		EmailValidations.validateEmail(email);
 		return true;
 	}
 
 	// Validation for phoneNumber
-	public static boolean validatePhoneNumber(String phoneNumber) throws ArtistDetailsInvalidExceptions {
+	public static boolean validatePhoneNumber(String phoneNumber) throws ArtistDetailsExceptions {
 		if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
-			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_PHONE_NUMBER_NULL);
+			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_PHONE_NUMBER_NULL);
 		}
 		PhoneNumberValidations.validateNumber(phoneNumber);
 		return true;
 	}
 
 	// Validation of years of experience
-	public static boolean validateYearsOfExperience(int yearsOfExperience) throws ArtistDetailsInvalidExceptions {
+	public static boolean validateYearsOfExperience(int yearsOfExperience) throws ArtistDetailsExceptions {
 		if (yearsOfExperience <= 0) {
-			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_YEARS_OF_EXPERIENCE_NEGATIVE);
+			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_YEARS_OF_EXPERIENCE_NEGATIVE);
 		}
 		return true;
 	}
 
 	// Validation for availability
-	public static boolean validateIsAvailable(boolean isAvailable) throws ArtistDetailsInvalidExceptions {
+	public static boolean validateIsAvailable(boolean isAvailable) throws ArtistDetailsExceptions {
 		
 	
 	
@@ -118,54 +118,34 @@ public class ArtitsValidator {
 	}
 
 	// Validation for languagesSpoken
-	public static boolean validateLanguagesSpoken(String languageSpoken) throws ArtistDetailsInvalidExceptions {
+	public static boolean validateLanguagesSpoken(String languageSpoken) throws ArtistDetailsExceptions {
 		if (languageSpoken == null || languageSpoken.isEmpty()) {
-			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_LANGUAGE);
+			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_LANGUAGE);
 		}
 		return true;
 	}
 
 	
 	// Validation for location
-	public static boolean validateLocation(String location) throws ArtistDetailsInvalidExceptions {
+	public static boolean validateLocation(String location) throws ArtistDetailsExceptions {
 		if (location == null) {
-			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_LOCATION_NULL);
+			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_LOCATION_NULL);
 		}
 
 		List<String> allowedLocations = LocationValidator.getAllowedLocations();
 		if (!allowedLocations.contains(location)) {
-			throw new ArtistDetailsInvalidExceptions(ErrorMessages.INVALID_LOCATION);
+			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_LOCATION);
 		}
 		return true;
 	}
 
-	// Validation for social media links
-	public static boolean validateSocialMediaLinks(List<String> socialMediaLinks) throws ArtistDetailsInvalidExceptions {
-		if (socialMediaLinks == null || socialMediaLinks.isEmpty()) {
-			throw new ArtistDetailsInvalidExceptions("Social media links cannot be empty or null.");
-		}
-
-		for (String link : socialMediaLinks) {
-			if (!isValidSocialMediaLink(link)) {
-				throw new ArtistDetailsInvalidExceptions("Invalid social media link: " + link);
-			}
-		}
-		return true;
-	}
-
-	// Validate social media link
-	private static boolean isValidSocialMediaLink(String link) {
-		if (link == null || link.trim().isEmpty()) {
-			return false;
-		}
-		Pattern pattern = Pattern.compile("^https?://");
-		return pattern.matcher(link).find();
-	}
+	
+	
 
 	// Validate gender
-	public static boolean validateGender(gender genderOfArtist) throws ArtistDetailsInvalidExceptions {
+	public static boolean validateGender(gender genderOfArtist) throws ArtistDetailsExceptions {
 		if (genderOfArtist == null) {
-			throw new ArtistDetailsInvalidExceptions("Gender of artist is required");
+			throw new ArtistDetailsExceptions("Gender of artist is required");
 		}
 		return true;
 		

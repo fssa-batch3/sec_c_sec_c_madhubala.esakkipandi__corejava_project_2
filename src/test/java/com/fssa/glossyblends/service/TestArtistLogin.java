@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import com.fssa.glossyblends.artistservicelayer.ArtistLogin;
-import com.fssa.glossyblends.customexception.DatabaseConnectionException;
+import com.fssa.glossyblends.customexception.DAOException;
 import com.fssa.glossyblends.loginenum.LoginStatus;
 
 /**
@@ -15,12 +15,12 @@ class TestArtistLogin {
 
     /**
      * Test logging in with a valid user.
-     * @throws DatabaseConnectionException 
+     * @throws DAOexception 
      *
     */
 	
     @Test
-    void testValidUser() throws SQLException, DatabaseConnectionException {
+    void testValidUser() throws SQLException, DAOException {
         ArtistLogin artistLog = new ArtistLogin();
 
         LoginStatus isExists = artistLog.login("joo12@example.com", "TestPassword123");
@@ -30,10 +30,10 @@ class TestArtistLogin {
 
     /**
      * Test logging in with a valid user but incorrect password.
-     * @throws DatabaseConnectionException 
+     * @throws DAOexception 
      */
     @Test
-    void testValidUserWithInCorrectPassword() throws SQLException, DatabaseConnectionException {
+    void testValidUserWithInCorrectPassword() throws SQLException, DAOException {
         ArtistLogin artistLog = new ArtistLogin();
 
         LoginStatus isExists = artistLog.login("joo12@example.com", "TestPpassword123");
@@ -43,11 +43,11 @@ class TestArtistLogin {
 
     /**
      * Test logging in with an invalid user email.
-     * @throws DatabaseConnectionException 
+     * @throws DAOexception 
      *
      */
     @Test
-    void testValidUserWithInValidUserEmail() throws SQLException, DatabaseConnectionException {
+    void testValidUserWithInValidUserEmail() throws SQLException, DAOException {
         ArtistLogin artistLog = new ArtistLogin();
 
         LoginStatus isExists = artistLog.login("j@example.com", "TestPpassword123");

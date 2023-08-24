@@ -3,16 +3,18 @@ package com.fssa.glossyblends.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.ServiceProviding;
-import com.fssa.glossyblends.customexception.DatabaseConnectionException;
+import com.fssa.glossyblends.customexception.DAOException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.model.ServiceCategory;
 import com.fssa.glossyblends.model.Services;
+import com.fssa.glossyblends.model.*;
 
 /**
  * Unit tests for CRUD (Create, Read, Update, Delete) operations on services.
@@ -21,31 +23,34 @@ class TestServiceCrudOperations {
 
 	/**
 	 * Test adding a new service.
-	 * @throws DatabaseConnectionException 
+	 * 
+	 * @throws DAOException
+	 * @throws SQLException
 	 *
 	 */
 	@Test
-	void testAddService() throws ServiceValueInvalidException, DatabaseConnectionException {
+	void testAddService() throws ServiceValueInvalidException, DAOException, SQLException {
 		ServiceProviding serviceProviding = new ServiceProviding();
-
+		String email="esakipandi@gmail.com";
 		Services service = new Services();
-		service.setArtistId(9);
 		service.setCategory(ServiceCategory.HAIR_STYLE);
 		service.setCost(90000);
 		service.setName("Haircutting");
 		service.setSampleImage("https://example.com/haircut.jpg");
 
-		boolean added = serviceProviding.addService(service);
+		boolean added = serviceProviding.addService(email, service);
 
 		assertTrue(added, "Service should have been added successfully.");
 	}
 
+	
 	/**
 	 * Test getting services by artist ID.
-	 * @throws DatabaseConnectionException 
+	 * 
+	 * @throws DAOexception
 	 */
 	@Test
-	void testGetServicesByArtistId() throws DatabaseConnectionException {
+	void testGetServicesByArtistId() throws DAOException {
 		ServiceProviding serviceProviding = new ServiceProviding();
 		List<Services> serviceList = serviceProviding.getServicesByArtistId(12);
 
@@ -58,14 +63,14 @@ class TestServiceCrudOperations {
 
 	/**
 	 * Test updating an existing service.
-	 * @throws DatabaseConnectionException 
+	 * 
+	 * @throws DAOexception
 	 */
 	@Test
-	void testUpdateService() throws DatabaseConnectionException {
+	void testUpdateService() throws DAOException {
 		try {
 			ServiceProviding serviceProviding = new ServiceProviding();
 
-			Services serviceToUpdate = serviceProviding.getServiceById(3, 12);
 
 			Services updatedService = serviceProviding.getServiceById(3, 12);
 
@@ -83,24 +88,26 @@ class TestServiceCrudOperations {
 
 	/**
 	 * Test deleting a service.
-	 * @throws DatabaseConnectionException 
+	 * 
+	 * @throws DAOexception
 	 *
 	 */
 	@Test
-	void testDeleteService() throws ServiceValueInvalidException, DatabaseConnectionException {
+	void testDeleteService() throws ServiceValueInvalidException, DAOException {
 		ServiceProviding serviceProviding = new ServiceProviding();
 
-		boolean deleted = serviceProviding.deleteServiceById(9, 75);
+		boolean deleted = serviceProviding.deleteServiceById(9, 71);
 
 		Assertions.assertTrue(deleted);
 	}
 
 	/**
 	 * Test updating a service with invalid values.
-	 * @throws DatabaseConnectionException 
+	 * 
+	 * @throws DAOexception
 	 */
 	@Test
-	void testUpdateServiceWithInvalidValues() throws DatabaseConnectionException {
+	void testUpdateServiceWithInvalidValues() throws DAOException {
 
 		ServiceProviding serviceProviding = new ServiceProviding();
 
@@ -110,9 +117,6 @@ class TestServiceCrudOperations {
 		invalidService.setName(null);
 		invalidService.setCost(-1);
 
-		
-		
-		
 		try {
 			boolean updated = serviceProviding.updateService(invalidService);
 

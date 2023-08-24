@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.glossyblends.artistservicelayer.ArtistService;
-import com.fssa.glossyblends.customexception.ArtistDetailsInvalidExceptions;
-import com.fssa.glossyblends.customexception.DatabaseConnectionException;
-import com.fssa.glossyblends.customexception.PostValueInvalidException;
-import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
+import com.fssa.glossyblends.customexception.ArtistDetailsExceptions;
+import com.fssa.glossyblends.customexception.DAOException;
 import com.fssa.glossyblends.dao.ArtistDAO;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
@@ -22,19 +20,16 @@ import com.fssa.glossyblends.model.Post;
 class TestArtistCrud {
 
 	@Test
-	void testAddArtist_ValidInput() throws ArtistDetailsInvalidExceptions, DatabaseConnectionException {
+	void testAddArtist_ValidInput() throws ArtistDetailsExceptions, DAOException, SQLException {
 		ArtistService artistservice = new ArtistService();
 
 		Artist artist = new Artist();
 		artist.setUsername("jallelaa");
 		artist.setPassword("TestPassword123");
-
-
-		artist.setEmail("esakipandi@gmail.com");
+		artist.setEmail("steffydomS@gmail.com");
 		artist.setPhonenNumber("1234567890");
 		artist.setYearsOfExperience(5);
 		artist.setAvailable(true);
-		
 		artist.setLanguagesSpoken("English");
 		artist.setLocation("chennai");
 		artist.setGenderOfArtist(Artist.gender.FEMALE);
@@ -44,8 +39,7 @@ class TestArtistCrud {
 	}
 
 	@Test
-	void UpdateArtistTestService()
-			throws SQLException, ArtistDetailsInvalidExceptions, PostValueInvalidException, ServiceValueInvalidException, DatabaseConnectionException {
+	void UpdateArtistTestService() throws SQLException, ArtistDetailsExceptions, DAOException {
 
 		ArtistService artistService = new ArtistService();
 
@@ -80,20 +74,18 @@ class TestArtistCrud {
 	}
 
 	@Test
-	void deleteArtistTestCase()
-			throws ArtistDetailsInvalidExceptions, PostValueInvalidException, ServiceValueInvalidException, DatabaseConnectionException {
+	void deleteArtistTestCase() throws ArtistDetailsExceptions, DAOException, SQLException {
 
 		ArtistService artistservice = new ArtistService();
-		int artistIdToDelete = 74;
+		int artistIdToDelete = 75;
 		Artist artistToDelete = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 
 		if (artistToDelete != null) {
-			
+
 			// Delete the artist
 			boolean isDeleted = artistservice.deleteArtist(artistToDelete);
 			Assertions.assertTrue(isDeleted);
 
-			
 			// Verify that the artist has been deleted
 			Artist deletedArtist = ArtistDAO.getArtistById(String.valueOf(artistIdToDelete));
 			Assertions.assertNull(deletedArtist, "Deleted artist should not be found.");
@@ -103,7 +95,7 @@ class TestArtistCrud {
 	}
 
 	@Test
-	void testGetPostsByArtistId_ValidInput() throws DatabaseConnectionException {
+	void testGetPostsByArtistId_ValidInput() throws DAOException {
 		try {
 			ArtistService artistservice = new ArtistService();
 			int artistId = 10;
@@ -116,14 +108,14 @@ class TestArtistCrud {
 			for (Post post : posts) {
 				System.out.println("Post Title: " + post.getTitle());
 			}
+
 		} catch (SQLException e) {
 			Assertions.fail("Exception thrown: " + e.getMessage());
 		}
 	}
 
-	
 	@Test
-	void testGetPostsByArtistId_InvalidArtistId() throws DatabaseConnectionException {
+	void testGetPostsByArtistId_InvalidArtistId() throws DAOException {
 		try {
 			ArtistService artistservice = new ArtistService();
 			int invalidArtistId = -1;
@@ -136,6 +128,5 @@ class TestArtistCrud {
 			Assertions.fail("Exception thrown: " + e.getMessage());
 		}
 
-		
 	}
 }

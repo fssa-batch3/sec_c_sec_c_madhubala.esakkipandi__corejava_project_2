@@ -7,7 +7,7 @@ package com.fssa.glossyblends.errormessages;
  * The class is designed to provide constant error message strings that can be used
  * throughout the application's codebase.
  */
-public class PostErrorMessages {
+public class PostErrors {
 
     /**
      * Error message indicating that a post's description cannot be null.

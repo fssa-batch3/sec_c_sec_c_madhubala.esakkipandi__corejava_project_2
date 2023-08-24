@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Artist {
 	private int artistId;
-
 	private String username;
 	private String password;
 	private String email;
@@ -12,12 +11,13 @@ public class Artist {
 	private int yearsOfExperience;
 	private boolean isAvailable;
 	private gender genderOfArtist;
-	private List<String> socialMediaLinks;
 	private String languagesSpoken;
 	private String location;
+
 	private List<Post> posts;
 	private List<Services> service;
 	private List<Schedule> schedule;
+
 	public List<Post> getPosts() {
 		return posts;
 	}
@@ -34,14 +34,33 @@ public class Artist {
 
 	}
 
+	public Artist(int artistId, String username, String password, String email, String phoneNumber,
+			int yearsOfExperience, boolean isAvailable, gender genderOfArtist, String languagesSpoken,
+			String location) {
+		this.artistId = artistId;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.yearsOfExperience = yearsOfExperience;
+		this.isAvailable = isAvailable;
+		this.genderOfArtist = genderOfArtist;
+		this.languagesSpoken = languagesSpoken;
+		this.location = location;
+	}
+
+	public Artist() {
+
+	}
+
 	// getter method for Artist id
 	public int getArtistId() {
 		return artistId;
 	}
 
 	// setter method for artist id
-	public void setArtistId(int string) {
-		this.artistId = string;
+	public void setArtistId(int artistId) {
+		this.artistId = artistId;
 	}
 
 	// artist name
@@ -117,16 +136,6 @@ public class Artist {
 	}
 
 	// getter method for average rating for artist
-
-	// getter method social media link
-	public List<String> getSocialMediaLinks() {
-		return socialMediaLinks;
-	}
-
-	// setter method for socialmedialink
-	public void setSocialMediaLinks(List<String> socialMediaLinks) {
-		this.socialMediaLinks = socialMediaLinks;
-	}
 
 	// getter method for languages spoken
 

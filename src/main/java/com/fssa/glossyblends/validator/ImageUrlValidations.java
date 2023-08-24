@@ -3,8 +3,8 @@ package com.fssa.glossyblends.validator;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import com.fssa.glossyblends.errormessages.ErrorMessages;
-import com.fssa.glossyblends.errormessages.PostErrorMessages;
+import com.fssa.glossyblends.errormessages.ArtistErrors;
+import com.fssa.glossyblends.errormessages.PostErrors;
 
 /**
  * Validation utility class for image URL validation.
@@ -21,7 +21,7 @@ public class ImageUrlValidations {
 	 */
 	public static boolean validateImageUrl(String imageUrl) throws IllegalArgumentException {
 		if (imageUrl == null) {
-			throw new IllegalArgumentException(PostErrorMessages.INVALID_IMAGE_URL_NULL);
+			throw new IllegalArgumentException(PostErrors.INVALID_IMAGE_URL_NULL);
 		}
 
 		
@@ -33,7 +33,7 @@ public class ImageUrlValidations {
 		boolean isValid = urlMatcher.matches();
 
 		if (!isValid) {
-			throw new IllegalArgumentException(PostErrorMessages.INVALID_IMAGE_URL_FORMAT);
+			throw new IllegalArgumentException(PostErrors.INVALID_IMAGE_URL_FORMAT);
 		}
 
 		return true;
