@@ -11,14 +11,13 @@ import com.fssa.glossyblends.errormessages.ScheduleErrors;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
 import com.fssa.glossyblends.model.Schedule;
-import com.fssa.glossyblends.model.Services;
+import com.fssa.glossyblends.model.Service;
 
 /**
  * Validation utility class for validating Artist objects and associated data.
  */
 public class ArtitsValidator {
 
-	
 	// Private constructor to prevent instantiation
 	private ArtitsValidator() {
 	}
@@ -46,16 +45,17 @@ public class ArtitsValidator {
 	}
 
 	// Validations for a list of provided services
-	public static boolean validateService(List<Services> providingServices)
+	public static boolean validateService(List<Service> providingServices)
 			throws IllegalArgumentException, ServiceValueInvalidException {
-		for (Services service : providingServices) {
+		for (Service service : providingServices) {
 			ServiceValidations.validateService(service);
 		}
 		return true;
 	}
 
 	// Validations for a list of schedules
-	public static boolean validateschedule(List<Schedule> scheduleList) throws ScheduleValueInvalidException, ArtistDetailsExceptions {
+	public static boolean validateschedule(List<Schedule> scheduleList)
+			throws ScheduleValueInvalidException, ArtistDetailsExceptions {
 		if (scheduleList == null || scheduleList.isEmpty()) {
 			throw new ScheduleValueInvalidException(ScheduleErrors.SCHEDULE_NULL_INVALID);
 		}
@@ -93,17 +93,15 @@ public class ArtitsValidator {
 	}
 
 	// Validation for phoneNumber
-	public static boolean validatePhoneNumber(String phoneNumber) throws ArtistDetailsExceptions {
-		if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
-			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_PHONE_NUMBER_NULL);
-		}
-		PhoneNumberValidations.validateNumber(phoneNumber);
+	public static boolean validatePhoneNumber(long phoneNumber) throws ArtistDetailsExceptions {
+
+		PhoneNumberValidations.validatePhoneNumber(phoneNumber);
 		return true;
 	}
 
 	// Validation of years of experience
 	public static boolean validateYearsOfExperience(int yearsOfExperience) throws ArtistDetailsExceptions {
-		if (yearsOfExperience <= 0) {
+		if (yearsOfExperience < 0) {
 			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_YEARS_OF_EXPERIENCE_NEGATIVE);
 		}
 		return true;
@@ -111,9 +109,7 @@ public class ArtitsValidator {
 
 	// Validation for availability
 	public static boolean validateIsAvailable(boolean isAvailable) throws ArtistDetailsExceptions {
-		
-	
-	
+
 		return true;
 	}
 
@@ -125,7 +121,6 @@ public class ArtitsValidator {
 		return true;
 	}
 
-	
 	// Validation for location
 	public static boolean validateLocation(String location) throws ArtistDetailsExceptions {
 		if (location == null) {
@@ -139,16 +134,13 @@ public class ArtitsValidator {
 		return true;
 	}
 
-	
-	
-
 	// Validate gender
 	public static boolean validateGender(gender genderOfArtist) throws ArtistDetailsExceptions {
 		if (genderOfArtist == null) {
 			throw new ArtistDetailsExceptions("Gender of artist is required");
 		}
 		return true;
-		
+
 	}
-	
+
 }

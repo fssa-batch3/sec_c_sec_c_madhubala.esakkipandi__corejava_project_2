@@ -24,8 +24,6 @@ public class ImageUrlValidations {
 			throw new IllegalArgumentException(PostErrors.INVALID_IMAGE_URL_NULL);
 		}
 
-		
-		
 		// Regular expression pattern to match valid image URLs
 		String imagePattern = "\\b(?:https?|ftp)://\\S+\\.(?:jpg|jpeg|png|gif|bmp)\\b";
 		Pattern pattern = Pattern.compile(imagePattern);

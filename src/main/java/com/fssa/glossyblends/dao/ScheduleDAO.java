@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 
-import com.fssa.glossyblends.dao.*;
 import com.fssa.glossyblends.customexception.DAOException;
-import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Schedule;
 import com.fssa.glossyblends.util.ConnectionUtil;
 
@@ -27,44 +25,52 @@ public class ScheduleDAO {
 	}
 
 	// Add a new schedule to the database
-	public static boolean addSchedule(String  email, Schedule listOfSchedule)
-			throws SQLException, DAOException {
+	/**
+	 * Adds a schedule for an artist with the provided email.
+	 *
+	 * @param email          The email of the artist.
+	 * @param listOfSchedule The schedule to be added.
+	 * @return True if the schedule was successfully added, otherwise false.
+	 * @throws SQLException If an SQL exception occurs during database interaction.
+	 * @throws DAOException If an exception specific to the data access layer
+	 *                      occurs.
+	 */
+	public static boolean addSchedule(String email, Schedule listOfSchedule) throws SQLException, DAOException {
 		String query = "INSERT INTO artist_schedule (artist_id, event_date, event_name, event_time) VALUES (?, ?, ?, ?)";
 
-		int artistId=PostDAO.getIdByArtistEmail(email);
-		
+		int artistId = PostDAO.getIdByArtistEmail(email);
+
 		try (Connection connection = ConnectionUtil.getConnection()) {
 			try (PreparedStatement smt = connection.prepareStatement(query)) {
+				smt.setInt(1, artistId);
 
-				smt.setInt(1,artistId);
 				LocalDate eventDate = listOfSchedule.getDate();
-				if (eventDate != null) {
-					smt.setDate(2, java.sql.Date.valueOf(eventDate));
-				} else {
-					throw new IllegalArgumentException("Event date cannot be null.");
-				}
 
+				smt.setDate(2, java.sql.Date.valueOf(eventDate));
 				LocalDateTime timeOfEvent = listOfSchedule.getTimeOfEvent();
-				if (timeOfEvent != null) {
-					Timestamp sqlTimestampOfEvent = Timestamp.valueOf(timeOfEvent);
-					smt.setTimestamp(4, sqlTimestampOfEvent);
-				}
-
+				Timestamp sqlTimestampOfEvent = Timestamp.valueOf(timeOfEvent);
+				smt.setTimestamp(4, sqlTimestampOfEvent);
 				smt.setString(3, listOfSchedule.getEventName());
 
 				int rowsAffected = smt.executeUpdate();
 
-				if (rowsAffected > 0) {
-					return true;
-				}
+				return rowsAffected > 0;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DAOException("Error adding schedule to the database.", e);
 		}
-		return false;
 	}
 
-	// Delete a schedule by artist ID and schedule ID
+	/**
+	 * Deletes a schedule with the specified artist ID and schedule ID.
+	 *
+	 * @param artistId The ID of the artist.
+	 * @param id       The ID of the schedule.
+	 * @return True if the schedule was successfully deleted, otherwise false.
+	 * @throws SQLException If an SQL exception occurs during database interaction.
+	 * @throws DAOException If an exception specific to the data access layer
+	 *                      occurs.
+	 */
 	public static boolean deleteSchedule(int artistId, int id) throws SQLException, DAOException {
 		String query = "DELETE FROM artist_schedule WHERE artist_id = ? AND id = ?";
 
@@ -75,17 +81,21 @@ public class ScheduleDAO {
 
 				int rowsAffected = smt.executeUpdate();
 
-				if (rowsAffected > 0) {
-					return true;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+				return rowsAffected > 0;
 			}
-			return false;
+		} catch (SQLException e) {
+			throw new DAOException("Error deleting schedule from the database.", e);
 		}
 	}
 
-	// Get schedules by artist ID
+	/**
+	 * Retrieves a list of schedules associated with the artist ID.
+	 *
+	 * @param artistId The ID of the artist.
+	 * @return A list of schedules associated with the artist.
+	 * @throws DAOException If an exception specific to the data access layer
+	 *                      occurs.
+	 */
 	public static List<Schedule> getSchedulesByArtistId(int artistId) throws DAOException {
 		List<Schedule> schedulesList = new ArrayList<>();
 
@@ -114,4 +124,5 @@ public class ScheduleDAO {
 
 		return schedulesList;
 	}
+
 }

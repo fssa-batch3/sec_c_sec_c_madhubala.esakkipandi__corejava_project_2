@@ -2,47 +2,30 @@
 Create database Glossy_Blends_Artist;
 
 USE Glossy_Blends_Artist;
+SELECT * FROM madhubala_esakkipandi_corejava_project.artists;
 
+USE madhubala_esakkipandi_corejava_project;
 CREATE TABLE artists (
     artist_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    phone_number VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,  
+    phone_number BIGINT NOT NULL,
     years_of_experience INT NOT NULL,
     is_available BOOLEAN NOT NULL,
     location VARCHAR(100) NOT NULL,
     languages_spoken VARCHAR(100) NOT NULL,
-    genderOfArtist ENUM('FEMALE', 'MALE', 'TRANSGENDER'),
-    averageRating DECIMAL(5, 2)
+    genderOfArtist ENUM('FEMALE', 'MALE', 'TRANSGENDER')
 );
 
-
-
-
-
-
-CREATE TABLE artist_schedule (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    artist_id INT,
-    event_date DATE,
-    event_name VARCHAR(100),
-    event_time DATETIME,
-    FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
-);
-
-USE Glossy_Blends_Artist;
-
-Select * from artist_schedule;
 
 
 CREATE TABLE artist_posts (
     id INT PRIMARY KEY AUTO_INCREMENT,
     artist_id INT,
-    post_id VARCHAR(50),
-    title VARCHAR(100),
-    description VARCHAR(255),
-    post_url VARCHAR(255),
+    title VARCHAR(100) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    post_url VARCHAR(255) NOT NULL,
     FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
 );
 
@@ -52,11 +35,72 @@ CREATE TABLE artist_services (
     id INT PRIMARY KEY AUTO_INCREMENT,
     artist_id INT,
     category ENUM('HAIR_STYLE', 'SAREE_DRAPPING', 'MAKEUP', 'MEHANDI', 'OTHERS'),
-    name VARCHAR(100),
-    cost DECIMAL(10, 2),
-    sample_image VARCHAR(255),
+    name VARCHAR(100) NOT NULL,
+    cost DECIMAL(10, 2) NOT NULL,
+    sample_image VARCHAR(255) NOT NULL,
     FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
 );
+
+
+
+CREATE TABLE artist_schedule (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    artist_id INT,
+    event_date DATE NOT NULL,
+    event_name VARCHAR(100) NOT NULL,
+    event_time DATETIME NOT NULL,
+    FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 USE Glossy_Blends_Artist;

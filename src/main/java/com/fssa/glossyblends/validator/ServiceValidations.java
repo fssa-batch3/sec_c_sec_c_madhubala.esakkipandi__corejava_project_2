@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.errormessages.ServiceErrors;
 import com.fssa.glossyblends.model.ServiceCategory;
-import com.fssa.glossyblends.model.Services;
+import com.fssa.glossyblends.model.Service;
 
 /**
  * Validation utility class for services.
@@ -21,7 +21,7 @@ public class ServiceValidations {
 	 * Validates the given service object.
 	 *
 	 */
-	public static boolean validateService(Services service) throws ServiceValueInvalidException {
+	public static boolean validateService(Service service) throws ServiceValueInvalidException {
 		if (service == null) {
 			throw new ServiceValueInvalidException(ServiceErrors.INVALID_SERVICE_OBJECT_NULL);
 		} else {
@@ -33,6 +33,7 @@ public class ServiceValidations {
 		return true;
 	}
 
+	
 	private static boolean validateCategory(ServiceCategory category) throws ServiceValueInvalidException {
 		if (category == null) {
 			throw new ServiceValueInvalidException();

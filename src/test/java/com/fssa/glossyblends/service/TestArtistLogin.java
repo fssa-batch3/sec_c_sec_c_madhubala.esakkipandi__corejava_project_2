@@ -4,9 +4,10 @@ import java.sql.SQLException;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import com.fssa.glossyblends.artistservicelayer.ArtistLogin;
+
 import com.fssa.glossyblends.customexception.DAOException;
 import com.fssa.glossyblends.loginenum.LoginStatus;
+import com.fssa.glossyblends.service.ArtistLogin;
 
 /**
  * Unit tests for artist login functionality.

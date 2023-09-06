@@ -54,10 +54,8 @@ CREATE TABLE artist_services (
     FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
 );
 
--- Display the contents of the artist_services table
 SELECT * FROM artist_services;
 
--- Create the artist_reviews table to store artist reviews
 CREATE TABLE artist_reviews (
     id INT PRIMARY KEY AUTO_INCREMENT,
     artist_id INT,

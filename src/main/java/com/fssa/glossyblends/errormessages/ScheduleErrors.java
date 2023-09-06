@@ -14,7 +14,6 @@ public class ScheduleErrors {
      */
 	
 	
-	
     public static final String INVALID_EVENT_NAME_NULL = "Event name is null";
 
     /**

@@ -18,6 +18,7 @@ public class ArtistLoginDAO {
         
     }
     
+    
     // Validate login using email and password
     public static boolean validateLogin(String email, String password) throws DAOException {
         try (Connection connection = ConnectionUtil.getConnection()) {

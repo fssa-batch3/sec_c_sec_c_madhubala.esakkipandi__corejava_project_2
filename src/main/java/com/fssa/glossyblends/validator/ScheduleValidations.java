@@ -35,6 +35,7 @@ public class ScheduleValidations {
 		return true;
 	}
 
+	
 	public static boolean validateDate(LocalDate date) throws ScheduleValueInvalidException {
 		if (date == null) {
 			throw new ScheduleValueInvalidException(ScheduleErrors.INVALID_DATE_NULL);

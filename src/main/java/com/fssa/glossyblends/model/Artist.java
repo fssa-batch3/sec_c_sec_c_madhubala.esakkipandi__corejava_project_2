@@ -7,15 +7,15 @@ public class Artist {
 	private String username;
 	private String password;
 	private String email;
-	private String phoneNumber;
+	private long phoneNumber;
 	private int yearsOfExperience;
 	private boolean isAvailable;
 	private gender genderOfArtist;
 	private String languagesSpoken;
 	private String location;
-
+ private String imageurl;
 	private List<Post> posts;
-	private List<Services> service;
+	private List<Service> service;
 	private List<Schedule> schedule;
 
 	public List<Post> getPosts() {
@@ -34,21 +34,7 @@ public class Artist {
 
 	}
 
-	public Artist(int artistId, String username, String password, String email, String phoneNumber,
-			int yearsOfExperience, boolean isAvailable, gender genderOfArtist, String languagesSpoken,
-			String location) {
-		this.artistId = artistId;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.yearsOfExperience = yearsOfExperience;
-		this.isAvailable = isAvailable;
-		this.genderOfArtist = genderOfArtist;
-		this.languagesSpoken = languagesSpoken;
-		this.location = location;
-	}
-
+	
 	public Artist() {
 
 	}
@@ -96,12 +82,12 @@ public class Artist {
 	}
 
 	// getter method for artist mobile number
-	public String getPhonenNumber() {
+	public long getPhonenNumber() {
 		return phoneNumber;
 	}
 
 	// setter method for for mobile number
-	public void setPhonenNumber(String phoneNumber) {
+	public void setPhonenNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -159,11 +145,11 @@ public class Artist {
 		this.genderOfArtist = genderOfArtist;
 	}
 
-	public List<Services> getService() {
+	public List<Service> getService() {
 		return service;
 	}
 
-	public void setService(List<Services> service) {
+	public void setService(List<Service> service) {
 		this.service = service;
 	}
 
@@ -173,6 +159,14 @@ public class Artist {
 
 	public void setSchedule(List<Schedule> schedule) {
 		this.schedule = schedule;
+	}
+
+	public String getImageurl() {
+		return imageurl;
+	}
+
+	public void setImageurl(String imageurl) {
+		this.imageurl = imageurl;
 	}
 
 }

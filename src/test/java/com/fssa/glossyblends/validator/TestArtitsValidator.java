@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +18,7 @@ import com.fssa.glossyblends.customexception.ScheduleValueInvalidException;
 import com.fssa.glossyblends.customexception.ServiceValueInvalidException;
 import com.fssa.glossyblends.model.Artist;
 import com.fssa.glossyblends.model.Artist.gender;
-
+import com.fssa.glossyblends.model.*;
 import com.fssa.glossyblends.errormessages.ArtistErrors;
 import com.fssa.glossyblends.errormessages.ScheduleErrors;
 import com.fssa.glossyblends.errormessages.ServiceErrors;
@@ -27,7 +26,6 @@ import com.fssa.glossyblends.errormessages.PostErrors;
 
 import com.fssa.glossyblends.model.Post;
 import com.fssa.glossyblends.model.ServiceCategory;
-import com.fssa.glossyblends.model.Services;
 import com.fssa.glossyblends.model.Schedule;
 
 /**
@@ -36,7 +34,6 @@ import com.fssa.glossyblends.model.Schedule;
 
 class TestArtitsValidator {
 
-	
 //validTestcase for username
 	@Test
 	void testValidationOfUserNameValid() throws ArtistDetailsExceptions {
@@ -109,7 +106,7 @@ class TestArtitsValidator {
 		artist.setUsername("TestArtist");
 		artist.setPassword("TestPassword123");
 		artist.setEmail("test@example.com");
-		artist.setPhonenNumber("1234567890");
+		artist.setPhonenNumber(1234567880);
 		artist.setYearsOfExperience(5);
 		artist.setAvailable(true);
 		artist.setLanguagesSpoken("English");
@@ -234,8 +231,8 @@ class TestArtitsValidator {
 	void testValidatePhoneNumberValid() throws ArtistDetailsExceptions {
 		// Create an Artist object with a valid phone number
 		Artist artist = new Artist();
-		artist.setPhonenNumber("12345678");
-
+		long num = 936672105;
+		artist.setPhonenNumber(num);
 		// Validate the phone number, expect a valid result
 		Assertions.assertTrue(ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber()));
 	}
@@ -246,7 +243,7 @@ class TestArtitsValidator {
 		try {
 			// Create an Artist object with an invalid phone number
 			Artist artist = new Artist();
-			artist.setPhonenNumber("Madh123342");
+			artist.setPhonenNumber(1);
 
 			// Validate the invalid phone number, expect an exception to be thrown
 			ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
@@ -256,44 +253,6 @@ class TestArtitsValidator {
 		} catch (ArtistDetailsExceptions e) {
 			// Check if the correct error message is provided
 			Assertions.assertEquals(ArtistErrors.INVALID_PHONE_NUMBER_FORMAT, e.getMessage());
-		}
-	}
-
-	// Test case for null mobile number
-	@Test
-	void testValidatePhoneNumberNull() {
-		// Create an Artist object with a null phone number
-		Artist artist = new Artist();
-		artist.setPhonenNumber(null);
-
-		try {
-			// Validate the null phone number, expect an exception to be thrown
-			ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
-
-			// If no exception is thrown, the test fails
-			Assertions.fail("Expected exception was not thrown.");
-		} catch (ArtistDetailsExceptions e) {
-			// Check if the correct error message is provided
-			Assertions.assertEquals(ArtistErrors.INVALID_PHONE_NUMBER_NULL, e.getMessage());
-		}
-	}
-
-	// Test case for empty mobile number
-	@Test
-	void testValidatePhoneNumberEmpty() throws ArtistDetailsExceptions {
-		// Create an Artist object with an empty phone number
-		Artist artist = new Artist();
-		artist.setPhonenNumber(" ");
-
-		try {
-			// Validate the empty phone number, expect an exception to be thrown
-			ArtitsValidator.validatePhoneNumber(artist.getPhonenNumber());
-
-			// If no exception is thrown, the test fails
-			Assertions.fail("Expected exception was not thrown.");
-		} catch (ArtistDetailsExceptions e) {
-			// Check if the correct error message is provided
-			Assertions.assertEquals(ArtistErrors.INVALID_PHONE_NUMBER_NULL, e.getMessage());
 		}
 	}
 
@@ -462,9 +421,8 @@ class TestArtitsValidator {
 	@Test
 	void testValidateSerivecValid() throws IllegalArgumentException, ServiceValueInvalidException {
 		// Create a list of valid services
-		List<Services> serviceList = new ArrayList<>();
-		Services service1 = new Services(0, ServiceCategory.HAIR_STYLE, "Haircut", 50,
-				"https://example.com/haircut.jpg");
+		List<Service> serviceList = new ArrayList<>();
+		Service service1 = new Service(0, ServiceCategory.HAIR_STYLE, "Haircut", 50, "https://example.com/haircut.jpg");
 		serviceList.add(service1);
 
 		// Validate the list of services, expect a valid result
@@ -756,11 +714,12 @@ class TestArtitsValidator {
 		fail("Expected IllegalArgumentException was not thrown.");
 	}
 
+	
 	@Test
 	void testValidateService_ValidServices_ReturnsTrue() throws ServiceValueInvalidException {
 		// Create a list of valid services
-		List<Services> services = new ArrayList<>();
-		Services validService = new Services(1, ServiceCategory.MEHANDI, "Service", 122,
+		List<Service> services = new ArrayList<>();
+		Service validService = new Service(1, ServiceCategory.MEHANDI, "Service", 122,
 				"https://example.com/new_artwork.jpg");
 		services.add(validService);
 
@@ -774,7 +733,7 @@ class TestArtitsValidator {
 	@Test
 	void testValidateService_EmptyServiceList_ReturnsTrue() throws ServiceValueInvalidException {
 		// Create an empty list of services
-		List<Services> emptyServices = new ArrayList<>();
+		List<Service> emptyServices = new ArrayList<>();
 
 		// Validate the empty list of services, expect a valid result
 		boolean result = ArtitsValidator.validateService(emptyServices);

@@ -9,4 +9,6 @@ public class ArtistDetailsExceptions extends Exception {
     public ArtistDetailsExceptions(String message) {
         super(message);
     }
+    
+  
 }

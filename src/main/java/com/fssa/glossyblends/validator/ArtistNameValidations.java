@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fssa.glossyblends.customexception.ArtistDetailsExceptions;
+import com.fssa.glossyblends.errormessages.ArtistErrors;
 import com.fssa.glossyblends.errormessages.ServiceErrors;
 
 public class ArtistNameValidations {
@@ -22,10 +23,10 @@ public class ArtistNameValidations {
 
 		if (!isValid) {// if not valid it will throw exception
 
-			throw new ArtistDetailsExceptions(ServiceErrors.INVALID_SERVICE_NAME_PATTERN);
+			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_USERNAME_PATTERN);
 
 		}
-		return true;// otherwise return true
+		return false;// otherwise return true
 
 	}
 

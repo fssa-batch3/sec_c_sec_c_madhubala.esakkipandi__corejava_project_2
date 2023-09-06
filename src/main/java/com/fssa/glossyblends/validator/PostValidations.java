@@ -28,6 +28,7 @@ public class PostValidations {
 		}
 	}
 
+	
 	public static boolean validateTitle(String title) throws PostValueInvalidException {
 		if (title == null || title.trim().isEmpty()) {
 			throw new PostValueInvalidException(PostErrors.INVALID_POST_TITLE_NULL);

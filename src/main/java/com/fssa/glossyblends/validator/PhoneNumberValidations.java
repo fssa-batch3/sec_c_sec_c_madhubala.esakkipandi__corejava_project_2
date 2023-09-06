@@ -19,24 +19,19 @@ public class PhoneNumberValidations {
 	 * Validates a phone number using a regular expression pattern.
 	 *
 	 */
-	public static boolean validateNumber(String number) throws ArtistDetailsExceptions {
-
-		// Regular expression pattern for a valid phone number
-		String mobilePattern = "^\\d{7,15}$";
-
-		// Compile the pattern
-		Pattern pattern = Pattern.compile(mobilePattern);
-
-		// Match the pattern against the given phone number
-		Matcher patternMatching = pattern.matcher(number);
-
-		// Check if the phone number matches the pattern
-		boolean isValid = patternMatching.matches();
-
-		if (!isValid) {
-			// Throw an exception if the phone number format is invalid
-			throw new ArtistDetailsExceptions(ArtistErrors.INVALID_PHONE_NUMBER_FORMAT);
-		}
-		return true;
+	// Validation for phoneNumber
+	public static boolean validatePhoneNumber(long phoneNumber) throws ArtistDetailsExceptions {
+	    String phoneNumberString = String.valueOf(phoneNumber);
+	    
+	    if (phoneNumberString.isEmpty()) {
+	        throw new ArtistDetailsExceptions(ArtistErrors.INVALID_PHONE_NUMBER_NULL);
+	    }
+	    
+	    if (!phoneNumberString.matches("^\\d{9}$")) {
+	        throw new ArtistDetailsExceptions(ArtistErrors.INVALID_PHONE_NUMBER_FORMAT);
+	    }
+	    
+	    return true;
 	}
+
 }
