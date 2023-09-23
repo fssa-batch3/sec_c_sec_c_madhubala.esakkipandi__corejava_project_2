@@ -1,0 +1,121 @@
+@charset "ISO-8859-1";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+   
+    font-family: 'Poppins', sans-serif;
+    background-size: cover;
+    background-position: center;
+    overflow-y: hidden;
+    background-repeat: no-repeat;
+}
+* {
+    margin: 0px;
+    padding: 0px;
+}
+.signupp {
+    height: 650px;
+    width: 1000px;
+    display: flex;
+    margin-top: 130px;
+    margin-left: 250px;
+    border-radius: 30px;
+    box-shadow:  rgb(255 255 255 / 10%) 0px 1px 1px 0px inset, rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
+
+}
+.left {
+    width: 500px;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 30px;
+   
+    
+}
+.left img {
+    width: 500px;
+    height: 600px;
+}
+.right {
+    width: 500px;
+    height: 600px;
+    background-color: white;
+    border-radius: 30px;
+}
+label {
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+label input {
+    width: 350px;
+    border-width: 0px 0px 1.5px 0px;
+    height: 35px;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+.terms_and_conditions {
+    display: flex;
+    margin-left: 40px;
+}
+.btn {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 13px;
+}
+
+button{
+    width: 120px;
+    height: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+  margin-top: 0px;
+    color:white;
+    background-color:#D70F64;
+    border: none;
+    border-radius: 45px;
+   /* padding: 15px; */
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    font-weight: bolder;
+
+    outline: none;
+    }
+  
+  button:hover {
+  background-color: #ce3767;
+    color:white;
+    transform: translateY(-7px);
+    box-shadow: 0px 1px 0px 2px white;
+
+  }
+button a {
+    color: white;
+}
+a {
+    text-decoration: none;
+    color: rgb(241, 237, 237);
+}
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #D70F64;
+}
+form{
+    height: 550px;
+
+}
+/* input:focus
+{
+    border: 1px solid #f1bacc;
+    box-shadow: 0px 1px 2px 2px #de2f6a;
+    outline-offset: 0px;
+    outline: none;
+    border-radius: 5px;
+} */
+.link{
+    color:black;
+}
