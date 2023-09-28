@@ -1,0 +1,5 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: var(--nav-v2-search-bg-color, #f4f5fb);
+}
